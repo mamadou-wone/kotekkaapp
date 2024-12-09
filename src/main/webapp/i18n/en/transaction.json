@@ -1,0 +1,47 @@
+{
+  "kotekkaappApp": {
+    "transaction": {
+      "home": {
+        "title": "Transactions",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Transaction",
+        "createOrEditLabel": "Create or edit a Transaction",
+        "notFound": "No Transactions found"
+      },
+      "created": "A new Transaction is created with identifier {{ param }}",
+      "updated": "A Transaction is updated with identifier {{ param }}",
+      "deleted": "A Transaction is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Transaction {{ id }}?"
+      },
+      "detail": {
+        "title": "Transaction"
+      },
+      "id": "ID",
+      "uuid": "Uuid",
+      "type": "Type",
+      "status": "Status",
+      "direction": "Direction",
+      "amount": "Amount",
+      "description": "Description",
+      "fee": "Fee",
+      "commission": "Commission",
+      "currency": "Currency",
+      "counterpartyType": "Counterparty Type",
+      "counterpartyId": "Counterparty Id",
+      "entryDate": "Entry Date",
+      "effectiveDate": "Effective Date",
+      "startTime": "Start Time",
+      "endTime": "End Time",
+      "parent": "Parent",
+      "reference": "Reference",
+      "externalId": "External Id",
+      "partnerToken": "Partner Token",
+      "wallet": "Wallet",
+      "createdBy": "Created By",
+      "createdDate": "Created Date",
+      "lastModifiedBy": "Last Modified By",
+      "lastModifiedDate": "Last Modified Date"
+    }
+  }
+}

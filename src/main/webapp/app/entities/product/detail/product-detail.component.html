@@ -1,0 +1,116 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (product(); as productRef) {
+      <div>
+        <h2 data-cy="productDetailsHeading"><span jhiTranslate="kotekkaappApp.product.detail.title">Product</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ productRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.product.uuid">Uuid</span></dt>
+          <dd>
+            <span>{{ productRef.uuid }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.product.walletHolder">Wallet Holder</span></dt>
+          <dd>
+            <span>{{ productRef.walletHolder }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.product.title">Title</span></dt>
+          <dd>
+            <span>{{ productRef.title }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.product.description">Description</span></dt>
+          <dd>
+            <span>{{ productRef.description }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.product.status">Status</span></dt>
+          <dd>
+            <span [jhiTranslate]="'kotekkaappApp.ProductStatus.' + (productRef.status ?? 'null')">{{
+              { null: '', Active: 'Active', Inactive: 'Inactive' }[productRef.status ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.product.media">Media</span></dt>
+          <dd>
+            @if (productRef.media) {
+              <div>
+                <a (click)="openFile(productRef.media ?? '', productRef.mediaContentType)">
+                  <img
+                    [src]="'data:' + productRef.mediaContentType + ';base64,' + productRef.media"
+                    style="max-width: 100%"
+                    alt="product"
+                  />
+                </a>
+                {{ productRef.mediaContentType }}, {{ byteSize(productRef.media ?? '') }}
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.product.price">Price</span></dt>
+          <dd>
+            <span>{{ productRef.price }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.product.compareAtPrice">Compare At Price</span></dt>
+          <dd>
+            <span>{{ productRef.compareAtPrice }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.product.costPerItem">Cost Per Item</span></dt>
+          <dd>
+            <span>{{ productRef.costPerItem }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.product.profit">Profit</span></dt>
+          <dd>
+            <span>{{ productRef.profit }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.product.margin">Margin</span></dt>
+          <dd>
+            <span>{{ productRef.margin }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.product.inventoryQuantity">Inventory Quantity</span></dt>
+          <dd>
+            <span>{{ productRef.inventoryQuantity }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.product.inventoryLocation">Inventory Location</span></dt>
+          <dd>
+            <span>{{ productRef.inventoryLocation }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.product.trackQuantity">Track Quantity</span></dt>
+          <dd>
+            <span>{{ productRef.trackQuantity }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.product.category">Category</span></dt>
+          <dd>
+            @if (product()!.category) {
+              <div>
+                <a [routerLink]="['/category', product()!.category?.id, 'view']">{{ productRef.category?.name }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.product.collections">Collections</span></dt>
+          <dd>
+            @for (collections of productRef.collections; track $index; let last = $last) {
+              <span>
+                <a [routerLink]="['/collection', collections.id, 'view']">{{ collections?.name }}</a
+                >{{ last ? '' : ', ' }}
+              </span>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/product', productRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

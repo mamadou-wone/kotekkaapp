@@ -1,0 +1,55 @@
+{
+  "annotations": {
+    "changelogDate": "20241209130823"
+  },
+  "applications": "*",
+  "documentation": "Referal information",
+  "fields": [
+    {
+      "fieldName": "uuid",
+      "fieldType": "UUID",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "referalCode",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "36"
+    },
+    {
+      "fieldName": "walletHolder",
+      "fieldType": "UUID"
+    },
+    {
+      "fieldName": "refered",
+      "fieldType": "UUID"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "ReferalStatus",
+      "fieldValues": "PENDING,CONFIRMED,REJECTED,PAID"
+    },
+    {
+      "fieldName": "createdBy",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "createdDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "lastModifiedBy",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "lastModifiedDate",
+      "fieldType": "Instant"
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "name": "ReferalInfo",
+  "pagination": "pagination",
+  "relationships": [],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

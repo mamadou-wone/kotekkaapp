@@ -1,0 +1,35 @@
+{
+  "kotekkaappApp": {
+    "partnerCall": {
+      "home": {
+        "title": "PartnerCalls",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Partner Call",
+        "createOrEditLabel": "Créer ou éditer un Partner Call",
+        "notFound": "Aucun Partner Call trouvé"
+      },
+      "created": "Un nouveau Partner Call a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Partner Call avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Partner Call avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Partner Call {{ id }} ?"
+      },
+      "detail": {
+        "title": "Partner Call"
+      },
+      "id": "ID",
+      "partner": "Partner",
+      "api": "Api",
+      "method": "Method",
+      "requestHeaders": "Request Headers",
+      "requestBody": "Request Body",
+      "requestTime": "Request Time",
+      "responseStatusCode": "Response Status Code",
+      "responseHeaders": "Response Headers",
+      "responseBody": "Response Body",
+      "responseTime": "Response Time",
+      "correlationId": "Correlation Id",
+      "queryParam": "Query Param"
+    }
+  }
+}

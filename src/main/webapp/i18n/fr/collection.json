@@ -1,0 +1,25 @@
+{
+  "kotekkaappApp": {
+    "collection": {
+      "home": {
+        "title": "Collections",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Collection",
+        "createOrEditLabel": "Créer ou éditer un Collection",
+        "notFound": "Aucun Collection trouvé"
+      },
+      "created": "Un nouveau Collection a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Collection avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Collection avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Collection {{ id }} ?"
+      },
+      "detail": {
+        "title": "Collection"
+      },
+      "id": "ID",
+      "name": "Name",
+      "product": "Product"
+    }
+  }
+}

@@ -1,0 +1,92 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (card(); as cardRef) {
+      <div>
+        <h2 data-cy="cardDetailsHeading"><span jhiTranslate="kotekkaappApp.card.detail.title">Card</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ cardRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.card.uuid">Uuid</span></dt>
+          <dd>
+            <span>{{ cardRef.uuid }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.card.status">Status</span></dt>
+          <dd>
+            <span [jhiTranslate]="'kotekkaappApp.DefaultStatus.' + (cardRef.status ?? 'null')">{{
+              { null: '', PENDING: 'PENDING', ACTIVE: 'ACTIVE', BLOCKED: 'BLOCKED', DELETED: 'DELETED' }[cardRef.status ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.card.label">Label</span></dt>
+          <dd>
+            <span>{{ cardRef.label }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.card.maskedPan">Masked Pan</span></dt>
+          <dd>
+            <span>{{ cardRef.maskedPan }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.card.cardHolderName">Card Holder Name</span></dt>
+          <dd>
+            <span>{{ cardRef.cardHolderName }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.card.token">Token</span></dt>
+          <dd>
+            <span>{{ cardRef.token }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.card.expiryYear">Expiry Year</span></dt>
+          <dd>
+            <span>{{ cardRef.expiryYear }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.card.expiryMonth">Expiry Month</span></dt>
+          <dd>
+            <span>{{ cardRef.expiryMonth }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.card.rnd">Rnd</span></dt>
+          <dd>
+            <span>{{ cardRef.rnd }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.card.hash">Hash</span></dt>
+          <dd>
+            <span>{{ cardRef.hash }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.card.walletHolder">Wallet Holder</span></dt>
+          <dd>
+            <span>{{ cardRef.walletHolder }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.card.createdBy">Created By</span></dt>
+          <dd>
+            <span>{{ cardRef.createdBy }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.card.createdDate">Created Date</span></dt>
+          <dd>
+            <span>{{ cardRef.createdDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.card.lastModifiedBy">Last Modified By</span></dt>
+          <dd>
+            <span>{{ cardRef.lastModifiedBy }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.card.lastModifiedDate">Last Modified Date</span></dt>
+          <dd>
+            <span>{{ cardRef.lastModifiedDate | formatMediumDatetime }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/card', cardRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

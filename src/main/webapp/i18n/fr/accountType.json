@@ -1,0 +1,11 @@
+{
+  "kotekkaappApp": {
+    "AccountType": {
+      "null": "",
+      "CUSTOMER": "CUSTOMER",
+      "MERCHANT": "MERCHANT",
+      "AGENT": "AGENT",
+      "INTERNAL": "INTERNAL"
+    }
+  }
+}

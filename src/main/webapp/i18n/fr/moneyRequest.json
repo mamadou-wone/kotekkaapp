@@ -1,0 +1,34 @@
+{
+  "kotekkaappApp": {
+    "moneyRequest": {
+      "home": {
+        "title": "MoneyRequests",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Money Request",
+        "createOrEditLabel": "Créer ou éditer un Money Request",
+        "notFound": "Aucun Money Request trouvé"
+      },
+      "created": "Un nouveau Money Request a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Money Request avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Money Request avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Money Request {{ id }} ?"
+      },
+      "detail": {
+        "title": "Money Request"
+      },
+      "id": "ID",
+      "uuid": "Uuid",
+      "status": "Status",
+      "otherHolder": "Other Holder",
+      "amount": "Amount",
+      "description": "Description",
+      "currency": "Currency",
+      "walletHolder": "Wallet Holder",
+      "createdBy": "Created By",
+      "createdDate": "Created Date",
+      "lastModifiedBy": "Last Modified By",
+      "lastModifiedDate": "Last Modified Date"
+    }
+  }
+}

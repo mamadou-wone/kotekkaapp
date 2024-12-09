@@ -1,0 +1,24 @@
+@if (recipient) {
+  <form name="deleteForm" (ngSubmit)="confirmDelete(recipient.id!)">
+    <div class="modal-header">
+      <h4 class="modal-title" data-cy="recipientDeleteDialogHeading" jhiTranslate="entity.delete.title">Confirm delete operation</h4>
+    </div>
+
+    <div class="modal-body">
+      <jhi-alert-error></jhi-alert-error>
+      <p id="jhi-delete-recipient-heading" jhiTranslate="kotekkaappApp.recipient.delete.question" [translateValues]="{ id: recipient.id }">
+        Are you sure you want to delete Recipient {{ recipient.id }}?
+      </p>
+    </div>
+
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="cancel()">
+        <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+      </button>
+
+      <button id="jhi-confirm-delete-recipient" data-cy="entityConfirmDeleteButton" type="submit" class="btn btn-danger">
+        <fa-icon icon="times"></fa-icon>&nbsp;<span jhiTranslate="entity.action.delete">Delete</span>
+      </button>
+    </div>
+  </form>
+}

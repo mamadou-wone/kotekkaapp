@@ -1,0 +1,11 @@
+id;partner;api;method;request_headers;request_body;created_date;response_status_code;response_time
+1;CIH;inasmuch phooey hmph;PATCH;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;2024-12-09T08:55:24;297;2024-12-08T19:41:10
+2;CIH;intently;PATCH;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;2024-12-09T06:26:12;190;2024-12-08T23:35:22
+3;CIH;amazing mathematics;DELETE;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;2024-12-09T12:42:27;544;2024-12-09T00:21:19
+4;OTHER;gracefully mosh times;PATCH;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;2024-12-08T16:45:29;457;2024-12-09T01:26:54
+5;WAFR;enthusiastically;DELETE;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;2024-12-08T21:54:22;945;2024-12-09T00:26:10
+6;WAFR;yippee within unusual;PATCH;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;2024-12-08T15:04:17;300;2024-12-09T00:08:30
+7;CMI;verbally indeed;GET;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;2024-12-08T21:50:28;473;2024-12-09T05:06:54
+8;OTHER;forenenst;PATCH;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;2024-12-09T00:14:58;57;2024-12-08T17:50:21
+9;CIH;that;GET;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;2024-12-09T09:37:51;158;2024-12-08T13:29:04
+10;CIH;under delight;PUT;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;2024-12-09T05:17:18;442;2024-12-09T10:07:09

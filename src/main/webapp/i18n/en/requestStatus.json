@@ -1,0 +1,11 @@
+{
+  "kotekkaappApp": {
+    "RequestStatus": {
+      "null": "",
+      "PENDING": "PENDING",
+      "SENT": "SENT",
+      "PROCESSED": "PROCESSED",
+      "FAILED": "FAILED"
+    }
+  }
+}

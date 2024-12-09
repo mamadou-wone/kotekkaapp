@@ -1,0 +1,261 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-card-heading" data-cy="CardCreateUpdateHeading" jhiTranslate="kotekkaappApp.card.home.createOrEditLabel">
+        Create or edit a Card
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="kotekkaappApp.card.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        @let uuidRef = editForm.get('uuid')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_uuid" jhiTranslate="kotekkaappApp.card.uuid">Uuid</label>
+          <input type="text" class="form-control" name="uuid" id="field_uuid" data-cy="uuid" formControlName="uuid" />
+          @if (uuidRef.invalid && (uuidRef.dirty || uuidRef.touched)) {
+            <div>
+              @if (editForm.get('uuid')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_status" jhiTranslate="kotekkaappApp.card.status">Status</label>
+          <select class="form-control" name="status" formControlName="status" id="field_status" data-cy="status">
+            <option [ngValue]="null">{{ 'kotekkaappApp.DefaultStatus.null' | translate }}</option>
+            @for (defaultStatus of defaultStatusValues; track $index) {
+              <option [value]="defaultStatus">{{ 'kotekkaappApp.DefaultStatus.' + defaultStatus | translate }}</option>
+            }
+          </select>
+        </div>
+
+        @let labelRef = editForm.get('label')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_label" jhiTranslate="kotekkaappApp.card.label">Label</label>
+          <input type="text" class="form-control" name="label" id="field_label" data-cy="label" formControlName="label" />
+          @if (labelRef.invalid && (labelRef.dirty || labelRef.touched)) {
+            <div>
+              @if (editForm.get('label')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '50' }"
+                  >This field cannot be longer than 50 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let maskedPanRef = editForm.get('maskedPan')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_maskedPan" jhiTranslate="kotekkaappApp.card.maskedPan">Masked Pan</label>
+          <input type="text" class="form-control" name="maskedPan" id="field_maskedPan" data-cy="maskedPan" formControlName="maskedPan" />
+          @if (maskedPanRef.invalid && (maskedPanRef.dirty || maskedPanRef.touched)) {
+            <div>
+              @if (editForm.get('maskedPan')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '30' }"
+                  >This field cannot be longer than 30 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let cardHolderNameRef = editForm.get('cardHolderName')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_cardHolderName" jhiTranslate="kotekkaappApp.card.cardHolderName">Card Holder Name</label>
+          <input
+            type="text"
+            class="form-control"
+            name="cardHolderName"
+            id="field_cardHolderName"
+            data-cy="cardHolderName"
+            formControlName="cardHolderName"
+          />
+          @if (cardHolderNameRef.invalid && (cardHolderNameRef.dirty || cardHolderNameRef.touched)) {
+            <div>
+              @if (editForm.get('cardHolderName')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '30' }"
+                  >This field cannot be longer than 30 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let tokenRef = editForm.get('token')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_token" jhiTranslate="kotekkaappApp.card.token">Token</label>
+          <input type="text" class="form-control" name="token" id="field_token" data-cy="token" formControlName="token" />
+          @if (tokenRef.invalid && (tokenRef.dirty || tokenRef.touched)) {
+            <div>
+              @if (editForm.get('token')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '36' }"
+                  >This field cannot be longer than 36 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let expiryYearRef = editForm.get('expiryYear')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_expiryYear" jhiTranslate="kotekkaappApp.card.expiryYear">Expiry Year</label>
+          <input
+            type="text"
+            class="form-control"
+            name="expiryYear"
+            id="field_expiryYear"
+            data-cy="expiryYear"
+            formControlName="expiryYear"
+          />
+          @if (expiryYearRef.invalid && (expiryYearRef.dirty || expiryYearRef.touched)) {
+            <div>
+              @if (editForm.get('expiryYear')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '2' }"
+                  >This field cannot be longer than 2 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let expiryMonthRef = editForm.get('expiryMonth')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_expiryMonth" jhiTranslate="kotekkaappApp.card.expiryMonth">Expiry Month</label>
+          <input
+            type="text"
+            class="form-control"
+            name="expiryMonth"
+            id="field_expiryMonth"
+            data-cy="expiryMonth"
+            formControlName="expiryMonth"
+          />
+          @if (expiryMonthRef.invalid && (expiryMonthRef.dirty || expiryMonthRef.touched)) {
+            <div>
+              @if (editForm.get('expiryMonth')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '2' }"
+                  >This field cannot be longer than 2 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let rndRef = editForm.get('rnd')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_rnd" jhiTranslate="kotekkaappApp.card.rnd">Rnd</label>
+          <input type="text" class="form-control" name="rnd" id="field_rnd" data-cy="rnd" formControlName="rnd" />
+          @if (rndRef.invalid && (rndRef.dirty || rndRef.touched)) {
+            <div>
+              @if (editForm.get('rnd')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '20' }"
+                  >This field cannot be longer than 20 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let hashRef = editForm.get('hash')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_hash" jhiTranslate="kotekkaappApp.card.hash">Hash</label>
+          <input type="text" class="form-control" name="hash" id="field_hash" data-cy="hash" formControlName="hash" />
+          @if (hashRef.invalid && (hashRef.dirty || hashRef.touched)) {
+            <div>
+              @if (editForm.get('hash')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '100' }"
+                  >This field cannot be longer than 100 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_walletHolder" jhiTranslate="kotekkaappApp.card.walletHolder">Wallet Holder</label>
+          <input
+            type="text"
+            class="form-control"
+            name="walletHolder"
+            id="field_walletHolder"
+            data-cy="walletHolder"
+            formControlName="walletHolder"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_createdBy" jhiTranslate="kotekkaappApp.card.createdBy">Created By</label>
+          <input type="text" class="form-control" name="createdBy" id="field_createdBy" data-cy="createdBy" formControlName="createdBy" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_createdDate" jhiTranslate="kotekkaappApp.card.createdDate">Created Date</label>
+          <div class="d-flex">
+            <input
+              id="field_createdDate"
+              data-cy="createdDate"
+              type="datetime-local"
+              class="form-control"
+              name="createdDate"
+              formControlName="createdDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_lastModifiedBy" jhiTranslate="kotekkaappApp.card.lastModifiedBy">Last Modified By</label>
+          <input
+            type="text"
+            class="form-control"
+            name="lastModifiedBy"
+            id="field_lastModifiedBy"
+            data-cy="lastModifiedBy"
+            formControlName="lastModifiedBy"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_lastModifiedDate" jhiTranslate="kotekkaappApp.card.lastModifiedDate"
+            >Last Modified Date</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_lastModifiedDate"
+              data-cy="lastModifiedDate"
+              type="datetime-local"
+              class="form-control"
+              name="lastModifiedDate"
+              formControlName="lastModifiedDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

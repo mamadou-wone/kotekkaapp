@@ -1,0 +1,35 @@
+{
+  "kotekkaappApp": {
+    "device": {
+      "home": {
+        "title": "Devices",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Device",
+        "createOrEditLabel": "Créer ou éditer un Device",
+        "notFound": "Aucun Device trouvé"
+      },
+      "created": "Un nouveau Device a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Device avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Device avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Device {{ id }} ?"
+      },
+      "detail": {
+        "title": "Device"
+      },
+      "id": "ID",
+      "uuid": "Uuid",
+      "deviceUuid": "Device Uuid",
+      "type": "Type",
+      "manufacturer": "Manufacturer",
+      "model": "Model",
+      "os": "Os",
+      "appVersion": "App Version",
+      "inactive": "Inactive",
+      "createdBy": "Created By",
+      "createdDate": "Created Date",
+      "lastModifiedBy": "Last Modified By",
+      "lastModifiedDate": "Last Modified Date"
+    }
+  }
+}

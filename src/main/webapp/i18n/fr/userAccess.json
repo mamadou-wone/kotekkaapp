@@ -1,0 +1,27 @@
+{
+  "kotekkaappApp": {
+    "userAccess": {
+      "home": {
+        "title": "UserAccesses",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau User Access",
+        "createOrEditLabel": "Créer ou éditer un User Access",
+        "notFound": "Aucun User Access trouvé"
+      },
+      "created": "Un nouveau User Access a été créé avec l'identifiant {{ param }}",
+      "updated": "Le User Access avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le User Access avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le User Access {{ id }} ?"
+      },
+      "detail": {
+        "title": "User Access"
+      },
+      "id": "ID",
+      "login": "Login",
+      "ipAddress": "Ip Address",
+      "device": "Device",
+      "createdDate": "Created Date"
+    }
+  }
+}

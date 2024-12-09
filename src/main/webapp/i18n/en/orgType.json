@@ -1,0 +1,12 @@
+{
+  "kotekkaappApp": {
+    "OrgType": {
+      "null": "",
+      "UNIVERSITY": "UNIVERSITY",
+      "CORPORATION": "CORPORATION",
+      "NONPROFIT": "NONPROFIT",
+      "GOVERNMENT": "GOVERNMENT",
+      "OTHER": "OTHER"
+    }
+  }
+}

@@ -1,0 +1,72 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (serviceClient(); as serviceClientRef) {
+      <div>
+        <h2 data-cy="serviceClientDetailsHeading"><span jhiTranslate="kotekkaappApp.serviceClient.detail.title">Service Client</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ serviceClientRef.id }}</span>
+          </dd>
+          <dt>
+            <span [ngbTooltip]="'kotekkaappApp.serviceClient.help.clientId' | translate" jhiTranslate="kotekkaappApp.serviceClient.clientId"
+              >Client Id</span
+            >
+          </dt>
+          <dd>
+            <span>{{ serviceClientRef.clientId }}</span>
+          </dd>
+          <dt>
+            <span [ngbTooltip]="'kotekkaappApp.serviceClient.help.type' | translate" jhiTranslate="kotekkaappApp.serviceClient.type"
+              >Type</span
+            >
+          </dt>
+          <dd>
+            <span [jhiTranslate]="'kotekkaappApp.AccountType.' + (serviceClientRef.type ?? 'null')">{{
+              { null: '', CUSTOMER: 'CUSTOMER', MERCHANT: 'MERCHANT', AGENT: 'AGENT', INTERNAL: 'INTERNAL' }[
+                serviceClientRef.type ?? 'null'
+              ]
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.serviceClient.apiKey">Api Key</span></dt>
+          <dd>
+            <span>{{ serviceClientRef.apiKey }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.serviceClient.status">Status</span></dt>
+          <dd>
+            <span [jhiTranslate]="'kotekkaappApp.DefaultStatus.' + (serviceClientRef.status ?? 'null')">{{
+              { null: '', PENDING: 'PENDING', ACTIVE: 'ACTIVE', BLOCKED: 'BLOCKED', DELETED: 'DELETED' }[serviceClientRef.status ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.serviceClient.note">Note</span></dt>
+          <dd>
+            <span>{{ serviceClientRef.note }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.serviceClient.createdDate">Created Date</span></dt>
+          <dd>
+            <span>{{ serviceClientRef.createdDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.serviceClient.lastModifiedDate">Last Modified Date</span></dt>
+          <dd>
+            <span>{{ serviceClientRef.lastModifiedDate | formatMediumDatetime }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/service-client', serviceClientRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

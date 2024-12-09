@@ -1,0 +1,82 @@
+{
+  "annotations": {
+    "changelogDate": "20241209130829"
+  },
+  "applications": "*",
+  "documentation": "Wallet account\\nCollects balances and transactions\\nCurrent balance should match externel provider balance",
+  "fields": [
+    {
+      "fieldName": "uuid",
+      "fieldType": "UUID",
+      "fieldValidateRules": ["required", "unique"]
+    },
+    {
+      "fieldName": "type",
+      "fieldType": "WalletType",
+      "fieldTypeDocumentation": "For future use: eg SAVINGS, JOINT, SPONSOR (youth)",
+      "fieldValues": "PRIMARY,SAVINGS,SECONDARY"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "WalletStatus",
+      "fieldValues": "PENDING,ACTIVE,REJECTED,BLOCKED,CLOSED"
+    },
+    {
+      "fieldName": "level",
+      "fieldType": "AccountLevel",
+      "fieldValues": "ONE,TWO,THREE"
+    },
+    {
+      "fieldName": "iban",
+      "fieldType": "String",
+      "fieldValidateRules": ["unique", "maxlength"],
+      "fieldValidateRulesMaxlength": "32"
+    },
+    {
+      "fieldName": "currency",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "3"
+    },
+    {
+      "fieldName": "balance",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "balancesAsOf",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "externalId",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "36"
+    },
+    {
+      "fieldName": "walletHolder",
+      "fieldType": "UUID"
+    },
+    {
+      "fieldName": "createdBy",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "createdDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "lastModifiedBy",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "lastModifiedDate",
+      "fieldType": "Instant"
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "name": "Wallet",
+  "pagination": "pagination",
+  "relationships": [],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

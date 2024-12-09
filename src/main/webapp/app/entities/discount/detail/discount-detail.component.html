@@ -1,0 +1,78 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (discount(); as discountRef) {
+      <div>
+        <h2 data-cy="discountDetailsHeading"><span jhiTranslate="kotekkaappApp.discount.detail.title">Discount</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ discountRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.discount.uuid">Uuid</span></dt>
+          <dd>
+            <span>{{ discountRef.uuid }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.discount.name">Name</span></dt>
+          <dd>
+            <span>{{ discountRef.name }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.discount.type">Type</span></dt>
+          <dd>
+            <span [jhiTranslate]="'kotekkaappApp.DiscountType.' + (discountRef.type ?? 'null')">{{
+              { null: '', FIXED: 'FIXED', PERCENTAGE: 'PERCENTAGE' }[discountRef.type ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.discount.value">Value</span></dt>
+          <dd>
+            <span>{{ discountRef.value }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.discount.startDate">Start Date</span></dt>
+          <dd>
+            <span>{{ discountRef.startDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.discount.endDate">End Date</span></dt>
+          <dd>
+            <span>{{ discountRef.endDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.discount.status">Status</span></dt>
+          <dd>
+            <span [jhiTranslate]="'kotekkaappApp.DefaultStatus.' + (discountRef.status ?? 'null')">{{
+              { null: '', PENDING: 'PENDING', ACTIVE: 'ACTIVE', BLOCKED: 'BLOCKED', DELETED: 'DELETED' }[discountRef.status ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.discount.createdBy">Created By</span></dt>
+          <dd>
+            <span>{{ discountRef.createdBy }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.discount.createdDate">Created Date</span></dt>
+          <dd>
+            <span>{{ discountRef.createdDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.discount.lastModifiedBy">Last Modified By</span></dt>
+          <dd>
+            <span>{{ discountRef.lastModifiedBy }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.discount.lastModifiedDate">Last Modified Date</span></dt>
+          <dd>
+            <span>{{ discountRef.lastModifiedDate | formatMediumDatetime }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/discount', discountRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

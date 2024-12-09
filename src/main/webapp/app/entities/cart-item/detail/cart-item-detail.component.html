@@ -1,0 +1,54 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (cartItem(); as cartItemRef) {
+      <div>
+        <h2 data-cy="cartItemDetailsHeading"><span jhiTranslate="kotekkaappApp.cartItem.detail.title">Cart Item</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ cartItemRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.cartItem.uuid">Uuid</span></dt>
+          <dd>
+            <span>{{ cartItemRef.uuid }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.cartItem.cart">Cart</span></dt>
+          <dd>
+            <span>{{ cartItemRef.cart }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.cartItem.product">Product</span></dt>
+          <dd>
+            <span>{{ cartItemRef.product }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.cartItem.quantity">Quantity</span></dt>
+          <dd>
+            <span>{{ cartItemRef.quantity }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.cartItem.price">Price</span></dt>
+          <dd>
+            <span>{{ cartItemRef.price }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.cartItem.totalPrice">Total Price</span></dt>
+          <dd>
+            <span>{{ cartItemRef.totalPrice }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/cart-item', cartItemRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

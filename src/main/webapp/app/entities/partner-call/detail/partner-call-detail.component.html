@@ -1,0 +1,82 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (partnerCall(); as partnerCallRef) {
+      <div>
+        <h2 data-cy="partnerCallDetailsHeading"><span jhiTranslate="kotekkaappApp.partnerCall.detail.title">Partner Call</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ partnerCallRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.partnerCall.partner">Partner</span></dt>
+          <dd>
+            <span [jhiTranslate]="'kotekkaappApp.Partner.' + (partnerCallRef.partner ?? 'null')">{{
+              { null: '', CIH: 'CIH', CMI: 'CMI', WAFR: 'WAFR', OTHER: 'OTHER' }[partnerCallRef.partner ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.partnerCall.api">Api</span></dt>
+          <dd>
+            <span>{{ partnerCallRef.api }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.partnerCall.method">Method</span></dt>
+          <dd>
+            <span [jhiTranslate]="'kotekkaappApp.HttpMethod.' + (partnerCallRef.method ?? 'null')">{{
+              { null: '', GET: 'GET', POST: 'POST', PUT: 'PUT', DELETE: 'DELETE', PATCH: 'PATCH' }[partnerCallRef.method ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.partnerCall.requestHeaders">Request Headers</span></dt>
+          <dd>
+            <span>{{ partnerCallRef.requestHeaders }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.partnerCall.requestBody">Request Body</span></dt>
+          <dd>
+            <span>{{ partnerCallRef.requestBody }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.partnerCall.requestTime">Request Time</span></dt>
+          <dd>
+            <span>{{ partnerCallRef.requestTime | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.partnerCall.responseStatusCode">Response Status Code</span></dt>
+          <dd>
+            <span>{{ partnerCallRef.responseStatusCode }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.partnerCall.responseHeaders">Response Headers</span></dt>
+          <dd>
+            <span>{{ partnerCallRef.responseHeaders }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.partnerCall.responseBody">Response Body</span></dt>
+          <dd>
+            <span>{{ partnerCallRef.responseBody }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.partnerCall.responseTime">Response Time</span></dt>
+          <dd>
+            <span>{{ partnerCallRef.responseTime | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.partnerCall.correlationId">Correlation Id</span></dt>
+          <dd>
+            <span>{{ partnerCallRef.correlationId }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.partnerCall.queryParam">Query Param</span></dt>
+          <dd>
+            <span>{{ partnerCallRef.queryParam }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/partner-call', partnerCallRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

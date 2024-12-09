@@ -1,0 +1,11 @@
+{
+  "kotekkaappApp": {
+    "CounterpartyType": {
+      "null": "",
+      "WALLET": "WALLET",
+      "CARD": "CARD",
+      "BENEFICIARY": "BENEFICIARY",
+      "RECIPIENT": "RECIPIENT"
+    }
+  }
+}

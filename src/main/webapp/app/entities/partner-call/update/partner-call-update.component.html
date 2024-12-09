@@ -1,0 +1,235 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-partner-call-heading"
+        data-cy="PartnerCallCreateUpdateHeading"
+        jhiTranslate="kotekkaappApp.partnerCall.home.createOrEditLabel"
+      >
+        Create or edit a Partner Call
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="kotekkaappApp.partnerCall.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        @let partnerRef = editForm.get('partner')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_partner" jhiTranslate="kotekkaappApp.partnerCall.partner">Partner</label>
+          <select class="form-control" name="partner" formControlName="partner" id="field_partner" data-cy="partner">
+            <option [ngValue]="null">{{ 'kotekkaappApp.Partner.null' | translate }}</option>
+            @for (partner of partnerValues; track $index) {
+              <option [value]="partner">{{ 'kotekkaappApp.Partner.' + partner | translate }}</option>
+            }
+          </select>
+          @if (partnerRef.invalid && (partnerRef.dirty || partnerRef.touched)) {
+            <div>
+              @if (editForm.get('partner')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        @let apiRef = editForm.get('api')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_api" jhiTranslate="kotekkaappApp.partnerCall.api">Api</label>
+          <input type="text" class="form-control" name="api" id="field_api" data-cy="api" formControlName="api" />
+          @if (apiRef.invalid && (apiRef.dirty || apiRef.touched)) {
+            <div>
+              @if (editForm.get('api')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '255' }"
+                  >This field cannot be longer than 255 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_method" jhiTranslate="kotekkaappApp.partnerCall.method">Method</label>
+          <select class="form-control" name="method" formControlName="method" id="field_method" data-cy="method">
+            <option [ngValue]="null">{{ 'kotekkaappApp.HttpMethod.null' | translate }}</option>
+            @for (httpMethod of httpMethodValues; track $index) {
+              <option [value]="httpMethod">{{ 'kotekkaappApp.HttpMethod.' + httpMethod | translate }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_requestHeaders" jhiTranslate="kotekkaappApp.partnerCall.requestHeaders"
+            >Request Headers</label
+          >
+          <textarea
+            class="form-control"
+            name="requestHeaders"
+            id="field_requestHeaders"
+            data-cy="requestHeaders"
+            formControlName="requestHeaders"
+          ></textarea>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_requestBody" jhiTranslate="kotekkaappApp.partnerCall.requestBody">Request Body</label>
+          <textarea
+            class="form-control"
+            name="requestBody"
+            id="field_requestBody"
+            data-cy="requestBody"
+            formControlName="requestBody"
+          ></textarea>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_requestTime" jhiTranslate="kotekkaappApp.partnerCall.requestTime">Request Time</label>
+          <div class="d-flex">
+            <input
+              id="field_requestTime"
+              data-cy="requestTime"
+              type="datetime-local"
+              class="form-control"
+              name="requestTime"
+              formControlName="requestTime"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        @let responseStatusCodeRef = editForm.get('responseStatusCode')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_responseStatusCode" jhiTranslate="kotekkaappApp.partnerCall.responseStatusCode"
+            >Response Status Code</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="responseStatusCode"
+            id="field_responseStatusCode"
+            data-cy="responseStatusCode"
+            formControlName="responseStatusCode"
+          />
+          @if (responseStatusCodeRef.invalid && (responseStatusCodeRef.dirty || responseStatusCodeRef.touched)) {
+            <div>
+              @if (editForm.get('responseStatusCode')?.errors?.max) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.max" [translateValues]="{ max: '999' }"
+                  >This field cannot be more than 999.</small
+                >
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('responseStatusCode')?.errors?.number"
+                jhiTranslate="entity.validation.number"
+                >This field should be a number.</small
+              >
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_responseHeaders" jhiTranslate="kotekkaappApp.partnerCall.responseHeaders"
+            >Response Headers</label
+          >
+          <textarea
+            class="form-control"
+            name="responseHeaders"
+            id="field_responseHeaders"
+            data-cy="responseHeaders"
+            formControlName="responseHeaders"
+          ></textarea>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_responseBody" jhiTranslate="kotekkaappApp.partnerCall.responseBody">Response Body</label>
+          <textarea
+            class="form-control"
+            name="responseBody"
+            id="field_responseBody"
+            data-cy="responseBody"
+            formControlName="responseBody"
+          ></textarea>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_responseTime" jhiTranslate="kotekkaappApp.partnerCall.responseTime">Response Time</label>
+          <div class="d-flex">
+            <input
+              id="field_responseTime"
+              data-cy="responseTime"
+              type="datetime-local"
+              class="form-control"
+              name="responseTime"
+              formControlName="responseTime"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        @let correlationIdRef = editForm.get('correlationId')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_correlationId" jhiTranslate="kotekkaappApp.partnerCall.correlationId">Correlation Id</label>
+          <input
+            type="text"
+            class="form-control"
+            name="correlationId"
+            id="field_correlationId"
+            data-cy="correlationId"
+            formControlName="correlationId"
+          />
+          @if (correlationIdRef.invalid && (correlationIdRef.dirty || correlationIdRef.touched)) {
+            <div>
+              @if (editForm.get('correlationId')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '50' }"
+                  >This field cannot be longer than 50 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let queryParamRef = editForm.get('queryParam')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_queryParam" jhiTranslate="kotekkaappApp.partnerCall.queryParam">Query Param</label>
+          <input
+            type="text"
+            class="form-control"
+            name="queryParam"
+            id="field_queryParam"
+            data-cy="queryParam"
+            formControlName="queryParam"
+          />
+          @if (queryParamRef.invalid && (queryParamRef.dirty || queryParamRef.touched)) {
+            <div>
+              @if (editForm.get('queryParam')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '255' }"
+                  >This field cannot be longer than 255 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

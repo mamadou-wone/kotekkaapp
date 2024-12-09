@@ -1,0 +1,54 @@
+{
+  "annotations": {
+    "changelogDate": "20241209130813"
+  },
+  "applications": "*",
+  "documentation": "Failed verification Attempts History\\nNot Audited",
+  "fields": [
+    {
+      "fieldName": "login",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "ipAddress",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "isAfterLock",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "app",
+      "fieldType": "App",
+      "fieldValues": "MOBILE,WEB,MERCHANT,AGENT,PORTAL"
+    },
+    {
+      "fieldName": "action",
+      "fieldType": "Action",
+      "fieldValues": "LOGIN,PHONENUMBER_CHECK,EMAIL_CHECK,PASSWORD_RESET,DEVICE_CHECK,TRANSACTION"
+    },
+    {
+      "fieldName": "device",
+      "fieldType": "UUID"
+    },
+    {
+      "fieldName": "createdDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "reason",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "100"
+    }
+  ],
+  "name": "FailedAttemptHistory",
+  "pagination": "pagination",
+  "relationships": [],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

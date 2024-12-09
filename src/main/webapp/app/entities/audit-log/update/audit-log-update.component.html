@@ -1,0 +1,161 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-audit-log-heading" data-cy="AuditLogCreateUpdateHeading" jhiTranslate="kotekkaappApp.auditLog.home.createOrEditLabel">
+        Create or edit a Audit Log
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="kotekkaappApp.auditLog.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        @let uuidRef = editForm.get('uuid')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_uuid" jhiTranslate="kotekkaappApp.auditLog.uuid">Uuid</label>
+          <input type="text" class="form-control" name="uuid" id="field_uuid" data-cy="uuid" formControlName="uuid" />
+          @if (uuidRef.invalid && (uuidRef.dirty || uuidRef.touched)) {
+            <div>
+              @if (editForm.get('uuid')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        @let entityNameRef = editForm.get('entityName')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_entityName" jhiTranslate="kotekkaappApp.auditLog.entityName">Entity Name</label>
+          <input
+            type="text"
+            class="form-control"
+            name="entityName"
+            id="field_entityName"
+            data-cy="entityName"
+            formControlName="entityName"
+          />
+          @if (entityNameRef.invalid && (entityNameRef.dirty || entityNameRef.touched)) {
+            <div>
+              @if (editForm.get('entityName')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              @if (editForm.get('entityName')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '100' }"
+                  >This field cannot be longer than 100 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let entityIdRef = editForm.get('entityId')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_entityId" jhiTranslate="kotekkaappApp.auditLog.entityId">Entity Id</label>
+          <input type="text" class="form-control" name="entityId" id="field_entityId" data-cy="entityId" formControlName="entityId" />
+          @if (entityIdRef.invalid && (entityIdRef.dirty || entityIdRef.touched)) {
+            <div>
+              @if (editForm.get('entityId')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        @let actionRef = editForm.get('action')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_action" jhiTranslate="kotekkaappApp.auditLog.action">Action</label>
+          <input type="text" class="form-control" name="action" id="field_action" data-cy="action" formControlName="action" />
+          @if (actionRef.invalid && (actionRef.dirty || actionRef.touched)) {
+            <div>
+              @if (editForm.get('action')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              @if (editForm.get('action')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '50' }"
+                  >This field cannot be longer than 50 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let performedByRef = editForm.get('performedBy')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_performedBy" jhiTranslate="kotekkaappApp.auditLog.performedBy">Performed By</label>
+          <input
+            type="text"
+            class="form-control"
+            name="performedBy"
+            id="field_performedBy"
+            data-cy="performedBy"
+            formControlName="performedBy"
+          />
+          @if (performedByRef.invalid && (performedByRef.dirty || performedByRef.touched)) {
+            <div>
+              @if (editForm.get('performedBy')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '50' }"
+                  >This field cannot be longer than 50 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let performedDateRef = editForm.get('performedDate')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_performedDate" jhiTranslate="kotekkaappApp.auditLog.performedDate">Performed Date</label>
+          <div class="d-flex">
+            <input
+              id="field_performedDate"
+              data-cy="performedDate"
+              type="datetime-local"
+              class="form-control"
+              name="performedDate"
+              formControlName="performedDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+          @if (performedDateRef.invalid && (performedDateRef.dirty || performedDateRef.touched)) {
+            <div>
+              @if (editForm.get('performedDate')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('performedDate')?.errors?.datetimelocal"
+                jhiTranslate="entity.validation.datetimelocal"
+                >This field should be a date and time.</small
+              >
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_details" jhiTranslate="kotekkaappApp.auditLog.details">Details</label>
+          <textarea class="form-control" name="details" id="field_details" data-cy="details" formControlName="details"></textarea>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

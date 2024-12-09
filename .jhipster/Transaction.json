@@ -1,0 +1,128 @@
+{
+  "annotations": {
+    "changelogDate": "20241209130825"
+  },
+  "applications": "*",
+  "documentation": "Transaction performed by a user via their wallet",
+  "fields": [
+    {
+      "fieldName": "uuid",
+      "fieldType": "UUID",
+      "fieldValidateRules": ["required", "unique"]
+    },
+    {
+      "fieldName": "type",
+      "fieldType": "TransactionType",
+      "fieldValues": "PAY,RECEIVE,WIRE_IN,WIRE_OUT,TRANSFER_IN,TRANSFER_OUT,CASH_IN,CASH_OUT,FEE,REBATE,COMMISSION"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "TransactionStatus",
+      "fieldValues": "PENDING,TO_CONFIRM,CONFIRMED,REJECTED,PARTNER_CONFIRMED,PARTNER_REJECTED,IN_PROGRESS,PROCESSED,FAILED"
+    },
+    {
+      "fieldName": "direction",
+      "fieldType": "Direction",
+      "fieldValues": "DEBIT,CREDIT"
+    },
+    {
+      "fieldName": "amount",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "100"
+    },
+    {
+      "fieldName": "fee",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "commission",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "currency",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "3"
+    },
+    {
+      "fieldName": "counterpartyType",
+      "fieldType": "CounterpartyType",
+      "fieldValues": "WALLET,CARD,BENEFICIARY,RECIPIENT"
+    },
+    {
+      "fieldName": "counterpartyId",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "36"
+    },
+    {
+      "fieldName": "entryDate",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "effectiveDate",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "startTime",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "endTime",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "parent",
+      "fieldType": "UUID"
+    },
+    {
+      "fieldName": "reference",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "255"
+    },
+    {
+      "fieldName": "externalId",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "255"
+    },
+    {
+      "fieldName": "partnerToken",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "255"
+    },
+    {
+      "fieldName": "wallet",
+      "fieldType": "UUID"
+    },
+    {
+      "fieldName": "createdBy",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "createdDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "lastModifiedBy",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "lastModifiedDate",
+      "fieldType": "Instant"
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "name": "Transaction",
+  "pagination": "pagination",
+  "relationships": [],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

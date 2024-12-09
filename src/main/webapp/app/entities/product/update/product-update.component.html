@@ -1,0 +1,283 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-product-heading" data-cy="ProductCreateUpdateHeading" jhiTranslate="kotekkaappApp.product.home.createOrEditLabel">
+        Create or edit a Product
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="kotekkaappApp.product.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        @let uuidRef = editForm.get('uuid')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_uuid" jhiTranslate="kotekkaappApp.product.uuid">Uuid</label>
+          <input type="text" class="form-control" name="uuid" id="field_uuid" data-cy="uuid" formControlName="uuid" />
+          @if (uuidRef.invalid && (uuidRef.dirty || uuidRef.touched)) {
+            <div>
+              @if (editForm.get('uuid')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_walletHolder" jhiTranslate="kotekkaappApp.product.walletHolder">Wallet Holder</label>
+          <input
+            type="text"
+            class="form-control"
+            name="walletHolder"
+            id="field_walletHolder"
+            data-cy="walletHolder"
+            formControlName="walletHolder"
+          />
+        </div>
+
+        @let titleRef = editForm.get('title')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_title" jhiTranslate="kotekkaappApp.product.title">Title</label>
+          <input type="text" class="form-control" name="title" id="field_title" data-cy="title" formControlName="title" />
+          @if (titleRef.invalid && (titleRef.dirty || titleRef.touched)) {
+            <div>
+              @if (editForm.get('title')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        @let descriptionRef = editForm.get('description')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_description" jhiTranslate="kotekkaappApp.product.description">Description</label>
+          <input
+            type="text"
+            class="form-control"
+            name="description"
+            id="field_description"
+            data-cy="description"
+            formControlName="description"
+          />
+          @if (descriptionRef.invalid && (descriptionRef.dirty || descriptionRef.touched)) {
+            <div>
+              @if (editForm.get('description')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              @if (editForm.get('description')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '5000' }"
+                  >This field cannot be longer than 5000 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let statusRef = editForm.get('status')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_status" jhiTranslate="kotekkaappApp.product.status">Status</label>
+          <select class="form-control" name="status" formControlName="status" id="field_status" data-cy="status">
+            <option [ngValue]="null">{{ 'kotekkaappApp.ProductStatus.null' | translate }}</option>
+            @for (productStatus of productStatusValues; track $index) {
+              <option [value]="productStatus">{{ 'kotekkaappApp.ProductStatus.' + productStatus | translate }}</option>
+            }
+          </select>
+          @if (statusRef.invalid && (statusRef.dirty || statusRef.touched)) {
+            <div>
+              @if (editForm.get('status')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        @let mediaRef = editForm.get('media')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_media" jhiTranslate="kotekkaappApp.product.media">Media</label>
+          <div>
+            @if (mediaRef.value) {
+              <img
+                [src]="'data:' + editForm.get('mediaContentType')!.value + ';base64,' + mediaRef.value"
+                style="max-height: 100px"
+                alt="product"
+              />
+            }
+            @if (mediaRef.value) {
+              <div class="form-text text-danger clearfix">
+                <span class="pull-start">{{ editForm.get('mediaContentType')!.value }}, {{ byteSize(mediaRef.value!) }}</span>
+                <button
+                  type="button"
+                  (click)="clearInputImage('media', 'mediaContentType', 'file_media')"
+                  class="btn btn-secondary btn-xs pull-end"
+                >
+                  <fa-icon icon="times"></fa-icon>
+                </button>
+              </div>
+            }
+            <input
+              type="file"
+              id="file_media"
+              data-cy="media"
+              (change)="setFileData($event, 'media', true)"
+              accept="image/*"
+              jhiTranslate="entity.action.addimage"
+            />
+          </div>
+          <input type="hidden" class="form-control" name="media" id="field_media" data-cy="media" formControlName="media" />
+          <input
+            type="hidden"
+            class="form-control"
+            name="mediaContentType"
+            id="field_mediaContentType"
+            formControlName="mediaContentType"
+          />
+        </div>
+
+        @let priceRef = editForm.get('price')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_price" jhiTranslate="kotekkaappApp.product.price">Price</label>
+          <input type="number" class="form-control" name="price" id="field_price" data-cy="price" formControlName="price" />
+          @if (priceRef.invalid && (priceRef.dirty || priceRef.touched)) {
+            <div>
+              @if (editForm.get('price')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              <small class="form-text text-danger" [hidden]="!editForm.get('price')?.errors?.number" jhiTranslate="entity.validation.number"
+                >This field should be a number.</small
+              >
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_compareAtPrice" jhiTranslate="kotekkaappApp.product.compareAtPrice">Compare At Price</label>
+          <input
+            type="number"
+            class="form-control"
+            name="compareAtPrice"
+            id="field_compareAtPrice"
+            data-cy="compareAtPrice"
+            formControlName="compareAtPrice"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_costPerItem" jhiTranslate="kotekkaappApp.product.costPerItem">Cost Per Item</label>
+          <input
+            type="number"
+            class="form-control"
+            name="costPerItem"
+            id="field_costPerItem"
+            data-cy="costPerItem"
+            formControlName="costPerItem"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_profit" jhiTranslate="kotekkaappApp.product.profit">Profit</label>
+          <input type="number" class="form-control" name="profit" id="field_profit" data-cy="profit" formControlName="profit" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_margin" jhiTranslate="kotekkaappApp.product.margin">Margin</label>
+          <input type="number" class="form-control" name="margin" id="field_margin" data-cy="margin" formControlName="margin" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_inventoryQuantity" jhiTranslate="kotekkaappApp.product.inventoryQuantity"
+            >Inventory Quantity</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="inventoryQuantity"
+            id="field_inventoryQuantity"
+            data-cy="inventoryQuantity"
+            formControlName="inventoryQuantity"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_inventoryLocation" jhiTranslate="kotekkaappApp.product.inventoryLocation"
+            >Inventory Location</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="inventoryLocation"
+            id="field_inventoryLocation"
+            data-cy="inventoryLocation"
+            formControlName="inventoryLocation"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_trackQuantity" jhiTranslate="kotekkaappApp.product.trackQuantity">Track Quantity</label>
+          <input
+            type="checkbox"
+            class="form-check"
+            name="trackQuantity"
+            id="field_trackQuantity"
+            data-cy="trackQuantity"
+            formControlName="trackQuantity"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_category" jhiTranslate="kotekkaappApp.product.category">Category</label>
+          <select
+            class="form-control"
+            id="field_category"
+            data-cy="category"
+            name="category"
+            formControlName="category"
+            [compareWith]="compareCategory"
+          >
+            <option [ngValue]="null"></option>
+            @for (categoryOption of categoriesSharedCollection; track $index) {
+              <option [ngValue]="categoryOption">{{ categoryOption.name }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label for="field_collections" jhiTranslate="kotekkaappApp.product.collections">Collections</label>
+          <select
+            class="form-control"
+            id="field_collections"
+            data-cy="collections"
+            multiple
+            name="collections"
+            formControlName="collections"
+            [compareWith]="compareCollection"
+          >
+            @for (collectionOption of collectionsSharedCollection; track $index) {
+              <option [ngValue]="collectionOption">{{ collectionOption.name }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

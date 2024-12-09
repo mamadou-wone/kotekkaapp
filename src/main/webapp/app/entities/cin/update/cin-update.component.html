@@ -1,0 +1,389 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-cin-heading" data-cy="CinCreateUpdateHeading" jhiTranslate="kotekkaappApp.cin.home.createOrEditLabel">
+        Create or edit a Cin
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="kotekkaappApp.cin.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        @let cinIdRef = editForm.get('cinId')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_cinId" jhiTranslate="kotekkaappApp.cin.cinId">Cin Id</label>
+          <input type="text" class="form-control" name="cinId" id="field_cinId" data-cy="cinId" formControlName="cinId" />
+          @if (cinIdRef.invalid && (cinIdRef.dirty || cinIdRef.touched)) {
+            <div>
+              @if (editForm.get('cinId')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '50' }"
+                  >This field cannot be longer than 50 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_validityDate" jhiTranslate="kotekkaappApp.cin.validityDate">Validity Date</label>
+          <div class="input-group">
+            <input
+              id="field_validityDate"
+              data-cy="validityDate"
+              type="text"
+              class="form-control"
+              name="validityDate"
+              ngbDatepicker
+              #validityDateDp="ngbDatepicker"
+              formControlName="validityDate"
+            />
+            <button type="button" class="btn btn-secondary" (click)="validityDateDp.toggle()">
+              <fa-icon icon="calendar-alt"></fa-icon>
+            </button>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_birthDate" jhiTranslate="kotekkaappApp.cin.birthDate">Birth Date</label>
+          <div class="input-group">
+            <input
+              id="field_birthDate"
+              data-cy="birthDate"
+              type="text"
+              class="form-control"
+              name="birthDate"
+              ngbDatepicker
+              #birthDateDp="ngbDatepicker"
+              formControlName="birthDate"
+            />
+            <button type="button" class="btn btn-secondary" (click)="birthDateDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+          </div>
+        </div>
+
+        @let birthPlaceRef = editForm.get('birthPlace')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_birthPlace" jhiTranslate="kotekkaappApp.cin.birthPlace">Birth Place</label>
+          <input
+            type="text"
+            class="form-control"
+            name="birthPlace"
+            id="field_birthPlace"
+            data-cy="birthPlace"
+            formControlName="birthPlace"
+          />
+          @if (birthPlaceRef.invalid && (birthPlaceRef.dirty || birthPlaceRef.touched)) {
+            <div>
+              @if (editForm.get('birthPlace')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '255' }"
+                  >This field cannot be longer than 255 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let firstNameRef = editForm.get('firstName')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_firstName" jhiTranslate="kotekkaappApp.cin.firstName">First Name</label>
+          <input type="text" class="form-control" name="firstName" id="field_firstName" data-cy="firstName" formControlName="firstName" />
+          @if (firstNameRef.invalid && (firstNameRef.dirty || firstNameRef.touched)) {
+            <div>
+              @if (editForm.get('firstName')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '255' }"
+                  >This field cannot be longer than 255 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let lastNameRef = editForm.get('lastName')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_lastName" jhiTranslate="kotekkaappApp.cin.lastName">Last Name</label>
+          <input type="text" class="form-control" name="lastName" id="field_lastName" data-cy="lastName" formControlName="lastName" />
+          @if (lastNameRef.invalid && (lastNameRef.dirty || lastNameRef.touched)) {
+            <div>
+              @if (editForm.get('lastName')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '255' }"
+                  >This field cannot be longer than 255 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let birthCityRef = editForm.get('birthCity')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_birthCity" jhiTranslate="kotekkaappApp.cin.birthCity">Birth City</label>
+          <input type="text" class="form-control" name="birthCity" id="field_birthCity" data-cy="birthCity" formControlName="birthCity" />
+          @if (birthCityRef.invalid && (birthCityRef.dirty || birthCityRef.touched)) {
+            <div>
+              @if (editForm.get('birthCity')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '255' }"
+                  >This field cannot be longer than 255 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let fatherNameRef = editForm.get('fatherName')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_fatherName" jhiTranslate="kotekkaappApp.cin.fatherName">Father Name</label>
+          <input
+            type="text"
+            class="form-control"
+            name="fatherName"
+            id="field_fatherName"
+            data-cy="fatherName"
+            formControlName="fatherName"
+          />
+          @if (fatherNameRef.invalid && (fatherNameRef.dirty || fatherNameRef.touched)) {
+            <div>
+              @if (editForm.get('fatherName')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '255' }"
+                  >This field cannot be longer than 255 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let nationalityRef = editForm.get('nationality')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_nationality" jhiTranslate="kotekkaappApp.cin.nationality">Nationality</label>
+          <input
+            type="text"
+            class="form-control"
+            name="nationality"
+            id="field_nationality"
+            data-cy="nationality"
+            formControlName="nationality"
+          />
+          @if (nationalityRef.invalid && (nationalityRef.dirty || nationalityRef.touched)) {
+            <div>
+              @if (editForm.get('nationality')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '255' }"
+                  >This field cannot be longer than 255 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let nationalityCodeRef = editForm.get('nationalityCode')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_nationalityCode" jhiTranslate="kotekkaappApp.cin.nationalityCode">Nationality Code</label>
+          <input
+            type="text"
+            class="form-control"
+            name="nationalityCode"
+            id="field_nationalityCode"
+            data-cy="nationalityCode"
+            formControlName="nationalityCode"
+          />
+          @if (nationalityCodeRef.invalid && (nationalityCodeRef.dirty || nationalityCodeRef.touched)) {
+            <div>
+              @if (editForm.get('nationalityCode')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '255' }"
+                  >This field cannot be longer than 255 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let issuingCountryRef = editForm.get('issuingCountry')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_issuingCountry" jhiTranslate="kotekkaappApp.cin.issuingCountry">Issuing Country</label>
+          <input
+            type="text"
+            class="form-control"
+            name="issuingCountry"
+            id="field_issuingCountry"
+            data-cy="issuingCountry"
+            formControlName="issuingCountry"
+          />
+          @if (issuingCountryRef.invalid && (issuingCountryRef.dirty || issuingCountryRef.touched)) {
+            <div>
+              @if (editForm.get('issuingCountry')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '255' }"
+                  >This field cannot be longer than 255 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let issuingCountryCodeRef = editForm.get('issuingCountryCode')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_issuingCountryCode" jhiTranslate="kotekkaappApp.cin.issuingCountryCode"
+            >Issuing Country Code</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="issuingCountryCode"
+            id="field_issuingCountryCode"
+            data-cy="issuingCountryCode"
+            formControlName="issuingCountryCode"
+          />
+          @if (issuingCountryCodeRef.invalid && (issuingCountryCodeRef.dirty || issuingCountryCodeRef.touched)) {
+            <div>
+              @if (editForm.get('issuingCountryCode')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '3' }"
+                  >This field cannot be longer than 3 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let motherNameRef = editForm.get('motherName')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_motherName" jhiTranslate="kotekkaappApp.cin.motherName">Mother Name</label>
+          <input
+            type="text"
+            class="form-control"
+            name="motherName"
+            id="field_motherName"
+            data-cy="motherName"
+            formControlName="motherName"
+          />
+          @if (motherNameRef.invalid && (motherNameRef.dirty || motherNameRef.touched)) {
+            <div>
+              @if (editForm.get('motherName')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '255' }"
+                  >This field cannot be longer than 255 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let civilRegisterRef = editForm.get('civilRegister')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_civilRegister" jhiTranslate="kotekkaappApp.cin.civilRegister">Civil Register</label>
+          <input
+            type="text"
+            class="form-control"
+            name="civilRegister"
+            id="field_civilRegister"
+            data-cy="civilRegister"
+            formControlName="civilRegister"
+          />
+          @if (civilRegisterRef.invalid && (civilRegisterRef.dirty || civilRegisterRef.touched)) {
+            <div>
+              @if (editForm.get('civilRegister')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '255' }"
+                  >This field cannot be longer than 255 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let sexRef = editForm.get('sex')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_sex" jhiTranslate="kotekkaappApp.cin.sex">Sex</label>
+          <input type="text" class="form-control" name="sex" id="field_sex" data-cy="sex" formControlName="sex" />
+          @if (sexRef.invalid && (sexRef.dirty || sexRef.touched)) {
+            <div>
+              @if (editForm.get('sex')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '3' }"
+                  >This field cannot be longer than 3 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let addressRef = editForm.get('address')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_address" jhiTranslate="kotekkaappApp.cin.address">Address</label>
+          <input type="text" class="form-control" name="address" id="field_address" data-cy="address" formControlName="address" />
+          @if (addressRef.invalid && (addressRef.dirty || addressRef.touched)) {
+            <div>
+              @if (editForm.get('address')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '255' }"
+                  >This field cannot be longer than 255 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let birthCityCodeRef = editForm.get('birthCityCode')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_birthCityCode" jhiTranslate="kotekkaappApp.cin.birthCityCode">Birth City Code</label>
+          <input
+            type="text"
+            class="form-control"
+            name="birthCityCode"
+            id="field_birthCityCode"
+            data-cy="birthCityCode"
+            formControlName="birthCityCode"
+          />
+          @if (birthCityCodeRef.invalid && (birthCityCodeRef.dirty || birthCityCodeRef.touched)) {
+            <div>
+              @if (editForm.get('birthCityCode')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '3' }"
+                  >This field cannot be longer than 3 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_walletHolder" jhiTranslate="kotekkaappApp.cin.walletHolder">Wallet Holder</label>
+          <input
+            type="text"
+            class="form-control"
+            name="walletHolder"
+            id="field_walletHolder"
+            data-cy="walletHolder"
+            formControlName="walletHolder"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_createdDate" jhiTranslate="kotekkaappApp.cin.createdDate">Created Date</label>
+          <div class="d-flex">
+            <input
+              id="field_createdDate"
+              data-cy="createdDate"
+              type="datetime-local"
+              class="form-control"
+              name="createdDate"
+              formControlName="createdDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

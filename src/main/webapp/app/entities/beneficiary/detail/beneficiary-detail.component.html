@@ -1,0 +1,84 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (beneficiary(); as beneficiaryRef) {
+      <div>
+        <h2 data-cy="beneficiaryDetailsHeading"><span jhiTranslate="kotekkaappApp.beneficiary.detail.title">Beneficiary</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ beneficiaryRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.beneficiary.uuid">Uuid</span></dt>
+          <dd>
+            <span>{{ beneficiaryRef.uuid }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.beneficiary.status">Status</span></dt>
+          <dd>
+            <span [jhiTranslate]="'kotekkaappApp.DefaultStatus.' + (beneficiaryRef.status ?? 'null')">{{
+              { null: '', PENDING: 'PENDING', ACTIVE: 'ACTIVE', BLOCKED: 'BLOCKED', DELETED: 'DELETED' }[beneficiaryRef.status ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.beneficiary.firstName">First Name</span></dt>
+          <dd>
+            <span>{{ beneficiaryRef.firstName }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.beneficiary.lastName">Last Name</span></dt>
+          <dd>
+            <span>{{ beneficiaryRef.lastName }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.beneficiary.cin">Cin</span></dt>
+          <dd>
+            <span>{{ beneficiaryRef.cin }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.beneficiary.iban">Iban</span></dt>
+          <dd>
+            <span>{{ beneficiaryRef.iban }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.beneficiary.phoneNumber">Phone Number</span></dt>
+          <dd>
+            <span>{{ beneficiaryRef.phoneNumber }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.beneficiary.email">Email</span></dt>
+          <dd>
+            <span>{{ beneficiaryRef.email }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.beneficiary.walletHolder">Wallet Holder</span></dt>
+          <dd>
+            <span>{{ beneficiaryRef.walletHolder }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.beneficiary.createdBy">Created By</span></dt>
+          <dd>
+            <span>{{ beneficiaryRef.createdBy }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.beneficiary.createdDate">Created Date</span></dt>
+          <dd>
+            <span>{{ beneficiaryRef.createdDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.beneficiary.lastModifiedBy">Last Modified By</span></dt>
+          <dd>
+            <span>{{ beneficiaryRef.lastModifiedBy }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.beneficiary.lastModifiedDate">Last Modified Date</span></dt>
+          <dd>
+            <span>{{ beneficiaryRef.lastModifiedDate | formatMediumDatetime }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/beneficiary', beneficiaryRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

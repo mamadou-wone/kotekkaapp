@@ -1,0 +1,74 @@
+{
+  "annotations": {
+    "changelogDate": "20241209130821"
+  },
+  "applications": "*",
+  "documentation": "Call to partners by back-end\\nNot Audited",
+  "fields": [
+    {
+      "fieldName": "partner",
+      "fieldType": "Partner",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "CIH,CMI,WAFR,OTHER"
+    },
+    {
+      "fieldName": "api",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "255"
+    },
+    {
+      "fieldName": "method",
+      "fieldType": "HttpMethod",
+      "fieldValues": "GET,POST,PUT,DELETE,PATCH"
+    },
+    {
+      "fieldName": "requestHeaders",
+      "fieldType": "TextBlob"
+    },
+    {
+      "fieldName": "requestBody",
+      "fieldType": "TextBlob"
+    },
+    {
+      "fieldName": "requestTime",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "responseStatusCode",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["max"],
+      "fieldValidateRulesMax": "999"
+    },
+    {
+      "fieldName": "responseHeaders",
+      "fieldType": "TextBlob"
+    },
+    {
+      "fieldName": "responseBody",
+      "fieldType": "TextBlob"
+    },
+    {
+      "fieldName": "responseTime",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "correlationId",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "queryParam",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "255"
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "name": "PartnerCall",
+  "pagination": "pagination",
+  "relationships": [],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

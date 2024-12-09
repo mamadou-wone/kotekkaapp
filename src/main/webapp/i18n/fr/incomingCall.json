@@ -1,0 +1,31 @@
+{
+  "kotekkaappApp": {
+    "incomingCall": {
+      "home": {
+        "title": "IncomingCalls",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Incoming Call",
+        "createOrEditLabel": "Créer ou éditer un Incoming Call",
+        "notFound": "Aucun Incoming Call trouvé"
+      },
+      "created": "Un nouveau Incoming Call a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Incoming Call avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Incoming Call avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Incoming Call {{ id }} ?"
+      },
+      "detail": {
+        "title": "Incoming Call"
+      },
+      "id": "ID",
+      "partner": "Partner",
+      "api": "Api",
+      "method": "Method",
+      "requestHeaders": "Request Headers",
+      "requestBody": "Request Body",
+      "createdDate": "Created Date",
+      "responseStatusCode": "Response Status Code",
+      "responseTime": "Response Time"
+    }
+  }
+}

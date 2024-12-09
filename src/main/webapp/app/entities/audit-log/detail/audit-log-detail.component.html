@@ -1,0 +1,58 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (auditLog(); as auditLogRef) {
+      <div>
+        <h2 data-cy="auditLogDetailsHeading"><span jhiTranslate="kotekkaappApp.auditLog.detail.title">Audit Log</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ auditLogRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.auditLog.uuid">Uuid</span></dt>
+          <dd>
+            <span>{{ auditLogRef.uuid }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.auditLog.entityName">Entity Name</span></dt>
+          <dd>
+            <span>{{ auditLogRef.entityName }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.auditLog.entityId">Entity Id</span></dt>
+          <dd>
+            <span>{{ auditLogRef.entityId }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.auditLog.action">Action</span></dt>
+          <dd>
+            <span>{{ auditLogRef.action }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.auditLog.performedBy">Performed By</span></dt>
+          <dd>
+            <span>{{ auditLogRef.performedBy }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.auditLog.performedDate">Performed Date</span></dt>
+          <dd>
+            <span>{{ auditLogRef.performedDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.auditLog.details">Details</span></dt>
+          <dd>
+            <span>{{ auditLogRef.details }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/audit-log', auditLogRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

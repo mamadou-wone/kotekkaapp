@@ -1,0 +1,370 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-transaction-heading"
+        data-cy="TransactionCreateUpdateHeading"
+        jhiTranslate="kotekkaappApp.transaction.home.createOrEditLabel"
+      >
+        Create or edit a Transaction
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="kotekkaappApp.transaction.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        @let uuidRef = editForm.get('uuid')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_uuid" jhiTranslate="kotekkaappApp.transaction.uuid">Uuid</label>
+          <input type="text" class="form-control" name="uuid" id="field_uuid" data-cy="uuid" formControlName="uuid" />
+          @if (uuidRef.invalid && (uuidRef.dirty || uuidRef.touched)) {
+            <div>
+              @if (editForm.get('uuid')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_type" jhiTranslate="kotekkaappApp.transaction.type">Type</label>
+          <select class="form-control" name="type" formControlName="type" id="field_type" data-cy="type">
+            <option [ngValue]="null">{{ 'kotekkaappApp.TransactionType.null' | translate }}</option>
+            @for (transactionType of transactionTypeValues; track $index) {
+              <option [value]="transactionType">{{ 'kotekkaappApp.TransactionType.' + transactionType | translate }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_status" jhiTranslate="kotekkaappApp.transaction.status">Status</label>
+          <select class="form-control" name="status" formControlName="status" id="field_status" data-cy="status">
+            <option [ngValue]="null">{{ 'kotekkaappApp.TransactionStatus.null' | translate }}</option>
+            @for (transactionStatus of transactionStatusValues; track $index) {
+              <option [value]="transactionStatus">{{ 'kotekkaappApp.TransactionStatus.' + transactionStatus | translate }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_direction" jhiTranslate="kotekkaappApp.transaction.direction">Direction</label>
+          <select class="form-control" name="direction" formControlName="direction" id="field_direction" data-cy="direction">
+            <option [ngValue]="null">{{ 'kotekkaappApp.Direction.null' | translate }}</option>
+            @for (direction of directionValues; track $index) {
+              <option [value]="direction">{{ 'kotekkaappApp.Direction.' + direction | translate }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_amount" jhiTranslate="kotekkaappApp.transaction.amount">Amount</label>
+          <input type="number" class="form-control" name="amount" id="field_amount" data-cy="amount" formControlName="amount" />
+        </div>
+
+        @let descriptionRef = editForm.get('description')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_description" jhiTranslate="kotekkaappApp.transaction.description">Description</label>
+          <input
+            type="text"
+            class="form-control"
+            name="description"
+            id="field_description"
+            data-cy="description"
+            formControlName="description"
+          />
+          @if (descriptionRef.invalid && (descriptionRef.dirty || descriptionRef.touched)) {
+            <div>
+              @if (editForm.get('description')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '100' }"
+                  >This field cannot be longer than 100 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_fee" jhiTranslate="kotekkaappApp.transaction.fee">Fee</label>
+          <input type="number" class="form-control" name="fee" id="field_fee" data-cy="fee" formControlName="fee" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_commission" jhiTranslate="kotekkaappApp.transaction.commission">Commission</label>
+          <input
+            type="number"
+            class="form-control"
+            name="commission"
+            id="field_commission"
+            data-cy="commission"
+            formControlName="commission"
+          />
+        </div>
+
+        @let currencyRef = editForm.get('currency')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_currency" jhiTranslate="kotekkaappApp.transaction.currency">Currency</label>
+          <input type="text" class="form-control" name="currency" id="field_currency" data-cy="currency" formControlName="currency" />
+          @if (currencyRef.invalid && (currencyRef.dirty || currencyRef.touched)) {
+            <div>
+              @if (editForm.get('currency')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '3' }"
+                  >This field cannot be longer than 3 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_counterpartyType" jhiTranslate="kotekkaappApp.transaction.counterpartyType"
+            >Counterparty Type</label
+          >
+          <select
+            class="form-control"
+            name="counterpartyType"
+            formControlName="counterpartyType"
+            id="field_counterpartyType"
+            data-cy="counterpartyType"
+          >
+            <option [ngValue]="null">{{ 'kotekkaappApp.CounterpartyType.null' | translate }}</option>
+            @for (counterpartyType of counterpartyTypeValues; track $index) {
+              <option [value]="counterpartyType">{{ 'kotekkaappApp.CounterpartyType.' + counterpartyType | translate }}</option>
+            }
+          </select>
+        </div>
+
+        @let counterpartyIdRef = editForm.get('counterpartyId')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_counterpartyId" jhiTranslate="kotekkaappApp.transaction.counterpartyId"
+            >Counterparty Id</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="counterpartyId"
+            id="field_counterpartyId"
+            data-cy="counterpartyId"
+            formControlName="counterpartyId"
+          />
+          @if (counterpartyIdRef.invalid && (counterpartyIdRef.dirty || counterpartyIdRef.touched)) {
+            <div>
+              @if (editForm.get('counterpartyId')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '36' }"
+                  >This field cannot be longer than 36 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_entryDate" jhiTranslate="kotekkaappApp.transaction.entryDate">Entry Date</label>
+          <div class="input-group">
+            <input
+              id="field_entryDate"
+              data-cy="entryDate"
+              type="text"
+              class="form-control"
+              name="entryDate"
+              ngbDatepicker
+              #entryDateDp="ngbDatepicker"
+              formControlName="entryDate"
+            />
+            <button type="button" class="btn btn-secondary" (click)="entryDateDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_effectiveDate" jhiTranslate="kotekkaappApp.transaction.effectiveDate">Effective Date</label>
+          <div class="input-group">
+            <input
+              id="field_effectiveDate"
+              data-cy="effectiveDate"
+              type="text"
+              class="form-control"
+              name="effectiveDate"
+              ngbDatepicker
+              #effectiveDateDp="ngbDatepicker"
+              formControlName="effectiveDate"
+            />
+            <button type="button" class="btn btn-secondary" (click)="effectiveDateDp.toggle()">
+              <fa-icon icon="calendar-alt"></fa-icon>
+            </button>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_startTime" jhiTranslate="kotekkaappApp.transaction.startTime">Start Time</label>
+          <div class="d-flex">
+            <input
+              id="field_startTime"
+              data-cy="startTime"
+              type="datetime-local"
+              class="form-control"
+              name="startTime"
+              formControlName="startTime"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_endTime" jhiTranslate="kotekkaappApp.transaction.endTime">End Time</label>
+          <div class="d-flex">
+            <input
+              id="field_endTime"
+              data-cy="endTime"
+              type="datetime-local"
+              class="form-control"
+              name="endTime"
+              formControlName="endTime"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_parent" jhiTranslate="kotekkaappApp.transaction.parent">Parent</label>
+          <input type="text" class="form-control" name="parent" id="field_parent" data-cy="parent" formControlName="parent" />
+        </div>
+
+        @let referenceRef = editForm.get('reference')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_reference" jhiTranslate="kotekkaappApp.transaction.reference">Reference</label>
+          <input type="text" class="form-control" name="reference" id="field_reference" data-cy="reference" formControlName="reference" />
+          @if (referenceRef.invalid && (referenceRef.dirty || referenceRef.touched)) {
+            <div>
+              @if (editForm.get('reference')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '255' }"
+                  >This field cannot be longer than 255 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let externalIdRef = editForm.get('externalId')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_externalId" jhiTranslate="kotekkaappApp.transaction.externalId">External Id</label>
+          <input
+            type="text"
+            class="form-control"
+            name="externalId"
+            id="field_externalId"
+            data-cy="externalId"
+            formControlName="externalId"
+          />
+          @if (externalIdRef.invalid && (externalIdRef.dirty || externalIdRef.touched)) {
+            <div>
+              @if (editForm.get('externalId')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '255' }"
+                  >This field cannot be longer than 255 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let partnerTokenRef = editForm.get('partnerToken')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_partnerToken" jhiTranslate="kotekkaappApp.transaction.partnerToken">Partner Token</label>
+          <input
+            type="text"
+            class="form-control"
+            name="partnerToken"
+            id="field_partnerToken"
+            data-cy="partnerToken"
+            formControlName="partnerToken"
+          />
+          @if (partnerTokenRef.invalid && (partnerTokenRef.dirty || partnerTokenRef.touched)) {
+            <div>
+              @if (editForm.get('partnerToken')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '255' }"
+                  >This field cannot be longer than 255 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_wallet" jhiTranslate="kotekkaappApp.transaction.wallet">Wallet</label>
+          <input type="text" class="form-control" name="wallet" id="field_wallet" data-cy="wallet" formControlName="wallet" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_createdBy" jhiTranslate="kotekkaappApp.transaction.createdBy">Created By</label>
+          <input type="text" class="form-control" name="createdBy" id="field_createdBy" data-cy="createdBy" formControlName="createdBy" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_createdDate" jhiTranslate="kotekkaappApp.transaction.createdDate">Created Date</label>
+          <div class="d-flex">
+            <input
+              id="field_createdDate"
+              data-cy="createdDate"
+              type="datetime-local"
+              class="form-control"
+              name="createdDate"
+              formControlName="createdDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_lastModifiedBy" jhiTranslate="kotekkaappApp.transaction.lastModifiedBy"
+            >Last Modified By</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="lastModifiedBy"
+            id="field_lastModifiedBy"
+            data-cy="lastModifiedBy"
+            formControlName="lastModifiedBy"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_lastModifiedDate" jhiTranslate="kotekkaappApp.transaction.lastModifiedDate"
+            >Last Modified Date</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_lastModifiedDate"
+              data-cy="lastModifiedDate"
+              type="datetime-local"
+              class="form-control"
+              name="lastModifiedDate"
+              formControlName="lastModifiedDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

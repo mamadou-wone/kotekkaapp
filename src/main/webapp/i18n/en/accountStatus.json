@@ -1,0 +1,12 @@
+{
+  "kotekkaappApp": {
+    "AccountStatus": {
+      "null": "",
+      "PENDING": "PENDING",
+      "ACTIVE": "ACTIVE",
+      "REJECTED": "REJECTED",
+      "BLOCKED": "BLOCKED",
+      "CLOSED": "CLOSED"
+    }
+  }
+}

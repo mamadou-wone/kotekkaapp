@@ -1,0 +1,68 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (referalInfo(); as referalInfoRef) {
+      <div>
+        <h2 data-cy="referalInfoDetailsHeading"><span jhiTranslate="kotekkaappApp.referalInfo.detail.title">Referal Info</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ referalInfoRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.referalInfo.uuid">Uuid</span></dt>
+          <dd>
+            <span>{{ referalInfoRef.uuid }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.referalInfo.referalCode">Referal Code</span></dt>
+          <dd>
+            <span>{{ referalInfoRef.referalCode }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.referalInfo.walletHolder">Wallet Holder</span></dt>
+          <dd>
+            <span>{{ referalInfoRef.walletHolder }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.referalInfo.refered">Refered</span></dt>
+          <dd>
+            <span>{{ referalInfoRef.refered }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.referalInfo.status">Status</span></dt>
+          <dd>
+            <span [jhiTranslate]="'kotekkaappApp.ReferalStatus.' + (referalInfoRef.status ?? 'null')">{{
+              { null: '', PENDING: 'PENDING', CONFIRMED: 'CONFIRMED', REJECTED: 'REJECTED', PAID: 'PAID' }[referalInfoRef.status ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.referalInfo.createdBy">Created By</span></dt>
+          <dd>
+            <span>{{ referalInfoRef.createdBy }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.referalInfo.createdDate">Created Date</span></dt>
+          <dd>
+            <span>{{ referalInfoRef.createdDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.referalInfo.lastModifiedBy">Last Modified By</span></dt>
+          <dd>
+            <span>{{ referalInfoRef.lastModifiedBy }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.referalInfo.lastModifiedDate">Last Modified Date</span></dt>
+          <dd>
+            <span>{{ referalInfoRef.lastModifiedDate | formatMediumDatetime }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/referal-info', referalInfoRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

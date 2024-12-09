@@ -1,0 +1,11 @@
+{
+  "kotekkaappApp": {
+    "DefaultStatus": {
+      "null": "",
+      "PENDING": "PENDING",
+      "ACTIVE": "ACTIVE",
+      "BLOCKED": "BLOCKED",
+      "DELETED": "DELETED"
+    }
+  }
+}

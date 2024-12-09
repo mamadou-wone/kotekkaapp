@@ -1,0 +1,53 @@
+{
+  "annotations": {
+    "changelogDate": "20241209130816"
+  },
+  "applications": "*",
+  "documentation": "Incoming Call from partner\\nEither webhook callback, or normal api call\\nNot Audited",
+  "fields": [
+    {
+      "fieldName": "partner",
+      "fieldType": "Partner",
+      "fieldValues": "CIH,CMI,WAFR,OTHER"
+    },
+    {
+      "fieldName": "api",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "255"
+    },
+    {
+      "fieldName": "method",
+      "fieldType": "HttpMethod",
+      "fieldValues": "GET,POST,PUT,DELETE,PATCH"
+    },
+    {
+      "fieldName": "requestHeaders",
+      "fieldType": "TextBlob"
+    },
+    {
+      "fieldName": "requestBody",
+      "fieldType": "TextBlob"
+    },
+    {
+      "fieldName": "createdDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "responseStatusCode",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["max"],
+      "fieldValidateRulesMax": "999"
+    },
+    {
+      "fieldName": "responseTime",
+      "fieldType": "Instant"
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "name": "IncomingCall",
+  "pagination": "pagination",
+  "relationships": [],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

@@ -1,0 +1,39 @@
+{
+  "kotekkaappApp": {
+    "product": {
+      "home": {
+        "title": "Products",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Product",
+        "createOrEditLabel": "Créer ou éditer un Product",
+        "notFound": "Aucun Product trouvé"
+      },
+      "created": "Un nouveau Product a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Product avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Product avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Product {{ id }} ?"
+      },
+      "detail": {
+        "title": "Product"
+      },
+      "id": "ID",
+      "uuid": "Uuid",
+      "walletHolder": "Wallet Holder",
+      "title": "Title",
+      "description": "Description",
+      "status": "Status",
+      "media": "Media",
+      "price": "Price",
+      "compareAtPrice": "Compare At Price",
+      "costPerItem": "Cost Per Item",
+      "profit": "Profit",
+      "margin": "Margin",
+      "inventoryQuantity": "Inventory Quantity",
+      "inventoryLocation": "Inventory Location",
+      "trackQuantity": "Track Quantity",
+      "category": "Category",
+      "collections": "Collections"
+    }
+  }
+}

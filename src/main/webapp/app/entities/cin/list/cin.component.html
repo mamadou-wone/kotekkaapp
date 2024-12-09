@@ -1,0 +1,251 @@
+<div>
+  <h2 id="page-heading" data-cy="CinHeading">
+    <span jhiTranslate="kotekkaappApp.cin.home.title">Cins</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
+        <span jhiTranslate="kotekkaappApp.cin.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-cin"
+        [routerLink]="['/cin/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="kotekkaappApp.cin.home.createLabel">Create a new Cin</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <jhi-filter [filters]="filters"></jhi-filter>
+
+  @if (cins?.length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="kotekkaappApp.cin.home.notFound">No Cins found</span>
+    </div>
+  }
+
+  @if (cins && cins.length > 0) {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [sortState]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="cinId">
+              <div class="d-flex">
+                <span jhiTranslate="kotekkaappApp.cin.cinId">Cin Id</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="validityDate">
+              <div class="d-flex">
+                <span jhiTranslate="kotekkaappApp.cin.validityDate">Validity Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="birthDate">
+              <div class="d-flex">
+                <span jhiTranslate="kotekkaappApp.cin.birthDate">Birth Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="birthPlace">
+              <div class="d-flex">
+                <span jhiTranslate="kotekkaappApp.cin.birthPlace">Birth Place</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="firstName">
+              <div class="d-flex">
+                <span jhiTranslate="kotekkaappApp.cin.firstName">First Name</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="lastName">
+              <div class="d-flex">
+                <span jhiTranslate="kotekkaappApp.cin.lastName">Last Name</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="birthCity">
+              <div class="d-flex">
+                <span jhiTranslate="kotekkaappApp.cin.birthCity">Birth City</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="fatherName">
+              <div class="d-flex">
+                <span jhiTranslate="kotekkaappApp.cin.fatherName">Father Name</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="nationality">
+              <div class="d-flex">
+                <span jhiTranslate="kotekkaappApp.cin.nationality">Nationality</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="nationalityCode">
+              <div class="d-flex">
+                <span jhiTranslate="kotekkaappApp.cin.nationalityCode">Nationality Code</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="issuingCountry">
+              <div class="d-flex">
+                <span jhiTranslate="kotekkaappApp.cin.issuingCountry">Issuing Country</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="issuingCountryCode">
+              <div class="d-flex">
+                <span jhiTranslate="kotekkaappApp.cin.issuingCountryCode">Issuing Country Code</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="motherName">
+              <div class="d-flex">
+                <span jhiTranslate="kotekkaappApp.cin.motherName">Mother Name</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="civilRegister">
+              <div class="d-flex">
+                <span jhiTranslate="kotekkaappApp.cin.civilRegister">Civil Register</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="sex">
+              <div class="d-flex">
+                <span jhiTranslate="kotekkaappApp.cin.sex">Sex</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="address">
+              <div class="d-flex">
+                <span jhiTranslate="kotekkaappApp.cin.address">Address</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="birthCityCode">
+              <div class="d-flex">
+                <span jhiTranslate="kotekkaappApp.cin.birthCityCode">Birth City Code</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="walletHolder">
+              <div class="d-flex">
+                <span jhiTranslate="kotekkaappApp.cin.walletHolder">Wallet Holder</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="createdDate">
+              <div class="d-flex">
+                <span jhiTranslate="kotekkaappApp.cin.createdDate">Created Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (cin of cins; track trackId(cin)) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/cin', cin.id, 'view']">{{ cin.id }}</a>
+              </td>
+              <td>{{ cin.cinId }}</td>
+              <td>{{ cin.validityDate | formatMediumDate }}</td>
+              <td>{{ cin.birthDate | formatMediumDate }}</td>
+              <td>{{ cin.birthPlace }}</td>
+              <td>{{ cin.firstName }}</td>
+              <td>{{ cin.lastName }}</td>
+              <td>{{ cin.birthCity }}</td>
+              <td>{{ cin.fatherName }}</td>
+              <td>{{ cin.nationality }}</td>
+              <td>{{ cin.nationalityCode }}</td>
+              <td>{{ cin.issuingCountry }}</td>
+              <td>{{ cin.issuingCountryCode }}</td>
+              <td>{{ cin.motherName }}</td>
+              <td>{{ cin.civilRegister }}</td>
+              <td>{{ cin.sex }}</td>
+              <td>{{ cin.address }}</td>
+              <td>{{ cin.birthCityCode }}</td>
+              <td>{{ cin.walletHolder }}</td>
+              <td>{{ cin.createdDate | formatMediumDatetime }}</td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/cin', cin.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a [routerLink]="['/cin', cin.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(cin)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+  @if (cins && cins.length > 0) {
+    <div>
+      <div class="d-flex justify-content-center">
+        <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+      </div>
+
+      <div class="d-flex justify-content-center">
+        <ngb-pagination
+          [collectionSize]="totalItems"
+          [page]="page"
+          [pageSize]="itemsPerPage"
+          [maxSize]="5"
+          [rotate]="true"
+          [boundaryLinks]="true"
+          (pageChange)="navigateToPage($event)"
+        ></ngb-pagination>
+      </div>
+    </div>
+  }
+</div>

@@ -1,0 +1,34 @@
+{
+  "kotekkaappApp": {
+    "serviceClient": {
+      "home": {
+        "title": "ServiceClients",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Service Client",
+        "createOrEditLabel": "Créer ou éditer un Service Client",
+        "notFound": "Aucun Service Client trouvé"
+      },
+      "created": "Un nouveau Service Client a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Service Client avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Service Client avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Service Client {{ id }} ?"
+      },
+      "detail": {
+        "title": "Service Client"
+      },
+      "id": "ID",
+      "clientId": "Client Id",
+      "type": "Type",
+      "apiKey": "Api Key",
+      "status": "Status",
+      "note": "Note",
+      "createdDate": "Created Date",
+      "lastModifiedDate": "Last Modified Date",
+      "help": {
+        "clientId": "uuid of wallet holder if client type is Customer",
+        "type": "type of client initially only Customer"
+      }
+    }
+  }
+}

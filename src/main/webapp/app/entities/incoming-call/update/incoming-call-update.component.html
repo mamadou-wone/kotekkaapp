@@ -1,0 +1,159 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-incoming-call-heading"
+        data-cy="IncomingCallCreateUpdateHeading"
+        jhiTranslate="kotekkaappApp.incomingCall.home.createOrEditLabel"
+      >
+        Create or edit a Incoming Call
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="kotekkaappApp.incomingCall.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" for="field_partner" jhiTranslate="kotekkaappApp.incomingCall.partner">Partner</label>
+          <select class="form-control" name="partner" formControlName="partner" id="field_partner" data-cy="partner">
+            <option [ngValue]="null">{{ 'kotekkaappApp.Partner.null' | translate }}</option>
+            @for (partner of partnerValues; track $index) {
+              <option [value]="partner">{{ 'kotekkaappApp.Partner.' + partner | translate }}</option>
+            }
+          </select>
+        </div>
+
+        @let apiRef = editForm.get('api')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_api" jhiTranslate="kotekkaappApp.incomingCall.api">Api</label>
+          <input type="text" class="form-control" name="api" id="field_api" data-cy="api" formControlName="api" />
+          @if (apiRef.invalid && (apiRef.dirty || apiRef.touched)) {
+            <div>
+              @if (editForm.get('api')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '255' }"
+                  >This field cannot be longer than 255 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_method" jhiTranslate="kotekkaappApp.incomingCall.method">Method</label>
+          <select class="form-control" name="method" formControlName="method" id="field_method" data-cy="method">
+            <option [ngValue]="null">{{ 'kotekkaappApp.HttpMethod.null' | translate }}</option>
+            @for (httpMethod of httpMethodValues; track $index) {
+              <option [value]="httpMethod">{{ 'kotekkaappApp.HttpMethod.' + httpMethod | translate }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_requestHeaders" jhiTranslate="kotekkaappApp.incomingCall.requestHeaders"
+            >Request Headers</label
+          >
+          <textarea
+            class="form-control"
+            name="requestHeaders"
+            id="field_requestHeaders"
+            data-cy="requestHeaders"
+            formControlName="requestHeaders"
+          ></textarea>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_requestBody" jhiTranslate="kotekkaappApp.incomingCall.requestBody">Request Body</label>
+          <textarea
+            class="form-control"
+            name="requestBody"
+            id="field_requestBody"
+            data-cy="requestBody"
+            formControlName="requestBody"
+          ></textarea>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_createdDate" jhiTranslate="kotekkaappApp.incomingCall.createdDate">Created Date</label>
+          <div class="d-flex">
+            <input
+              id="field_createdDate"
+              data-cy="createdDate"
+              type="datetime-local"
+              class="form-control"
+              name="createdDate"
+              formControlName="createdDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        @let responseStatusCodeRef = editForm.get('responseStatusCode')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_responseStatusCode" jhiTranslate="kotekkaappApp.incomingCall.responseStatusCode"
+            >Response Status Code</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="responseStatusCode"
+            id="field_responseStatusCode"
+            data-cy="responseStatusCode"
+            formControlName="responseStatusCode"
+          />
+          @if (responseStatusCodeRef.invalid && (responseStatusCodeRef.dirty || responseStatusCodeRef.touched)) {
+            <div>
+              @if (editForm.get('responseStatusCode')?.errors?.max) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.max" [translateValues]="{ max: '999' }"
+                  >This field cannot be more than 999.</small
+                >
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('responseStatusCode')?.errors?.number"
+                jhiTranslate="entity.validation.number"
+                >This field should be a number.</small
+              >
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_responseTime" jhiTranslate="kotekkaappApp.incomingCall.responseTime">Response Time</label>
+          <div class="d-flex">
+            <input
+              id="field_responseTime"
+              data-cy="responseTime"
+              type="datetime-local"
+              class="form-control"
+              name="responseTime"
+              formControlName="responseTime"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

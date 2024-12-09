@@ -1,0 +1,78 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (device(); as deviceRef) {
+      <div>
+        <h2 data-cy="deviceDetailsHeading"><span jhiTranslate="kotekkaappApp.device.detail.title">Device</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ deviceRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.device.uuid">Uuid</span></dt>
+          <dd>
+            <span>{{ deviceRef.uuid }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.device.deviceUuid">Device Uuid</span></dt>
+          <dd>
+            <span>{{ deviceRef.deviceUuid }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.device.type">Type</span></dt>
+          <dd>
+            <span>{{ deviceRef.type }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.device.manufacturer">Manufacturer</span></dt>
+          <dd>
+            <span>{{ deviceRef.manufacturer }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.device.model">Model</span></dt>
+          <dd>
+            <span>{{ deviceRef.model }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.device.os">Os</span></dt>
+          <dd>
+            <span>{{ deviceRef.os }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.device.appVersion">App Version</span></dt>
+          <dd>
+            <span>{{ deviceRef.appVersion }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.device.inactive">Inactive</span></dt>
+          <dd>
+            <span>{{ deviceRef.inactive }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.device.createdBy">Created By</span></dt>
+          <dd>
+            <span>{{ deviceRef.createdBy }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.device.createdDate">Created Date</span></dt>
+          <dd>
+            <span>{{ deviceRef.createdDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.device.lastModifiedBy">Last Modified By</span></dt>
+          <dd>
+            <span>{{ deviceRef.lastModifiedBy }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.device.lastModifiedDate">Last Modified Date</span></dt>
+          <dd>
+            <span>{{ deviceRef.lastModifiedDate | formatMediumDatetime }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/device', deviceRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

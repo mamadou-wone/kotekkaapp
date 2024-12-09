@@ -1,0 +1,12 @@
+{
+  "kotekkaappApp": {
+    "App": {
+      "null": "",
+      "MOBILE": "MOBILE",
+      "WEB": "WEB",
+      "MERCHANT": "MERCHANT",
+      "AGENT": "AGENT",
+      "PORTAL": "PORTAL"
+    }
+  }
+}
