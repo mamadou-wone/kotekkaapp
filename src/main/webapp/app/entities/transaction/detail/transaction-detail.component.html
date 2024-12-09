@@ -1,0 +1,160 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (transaction(); as transactionRef) {
+      <div>
+        <h2 data-cy="transactionDetailsHeading"><span jhiTranslate="kotekkaappApp.transaction.detail.title">Transaction</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ transactionRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.transaction.uuid">Uuid</span></dt>
+          <dd>
+            <span>{{ transactionRef.uuid }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.transaction.type">Type</span></dt>
+          <dd>
+            <span [jhiTranslate]="'kotekkaappApp.TransactionType.' + (transactionRef.type ?? 'null')">{{
+              {
+                null: '',
+                PAY: 'PAY',
+                RECEIVE: 'RECEIVE',
+                WIRE_IN: 'WIRE_IN',
+                WIRE_OUT: 'WIRE_OUT',
+                TRANSFER_IN: 'TRANSFER_IN',
+                TRANSFER_OUT: 'TRANSFER_OUT',
+                CASH_IN: 'CASH_IN',
+                CASH_OUT: 'CASH_OUT',
+                FEE: 'FEE',
+                REBATE: 'REBATE',
+                COMMISSION: 'COMMISSION',
+              }[transactionRef.type ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.transaction.status">Status</span></dt>
+          <dd>
+            <span [jhiTranslate]="'kotekkaappApp.TransactionStatus.' + (transactionRef.status ?? 'null')">{{
+              {
+                null: '',
+                PENDING: 'PENDING',
+                TO_CONFIRM: 'TO_CONFIRM',
+                CONFIRMED: 'CONFIRMED',
+                REJECTED: 'REJECTED',
+                PARTNER_CONFIRMED: 'PARTNER_CONFIRMED',
+                PARTNER_REJECTED: 'PARTNER_REJECTED',
+                IN_PROGRESS: 'IN_PROGRESS',
+                PROCESSED: 'PROCESSED',
+                FAILED: 'FAILED',
+              }[transactionRef.status ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.transaction.direction">Direction</span></dt>
+          <dd>
+            <span [jhiTranslate]="'kotekkaappApp.Direction.' + (transactionRef.direction ?? 'null')">{{
+              { null: '', DEBIT: 'DEBIT', CREDIT: 'CREDIT' }[transactionRef.direction ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.transaction.amount">Amount</span></dt>
+          <dd>
+            <span>{{ transactionRef.amount }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.transaction.description">Description</span></dt>
+          <dd>
+            <span>{{ transactionRef.description }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.transaction.fee">Fee</span></dt>
+          <dd>
+            <span>{{ transactionRef.fee }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.transaction.commission">Commission</span></dt>
+          <dd>
+            <span>{{ transactionRef.commission }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.transaction.currency">Currency</span></dt>
+          <dd>
+            <span>{{ transactionRef.currency }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.transaction.counterpartyType">Counterparty Type</span></dt>
+          <dd>
+            <span [jhiTranslate]="'kotekkaappApp.CounterpartyType.' + (transactionRef.counterpartyType ?? 'null')">{{
+              { null: '', WALLET: 'WALLET', CARD: 'CARD', BENEFICIARY: 'BENEFICIARY', RECIPIENT: 'RECIPIENT' }[
+                transactionRef.counterpartyType ?? 'null'
+              ]
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.transaction.counterpartyId">Counterparty Id</span></dt>
+          <dd>
+            <span>{{ transactionRef.counterpartyId }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.transaction.entryDate">Entry Date</span></dt>
+          <dd>
+            <span>{{ transactionRef.entryDate | formatMediumDate }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.transaction.effectiveDate">Effective Date</span></dt>
+          <dd>
+            <span>{{ transactionRef.effectiveDate | formatMediumDate }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.transaction.startTime">Start Time</span></dt>
+          <dd>
+            <span>{{ transactionRef.startTime | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.transaction.endTime">End Time</span></dt>
+          <dd>
+            <span>{{ transactionRef.endTime | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.transaction.parent">Parent</span></dt>
+          <dd>
+            <span>{{ transactionRef.parent }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.transaction.reference">Reference</span></dt>
+          <dd>
+            <span>{{ transactionRef.reference }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.transaction.externalId">External Id</span></dt>
+          <dd>
+            <span>{{ transactionRef.externalId }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.transaction.partnerToken">Partner Token</span></dt>
+          <dd>
+            <span>{{ transactionRef.partnerToken }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.transaction.wallet">Wallet</span></dt>
+          <dd>
+            <span>{{ transactionRef.wallet }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.transaction.createdBy">Created By</span></dt>
+          <dd>
+            <span>{{ transactionRef.createdBy }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.transaction.createdDate">Created Date</span></dt>
+          <dd>
+            <span>{{ transactionRef.createdDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.transaction.lastModifiedBy">Last Modified By</span></dt>
+          <dd>
+            <span>{{ transactionRef.lastModifiedBy }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.transaction.lastModifiedDate">Last Modified Date</span></dt>
+          <dd>
+            <span>{{ transactionRef.lastModifiedDate | formatMediumDatetime }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/transaction', transactionRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

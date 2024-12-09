@@ -1,0 +1,165 @@
+<div>
+  <h2 id="page-heading" data-cy="ServiceClientHeading">
+    <span jhiTranslate="kotekkaappApp.serviceClient.home.title">Service Clients</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
+        <span jhiTranslate="kotekkaappApp.serviceClient.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-service-client"
+        [routerLink]="['/service-client/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="kotekkaappApp.serviceClient.home.createLabel">Create a new Service Client</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <jhi-filter [filters]="filters"></jhi-filter>
+
+  @if (serviceClients?.length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="kotekkaappApp.serviceClient.home.notFound">No Service Clients found</span>
+    </div>
+  }
+
+  @if (serviceClients && serviceClients.length > 0) {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [sortState]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="clientId">
+              <div class="d-flex">
+                <span jhiTranslate="kotekkaappApp.serviceClient.clientId">Client Id</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="type">
+              <div class="d-flex">
+                <span jhiTranslate="kotekkaappApp.serviceClient.type">Type</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="apiKey">
+              <div class="d-flex">
+                <span jhiTranslate="kotekkaappApp.serviceClient.apiKey">Api Key</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="status">
+              <div class="d-flex">
+                <span jhiTranslate="kotekkaappApp.serviceClient.status">Status</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="note">
+              <div class="d-flex">
+                <span jhiTranslate="kotekkaappApp.serviceClient.note">Note</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="createdDate">
+              <div class="d-flex">
+                <span jhiTranslate="kotekkaappApp.serviceClient.createdDate">Created Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="lastModifiedDate">
+              <div class="d-flex">
+                <span jhiTranslate="kotekkaappApp.serviceClient.lastModifiedDate">Last Modified Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (serviceClient of serviceClients; track trackId(serviceClient)) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/service-client', serviceClient.id, 'view']">{{ serviceClient.id }}</a>
+              </td>
+              <td>{{ serviceClient.clientId }}</td>
+              <td [jhiTranslate]="'kotekkaappApp.AccountType.' + (serviceClient.type ?? 'null')">
+                {{
+                  { null: '', CUSTOMER: 'CUSTOMER', MERCHANT: 'MERCHANT', AGENT: 'AGENT', INTERNAL: 'INTERNAL' }[
+                    serviceClient.type ?? 'null'
+                  ]
+                }}
+              </td>
+              <td>{{ serviceClient.apiKey }}</td>
+              <td [jhiTranslate]="'kotekkaappApp.DefaultStatus.' + (serviceClient.status ?? 'null')">
+                {{
+                  { null: '', PENDING: 'PENDING', ACTIVE: 'ACTIVE', BLOCKED: 'BLOCKED', DELETED: 'DELETED' }[serviceClient.status ?? 'null']
+                }}
+              </td>
+              <td>{{ serviceClient.note }}</td>
+              <td>{{ serviceClient.createdDate | formatMediumDatetime }}</td>
+              <td>{{ serviceClient.lastModifiedDate | formatMediumDatetime }}</td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/service-client', serviceClient.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a [routerLink]="['/service-client', serviceClient.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(serviceClient)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+  @if (serviceClients && serviceClients.length > 0) {
+    <div>
+      <div class="d-flex justify-content-center">
+        <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+      </div>
+
+      <div class="d-flex justify-content-center">
+        <ngb-pagination
+          [collectionSize]="totalItems"
+          [page]="page"
+          [pageSize]="itemsPerPage"
+          [maxSize]="5"
+          [rotate]="true"
+          [boundaryLinks]="true"
+          (pageChange)="navigateToPage($event)"
+        ></ngb-pagination>
+      </div>
+    </div>
+  }
+</div>

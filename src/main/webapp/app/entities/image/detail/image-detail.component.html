@@ -1,0 +1,69 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (image(); as imageRef) {
+      <div>
+        <h2 data-cy="imageDetailsHeading"><span jhiTranslate="kotekkaappApp.image.detail.title">Image</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ imageRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.image.uuid">Uuid</span></dt>
+          <dd>
+            <span>{{ imageRef.uuid }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.image.name">Name</span></dt>
+          <dd>
+            <span>{{ imageRef.name }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.image.file">File</span></dt>
+          <dd>
+            @if (imageRef.file) {
+              <div>
+                <a (click)="openFile(imageRef.file ?? '', imageRef.fileContentType)">
+                  <img [src]="'data:' + imageRef.fileContentType + ';base64,' + imageRef.file" style="max-width: 100%" alt="image" />
+                </a>
+                {{ imageRef.fileContentType }}, {{ byteSize(imageRef.file ?? '') }}
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.image.walletHolder">Wallet Holder</span></dt>
+          <dd>
+            <span>{{ imageRef.walletHolder }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.image.createdBy">Created By</span></dt>
+          <dd>
+            <span>{{ imageRef.createdBy }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.image.createdDate">Created Date</span></dt>
+          <dd>
+            <span>{{ imageRef.createdDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.image.lastModifiedBy">Last Modified By</span></dt>
+          <dd>
+            <span>{{ imageRef.lastModifiedBy }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.image.lastModifiedDate">Last Modified Date</span></dt>
+          <dd>
+            <span>{{ imageRef.lastModifiedDate | formatMediumDatetime }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/image', imageRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

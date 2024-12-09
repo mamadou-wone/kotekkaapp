@@ -1,0 +1,46 @@
+{
+  "kotekkaappApp": {
+    "walletHolder": {
+      "home": {
+        "title": "Wallet Holders",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Wallet Holder",
+        "createOrEditLabel": "Create or edit a Wallet Holder",
+        "notFound": "No Wallet Holders found"
+      },
+      "created": "A new Wallet Holder is created with identifier {{ param }}",
+      "updated": "A Wallet Holder is updated with identifier {{ param }}",
+      "deleted": "A Wallet Holder is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Wallet Holder {{ id }}?"
+      },
+      "detail": {
+        "title": "Wallet Holder"
+      },
+      "id": "ID",
+      "uuid": "Uuid",
+      "type": "Type",
+      "status": "Status",
+      "phoneNumber": "Phone Number",
+      "network": "Network",
+      "tag": "Tag",
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "address": "Address",
+      "city": "City",
+      "country": "Country",
+      "postalCode": "Postal Code",
+      "onboarding": "Onboarding",
+      "externalId": "External Id",
+      "email": "Email",
+      "dateOfBirth": "Date Of Birth",
+      "sex": "Sex",
+      "createdBy": "Created By",
+      "createdDate": "Created Date",
+      "lastModifiedBy": "Last Modified By",
+      "lastModifiedDate": "Last Modified Date",
+      "loginStatus": "Login Status",
+      "user": "User"
+    }
+  }
+}

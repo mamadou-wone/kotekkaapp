@@ -1,0 +1,51 @@
+{
+  "annotations": {
+    "changelogDate": "20241209130824"
+  },
+  "applications": "*",
+  "documentation": "Service Client",
+  "fields": [
+    {
+      "documentation": "uuid of wallet holder if client type is Customer",
+      "fieldName": "clientId",
+      "fieldType": "UUID"
+    },
+    {
+      "documentation": "type of client initially only Customer",
+      "fieldName": "type",
+      "fieldType": "AccountType",
+      "fieldValues": "CUSTOMER,MERCHANT,AGENT,INTERNAL"
+    },
+    {
+      "fieldName": "apiKey",
+      "fieldType": "UUID",
+      "fieldValidateRules": ["unique"]
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "DefaultStatus",
+      "fieldTypeDocumentation": "Default generic status values for entities added by users\\nShould be just `Status`",
+      "fieldValues": "PENDING,ACTIVE,BLOCKED,DELETED"
+    },
+    {
+      "fieldName": "note",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "255"
+    },
+    {
+      "fieldName": "createdDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "lastModifiedDate",
+      "fieldType": "Instant"
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "name": "ServiceClient",
+  "pagination": "pagination",
+  "relationships": [],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

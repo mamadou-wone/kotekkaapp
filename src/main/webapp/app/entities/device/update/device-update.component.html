@@ -1,0 +1,214 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-device-heading" data-cy="DeviceCreateUpdateHeading" jhiTranslate="kotekkaappApp.device.home.createOrEditLabel">
+        Create or edit a Device
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="kotekkaappApp.device.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        @let uuidRef = editForm.get('uuid')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_uuid" jhiTranslate="kotekkaappApp.device.uuid">Uuid</label>
+          <input type="text" class="form-control" name="uuid" id="field_uuid" data-cy="uuid" formControlName="uuid" />
+          @if (uuidRef.invalid && (uuidRef.dirty || uuidRef.touched)) {
+            <div>
+              @if (editForm.get('uuid')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        @let deviceUuidRef = editForm.get('deviceUuid')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_deviceUuid" jhiTranslate="kotekkaappApp.device.deviceUuid">Device Uuid</label>
+          <input
+            type="text"
+            class="form-control"
+            name="deviceUuid"
+            id="field_deviceUuid"
+            data-cy="deviceUuid"
+            formControlName="deviceUuid"
+          />
+          @if (deviceUuidRef.invalid && (deviceUuidRef.dirty || deviceUuidRef.touched)) {
+            <div>
+              @if (editForm.get('deviceUuid')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '36' }"
+                  >This field cannot be longer than 36 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let typeRef = editForm.get('type')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_type" jhiTranslate="kotekkaappApp.device.type">Type</label>
+          <input type="text" class="form-control" name="type" id="field_type" data-cy="type" formControlName="type" />
+          @if (typeRef.invalid && (typeRef.dirty || typeRef.touched)) {
+            <div>
+              @if (editForm.get('type')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '100' }"
+                  >This field cannot be longer than 100 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let manufacturerRef = editForm.get('manufacturer')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_manufacturer" jhiTranslate="kotekkaappApp.device.manufacturer">Manufacturer</label>
+          <input
+            type="text"
+            class="form-control"
+            name="manufacturer"
+            id="field_manufacturer"
+            data-cy="manufacturer"
+            formControlName="manufacturer"
+          />
+          @if (manufacturerRef.invalid && (manufacturerRef.dirty || manufacturerRef.touched)) {
+            <div>
+              @if (editForm.get('manufacturer')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '100' }"
+                  >This field cannot be longer than 100 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let modelRef = editForm.get('model')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_model" jhiTranslate="kotekkaappApp.device.model">Model</label>
+          <input type="text" class="form-control" name="model" id="field_model" data-cy="model" formControlName="model" />
+          @if (modelRef.invalid && (modelRef.dirty || modelRef.touched)) {
+            <div>
+              @if (editForm.get('model')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '100' }"
+                  >This field cannot be longer than 100 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let osRef = editForm.get('os')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_os" jhiTranslate="kotekkaappApp.device.os">Os</label>
+          <input type="text" class="form-control" name="os" id="field_os" data-cy="os" formControlName="os" />
+          @if (osRef.invalid && (osRef.dirty || osRef.touched)) {
+            <div>
+              @if (editForm.get('os')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '100' }"
+                  >This field cannot be longer than 100 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let appVersionRef = editForm.get('appVersion')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_appVersion" jhiTranslate="kotekkaappApp.device.appVersion">App Version</label>
+          <input
+            type="text"
+            class="form-control"
+            name="appVersion"
+            id="field_appVersion"
+            data-cy="appVersion"
+            formControlName="appVersion"
+          />
+          @if (appVersionRef.invalid && (appVersionRef.dirty || appVersionRef.touched)) {
+            <div>
+              @if (editForm.get('appVersion')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '100' }"
+                  >This field cannot be longer than 100 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_inactive" jhiTranslate="kotekkaappApp.device.inactive">Inactive</label>
+          <input type="checkbox" class="form-check" name="inactive" id="field_inactive" data-cy="inactive" formControlName="inactive" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_createdBy" jhiTranslate="kotekkaappApp.device.createdBy">Created By</label>
+          <input type="text" class="form-control" name="createdBy" id="field_createdBy" data-cy="createdBy" formControlName="createdBy" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_createdDate" jhiTranslate="kotekkaappApp.device.createdDate">Created Date</label>
+          <div class="d-flex">
+            <input
+              id="field_createdDate"
+              data-cy="createdDate"
+              type="datetime-local"
+              class="form-control"
+              name="createdDate"
+              formControlName="createdDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_lastModifiedBy" jhiTranslate="kotekkaappApp.device.lastModifiedBy">Last Modified By</label>
+          <input
+            type="text"
+            class="form-control"
+            name="lastModifiedBy"
+            id="field_lastModifiedBy"
+            data-cy="lastModifiedBy"
+            formControlName="lastModifiedBy"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_lastModifiedDate" jhiTranslate="kotekkaappApp.device.lastModifiedDate"
+            >Last Modified Date</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_lastModifiedDate"
+              data-cy="lastModifiedDate"
+              type="datetime-local"
+              class="form-control"
+              name="lastModifiedDate"
+              formControlName="lastModifiedDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

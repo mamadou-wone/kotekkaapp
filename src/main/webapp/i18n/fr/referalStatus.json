@@ -1,0 +1,11 @@
+{
+  "kotekkaappApp": {
+    "ReferalStatus": {
+      "null": "",
+      "PENDING": "PENDING",
+      "CONFIRMED": "CONFIRMED",
+      "REJECTED": "REJECTED",
+      "PAID": "PAID"
+    }
+  }
+}

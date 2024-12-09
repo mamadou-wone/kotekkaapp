@@ -1,0 +1,11 @@
+{
+  "kotekkaappApp": {
+    "Network": {
+      "null": "",
+      "IAM": "IAM",
+      "INWI": "INWI",
+      "ORANGE": "ORANGE",
+      "OTHER": "OTHER"
+    }
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "kotekkaappApp": {
+    "featureFlag": {
+      "home": {
+        "title": "FeatureFlags",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Feature Flag",
+        "createOrEditLabel": "Créer ou éditer un Feature Flag",
+        "notFound": "Aucun Feature Flag trouvé"
+      },
+      "created": "Un nouveau Feature Flag a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Feature Flag avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Feature Flag avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Feature Flag {{ id }} ?"
+      },
+      "detail": {
+        "title": "Feature Flag"
+      },
+      "id": "ID",
+      "name": "Name",
+      "enabled": "Enabled",
+      "description": "Description",
+      "createdBy": "Created By",
+      "createdDate": "Created Date",
+      "updatedBy": "Updated By",
+      "updatedDate": "Updated Date"
+    }
+  }
+}

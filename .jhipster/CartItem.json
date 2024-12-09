@@ -1,0 +1,44 @@
+{
+  "annotations": {
+    "changelogDate": "20241209130835"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "uuid",
+      "fieldType": "UUID",
+      "fieldValidateRules": ["required", "unique"]
+    },
+    {
+      "fieldName": "cart",
+      "fieldType": "UUID",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "product",
+      "fieldType": "UUID",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "quantity",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "price",
+      "fieldType": "BigDecimal",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "totalPrice",
+      "fieldType": "BigDecimal",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "name": "CartItem",
+  "pagination": "pagination",
+  "relationships": [],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

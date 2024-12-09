@@ -1,0 +1,141 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-review-heading" data-cy="ReviewCreateUpdateHeading" jhiTranslate="kotekkaappApp.review.home.createOrEditLabel">
+        Create or edit a Review
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="kotekkaappApp.review.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        @let uuidRef = editForm.get('uuid')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_uuid" jhiTranslate="kotekkaappApp.review.uuid">Uuid</label>
+          <input type="text" class="form-control" name="uuid" id="field_uuid" data-cy="uuid" formControlName="uuid" />
+          @if (uuidRef.invalid && (uuidRef.dirty || uuidRef.touched)) {
+            <div>
+              @if (editForm.get('uuid')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        @let productRef = editForm.get('product')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_product" jhiTranslate="kotekkaappApp.review.product">Product</label>
+          <input type="text" class="form-control" name="product" id="field_product" data-cy="product" formControlName="product" />
+          @if (productRef.invalid && (productRef.dirty || productRef.touched)) {
+            <div>
+              @if (editForm.get('product')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        @let walletHolderRef = editForm.get('walletHolder')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_walletHolder" jhiTranslate="kotekkaappApp.review.walletHolder">Wallet Holder</label>
+          <input
+            type="text"
+            class="form-control"
+            name="walletHolder"
+            id="field_walletHolder"
+            data-cy="walletHolder"
+            formControlName="walletHolder"
+          />
+          @if (walletHolderRef.invalid && (walletHolderRef.dirty || walletHolderRef.touched)) {
+            <div>
+              @if (editForm.get('walletHolder')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        @let ratingRef = editForm.get('rating')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_rating" jhiTranslate="kotekkaappApp.review.rating">Rating</label>
+          <input type="number" class="form-control" name="rating" id="field_rating" data-cy="rating" formControlName="rating" />
+          @if (ratingRef.invalid && (ratingRef.dirty || ratingRef.touched)) {
+            <div>
+              @if (editForm.get('rating')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              @if (editForm.get('rating')?.errors?.min) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.min" [translateValues]="{ min: '1' }"
+                  >This field should be at least 1.</small
+                >
+              }
+              @if (editForm.get('rating')?.errors?.max) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.max" [translateValues]="{ max: '5' }"
+                  >This field cannot be more than 5.</small
+                >
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('rating')?.errors?.number"
+                jhiTranslate="entity.validation.number"
+                >This field should be a number.</small
+              >
+            </div>
+          }
+        </div>
+
+        @let commentRef = editForm.get('comment')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_comment" jhiTranslate="kotekkaappApp.review.comment">Comment</label>
+          <input type="text" class="form-control" name="comment" id="field_comment" data-cy="comment" formControlName="comment" />
+          @if (commentRef.invalid && (commentRef.dirty || commentRef.touched)) {
+            <div>
+              @if (editForm.get('comment')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '1000' }"
+                  >This field cannot be longer than 1000 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_createdDate" jhiTranslate="kotekkaappApp.review.createdDate">Created Date</label>
+          <div class="d-flex">
+            <input
+              id="field_createdDate"
+              data-cy="createdDate"
+              type="datetime-local"
+              class="form-control"
+              name="createdDate"
+              formControlName="createdDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

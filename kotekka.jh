@@ -1,0 +1,662 @@
+/**
+ * Beneficiary for wire transfers
+ */
+entity Beneficiary {
+  uuid UUID required unique
+  status DefaultStatus
+  firstName String maxlength(50)
+  lastName String maxlength(50)
+  cin String minlength(6) maxlength(12)
+  iban String maxlength(32)
+  phoneNumber String maxlength(13)
+  email String minlength(5) maxlength(254)
+  walletHolder UUID
+  createdBy String
+  createdDate Instant
+  lastModifiedBy String
+  lastModifiedDate Instant
+}
+/**
+ * temporary Cache entity\n(key, value) pairs for given wallet holders\nincludes createdDate for cleanup
+ */
+entity CacheInfo {
+  walletHolder UUID
+  key String maxlength(150)
+  value TextBlob
+  createdDate Instant
+}
+/**
+ * Payment Card\nTokenized card details provided by the payment processor\nOptionally stored by the customer
+ */
+entity Card {
+  uuid UUID required unique
+  status DefaultStatus
+  label String maxlength(50)
+  maskedPan String maxlength(30)
+  cardHolderName String maxlength(30)
+  token String maxlength(36)
+  expiryYear String maxlength(2)
+  expiryMonth String maxlength(2)
+  rnd String maxlength(20)
+  hash String maxlength(100)
+  walletHolder UUID
+  createdBy String
+  createdDate Instant
+  lastModifiedBy String
+  lastModifiedDate Instant
+}
+/**
+ * CIN (Carte d'Identité Nationale)\nNot Audited
+ */
+entity Cin {
+  cinId String maxlength(50)
+  validityDate LocalDate
+  birthDate LocalDate
+  birthPlace String maxlength(255)
+  firstName String maxlength(255)
+  lastName String maxlength(255)
+  birthCity String maxlength(255)
+  fatherName String maxlength(255)
+  nationality String maxlength(255)
+  nationalityCode String maxlength(255)
+  issuingCountry String maxlength(255)
+  issuingCountryCode String maxlength(3)
+  motherName String maxlength(255)
+  civilRegister String maxlength(255)
+  sex String maxlength(3)
+  address String maxlength(255)
+  birthCityCode String maxlength(3)
+  walletHolder UUID
+  createdDate Instant
+}
+/**
+ * user Device
+ */
+entity Device {
+  uuid UUID required
+  deviceUuid String maxlength(36)
+  type String maxlength(100)
+  manufacturer String maxlength(100)
+  model String maxlength(100)
+  os String maxlength(100)
+  appVersion String maxlength(100)
+  inactive Boolean
+  createdBy String
+  createdDate Instant
+  lastModifiedBy String
+  lastModifiedDate Instant
+}
+/**
+ * Failed verification Attempts\nNot Audited
+ */
+entity FailedAttempt {
+  login String maxlength(50)
+  ipAddress String maxlength(50)
+  isAfterLock Boolean
+  app App
+  action Action
+  device UUID
+  createdDate Instant
+  reason String maxlength(100)
+}
+/**
+ * Failed verification Attempts History\nNot Audited
+ */
+entity FailedAttemptHistory {
+  login String maxlength(50)
+  ipAddress String maxlength(50)
+  isAfterLock Boolean
+  app App
+  action Action
+  device UUID
+  createdDate Instant
+  reason String maxlength(100)
+}
+entity FeatureFlag {
+  name String
+  enabled Boolean
+  description String
+  createdBy String
+  createdDate Instant
+  updatedBy String
+  updatedDate Instant
+}
+/**
+ * Image file stored internally\nCurrently used only for legal identity document scans
+ */
+entity Image {
+  uuid UUID required unique
+  name String maxlength(100)
+  file ImageBlob
+  walletHolder UUID
+  createdBy String
+  createdDate Instant
+  lastModifiedBy String
+  lastModifiedDate Instant
+}
+/**
+ * Incoming Call from partner\nEither webhook callback, or normal api call\nNot Audited
+ */
+entity IncomingCall {
+  partner Partner
+  api String maxlength(255)
+  method HttpMethod
+  requestHeaders TextBlob
+  requestBody TextBlob
+  createdDate Instant
+  responseStatusCode Integer max(999)
+  responseTime Instant
+}
+/**
+ * Tracks Requests for Money
+ */
+entity MoneyRequest {
+  uuid UUID required unique
+  status RequestStatus
+  otherHolder UUID
+  amount BigDecimal
+  description String maxlength(100)
+  currency String maxlength(3)
+  walletHolder UUID
+  createdBy String
+  createdDate Instant
+  lastModifiedBy String
+  lastModifiedDate Instant
+}
+/**
+ * Notification
+ */
+entity Notification {
+  uuid UUID
+  walletHolder UUID
+  heading String maxlength(100)
+  status NotificationStatus
+  content String maxlength(254)
+  data String maxlength(254)
+  language String maxlength(2)
+  createdDate Instant
+}
+/**
+ * Entity for tracking One Time Passwords\nShould be usable by all flows/applications\nNot Audited
+ */
+entity OneTimePassword {
+  uuid UUID required unique
+  user String maxlength(50)
+  code String maxlength(12)
+  status OtpStatus
+  expiry Instant
+  createdDate Instant
+}
+entity Organisation {
+  name String required maxlength(50)
+  type OrgType
+  parent String maxlength(50)
+  location String maxlength(50)
+  headcount Integer
+  createdBy String
+  createdDate Instant
+}
+/**
+ * Call to partners by back-end\nNot Audited
+ */
+entity PartnerCall {
+  partner Partner required
+  api String maxlength(255)
+  method HttpMethod
+  requestHeaders TextBlob
+  requestBody TextBlob
+  requestTime Instant
+  responseStatusCode Integer max(999)
+  responseHeaders TextBlob
+  responseBody TextBlob
+  responseTime Instant
+  correlationId String maxlength(50)
+  queryParam String maxlength(255)
+}
+/**
+ * Recipients are phone contacts who will receive Cash directly\nThey are identified by their phone number
+ */
+entity Recipient {
+  uuid UUID required unique
+  status DefaultStatus
+  firstName String maxlength(50)
+  lastName String maxlength(50)
+  phoneNumber String maxlength(13)
+  walletHolder UUID
+  createdBy String
+  createdDate Instant
+  lastModifiedBy String
+  lastModifiedDate Instant
+}
+/**
+ * Referal information
+ */
+entity ReferalInfo {
+  uuid UUID required
+  referalCode String maxlength(36)
+  walletHolder UUID
+  refered UUID
+  status ReferalStatus
+  createdBy String
+  createdDate Instant
+  lastModifiedBy String
+  lastModifiedDate Instant
+}
+/**
+ * Service Client
+ */
+entity ServiceClient {
+  /**
+   * uuid of wallet holder if client type is Customer
+   */
+  clientId UUID
+  /**
+   * type of client initially only Customer
+   */
+  type AccountType
+  apiKey UUID unique
+  status DefaultStatus
+  note String maxlength(255)
+  createdDate Instant
+  lastModifiedDate Instant
+}
+
+/**
+ * Transaction performed by a user via their wallet
+ */
+entity Transaction {
+  uuid UUID required unique
+  type TransactionType
+  status TransactionStatus
+  direction Direction
+  amount BigDecimal
+  description String maxlength(100)
+  fee BigDecimal
+  commission BigDecimal
+  currency String maxlength(3)
+  counterpartyType CounterpartyType
+  counterpartyId String maxlength(36)
+  entryDate LocalDate
+  effectiveDate LocalDate
+  startTime Instant
+  endTime Instant
+  parent UUID
+  reference String maxlength(255)
+  externalId String maxlength(255)
+  partnerToken String maxlength(255)
+  wallet UUID
+  createdBy String
+  createdDate Instant
+  lastModifiedBy String
+  lastModifiedDate Instant
+}
+/**
+ * Created upon successful login\nNot Audited
+ */
+entity UserAccess {
+  login String maxlength(50)
+  ipAddress String maxlength(50)
+  device UUID
+  createdDate Instant
+}
+entity UserAffiliation {
+  walletHolder UUID required
+  affiliation String required minlength(3) maxlength(100)
+  createdBy String
+  createdDate Instant
+}
+/**
+ * User Preference\nNot Audited
+ */
+entity UserPreference {
+  app App
+  name String maxlength(50)
+  setting String maxlength(100)
+  createdDate Instant
+}
+/**
+ * Wallet account\nCollects balances and transactions\nCurrent balance should match externel provider balance
+ */
+entity Wallet {
+  uuid UUID required unique
+  type WalletType
+  status WalletStatus
+  level AccountLevel
+  iban String unique maxlength(32)
+  currency String maxlength(3)
+  balance BigDecimal
+  balancesAsOf Instant
+  externalId String maxlength(36)
+  walletHolder UUID
+  createdBy String
+  createdDate Instant
+  lastModifiedBy String
+  lastModifiedDate Instant
+}
+/**
+ * A Wallet account Holder\nUsually a Customer, but could be a Merchant or an Internal user, etc.
+ */
+entity WalletHolder {
+  uuid UUID required unique
+  type AccountType
+  status AccountStatus
+  phoneNumber String maxlength(50)
+  network Network
+  tag String unique maxlength(50)
+  firstName String maxlength(50)
+  lastName String maxlength(50)
+  address String maxlength(50)
+  city String maxlength(50)
+  country String maxlength(50)
+  postalCode String maxlength(50)
+  onboarding OnboardingStatus
+  externalId String maxlength(36)
+  email String minlength(5) maxlength(254)
+  dateOfBirth LocalDate
+  sex Sex
+  createdBy String
+  createdDate Instant
+  lastModifiedBy String
+  lastModifiedDate Instant
+  loginStatus LoginStatus
+}
+
+entity Product {
+  	uuid UUID required unique
+	walletHolder UUID
+    title String required,
+    description String required maxlength(5000), // Rich text or large description field
+    status ProductStatus required, // Enum for Active/Inactive
+    media ImageBlob, // Image or media upload for the product
+    price BigDecimal required, // Product price
+    compareAtPrice BigDecimal, // Optional compare price
+    costPerItem BigDecimal, // Cost per item (optional)
+    profit BigDecimal, // Calculated based on pricing details
+    margin BigDecimal, // Profit margin
+    inventoryQuantity Integer, // Inventory quantity
+    inventoryLocation String, // Store or warehouse location
+    trackQuantity Boolean, // Whether to track inventory
+}
+
+entity Order {
+  uuid UUID required unique
+  walletHolder UUID
+  status OrderStatus required
+  totalPrice BigDecimal required
+  currency String maxlength(3)
+  orderDate Instant required
+  paymentMethod String maxlength(50)
+  shippingAddress TextBlob
+  createdBy String
+  createdDate Instant
+  lastModifiedBy String
+  lastModifiedDate Instant
+}
+enum OrderStatus {
+  PENDING,
+  CONFIRMED,
+  SHIPPED,
+  DELIVERED,
+  CANCELED
+}
+
+entity Discount {
+  uuid UUID required unique
+  name String required maxlength(100)
+  type DiscountType required
+  value BigDecimal required
+  startDate Instant
+  endDate Instant
+  status DefaultStatus
+  createdBy String
+  createdDate Instant
+  lastModifiedBy String
+  lastModifiedDate Instant
+}
+enum DiscountType {
+  FIXED,
+  PERCENTAGE
+}
+
+entity Cart {
+  uuid UUID required unique
+  walletHolder UUID required
+  totalQuantity Integer required
+  totalPrice BigDecimal required
+  currency String maxlength(3)
+  createdDate Instant
+  lastModifiedDate Instant
+}
+
+
+entity CartItem {
+  uuid UUID required unique
+  cart UUID required
+  product UUID required
+  quantity Integer required
+  price BigDecimal required
+  totalPrice BigDecimal required
+}
+
+
+entity AuditLog {
+  uuid UUID required unique
+  entityName String required maxlength(100)
+  entityId UUID required
+  action String required maxlength(50)
+  performedBy String maxlength(50)
+  performedDate Instant required
+  details TextBlob
+}
+
+entity Review {
+  uuid UUID required unique
+  product UUID required
+  walletHolder UUID required
+  rating Integer required min(1) max(5)
+  comment String maxlength(1000)
+  createdDate Instant
+}
+
+
+entity Category {
+    name String required,
+}
+
+entity Collection {
+    name String required,
+}
+
+enum ProductStatus {
+    Active,
+    Inactive
+}
+
+// Relationships
+relationship ManyToOne {
+    Product{category(name)} to Category
+}
+
+relationship ManyToMany {
+    Product{collections(name)} to Collection
+}
+
+/**
+ * Default generic status values for entities added by users\nShould be just `Status`
+ */
+enum DefaultStatus {
+  PENDING,
+  ACTIVE,
+  BLOCKED,
+  DELETED
+}
+enum App {
+  MOBILE,
+  WEB,
+  MERCHANT,
+  AGENT,
+  PORTAL
+}
+enum Action {
+  LOGIN,
+  PHONENUMBER_CHECK,
+  EMAIL_CHECK,
+  PASSWORD_RESET,
+  DEVICE_CHECK,
+  TRANSACTION
+}
+enum Partner {
+  CIH,
+  CMI,
+  WAFR,
+  OTHER
+}
+enum HttpMethod {
+  GET,
+  POST,
+  PUT,
+  DELETE,
+  PATCH
+}
+enum RequestStatus {
+  PENDING,
+  SENT,
+  PROCESSED,
+  FAILED
+}
+enum NotificationStatus {
+  PENDING,
+  REQUESTED,
+  PROCESSED,
+  FAILED
+}
+enum OtpStatus {
+  PENDING,
+  VALID,
+  REJECTED,
+  EXPIRED
+}
+enum OrgType {
+  UNIVERSITY,
+  CORPORATION,
+  NONPROFIT,
+  GOVERNMENT,
+  OTHER
+}
+enum ReferalStatus {
+  PENDING,
+  CONFIRMED,
+  REJECTED,
+  PAID
+}
+enum AccountType {
+  CUSTOMER,
+  MERCHANT,
+  AGENT,
+  INTERNAL
+}
+enum TransactionType {
+  PAY,
+  RECEIVE,
+  WIRE_IN,
+  WIRE_OUT,
+  TRANSFER_IN,
+  TRANSFER_OUT,
+  CASH_IN,
+  CASH_OUT,
+  FEE,
+  REBATE,
+  COMMISSION
+}
+enum TransactionStatus {
+  PENDING,
+  TO_CONFIRM,
+  CONFIRMED,
+  REJECTED,
+  PARTNER_CONFIRMED,
+  PARTNER_REJECTED,
+  IN_PROGRESS,
+  PROCESSED,
+  FAILED
+}
+enum Direction {
+  DEBIT,
+  CREDIT
+}
+enum CounterpartyType {
+  WALLET,
+  CARD,
+  BENEFICIARY,
+  RECIPIENT
+}
+/**
+ * For future use: eg SAVINGS, JOINT, SPONSOR (youth)
+ */
+enum WalletType {
+  PRIMARY,
+  SAVINGS,
+  SECONDARY
+}
+enum WalletStatus {
+  PENDING,
+  ACTIVE,
+  REJECTED,
+  BLOCKED,
+  CLOSED
+}
+enum AccountLevel {
+  ONE,
+  TWO,
+  THREE
+}
+enum AccountStatus {
+  PENDING,
+  ACTIVE,
+  REJECTED,
+  BLOCKED,
+  CLOSED
+}
+enum Network {
+  IAM,
+  INWI,
+  ORANGE,
+  OTHER
+}
+enum OnboardingStatus {
+  PENDING,
+  PERSONAL_INFO,
+  CREATE_INTERNAL_WALLET,
+  ACTIVATE_CUSTOMER_PARTNER_SIDE,
+  PRE_CREATE_CUSTOMER_PARTNER_SIDE,
+  SET_PASSWORD,
+  CREATE_EXTERNAL_WALLET,
+  CONFIRM_OTP
+}
+enum Sex {
+  M,
+  F
+}
+enum LoginStatus {
+  LOGIN_LOCKED,
+  LOGIN_UNLOCKED,
+  LOGIN_LOCKED_FULL,
+  LOGIN_DEVICE_LOCKED,
+  DEVICE_FLAGGED
+}
+enum WireStatus {
+  PENDING,
+  REQUESTED,
+  PROCESSED,
+  FAILED
+}
+
+relationship OneToOne {
+  WalletHolder{user(login)} to User with builtInEntity
+}
+relationship ManyToOne {
+  UserPreference{user(login)} to User with builtInEntity
+}
+
+paginate * with pagination
+service * with serviceImpl
+filter * except CaheInfo, Beneficiary, Notification, FailedAttemptHistory, Device, Card, Organisation, Recipient

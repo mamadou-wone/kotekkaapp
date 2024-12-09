@@ -17,7 +17,43 @@
     <property name="datetimeType" value="datetime" dbms="postgresql"/>
 
     <include file="config/liquibase/changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20241209130807_added_entity_Beneficiary.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20241209130808_added_entity_CacheInfo.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20241209130809_added_entity_Card.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20241209130810_added_entity_Cin.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20241209130811_added_entity_Device.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20241209130812_added_entity_FailedAttempt.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20241209130813_added_entity_FailedAttemptHistory.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20241209130814_added_entity_FeatureFlag.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20241209130815_added_entity_Image.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20241209130816_added_entity_IncomingCall.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20241209130817_added_entity_MoneyRequest.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20241209130818_added_entity_Notification.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20241209130819_added_entity_OneTimePassword.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20241209130820_added_entity_Organisation.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20241209130821_added_entity_PartnerCall.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20241209130822_added_entity_Recipient.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20241209130823_added_entity_ReferalInfo.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20241209130824_added_entity_ServiceClient.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20241209130825_added_entity_Transaction.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20241209130826_added_entity_UserAccess.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20241209130827_added_entity_UserAffiliation.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20241209130828_added_entity_UserPreference.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20241209130829_added_entity_Wallet.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20241209130830_added_entity_WalletHolder.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20241209130831_added_entity_Product.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20241209130832_added_entity_Order.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20241209130833_added_entity_Discount.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20241209130834_added_entity_Cart.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20241209130835_added_entity_CartItem.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20241209130836_added_entity_AuditLog.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20241209130837_added_entity_Review.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20241209130838_added_entity_Category.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20241209130839_added_entity_Collection.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
+    <include file="config/liquibase/changelog/20241209130828_added_entity_constraints_UserPreference.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20241209130830_added_entity_constraints_WalletHolder.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20241209130831_added_entity_constraints_Product.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
     <!-- jhipster-needle-liquibase-add-incremental-changelog - JHipster will add incremental liquibase changelogs here -->
 </databaseChangeLog>

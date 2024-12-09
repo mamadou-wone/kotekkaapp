@@ -1,0 +1,325 @@
+<div>
+  <h2 id="page-heading" data-cy="WalletHolderHeading">
+    <span jhiTranslate="kotekkaappApp.walletHolder.home.title">Wallet Holders</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
+        <span jhiTranslate="kotekkaappApp.walletHolder.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-wallet-holder"
+        [routerLink]="['/wallet-holder/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="kotekkaappApp.walletHolder.home.createLabel">Create a new Wallet Holder</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <jhi-filter [filters]="filters"></jhi-filter>
+
+  @if (walletHolders?.length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="kotekkaappApp.walletHolder.home.notFound">No Wallet Holders found</span>
+    </div>
+  }
+
+  @if (walletHolders && walletHolders.length > 0) {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [sortState]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="uuid">
+              <div class="d-flex">
+                <span jhiTranslate="kotekkaappApp.walletHolder.uuid">Uuid</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="type">
+              <div class="d-flex">
+                <span jhiTranslate="kotekkaappApp.walletHolder.type">Type</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="status">
+              <div class="d-flex">
+                <span jhiTranslate="kotekkaappApp.walletHolder.status">Status</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="phoneNumber">
+              <div class="d-flex">
+                <span jhiTranslate="kotekkaappApp.walletHolder.phoneNumber">Phone Number</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="network">
+              <div class="d-flex">
+                <span jhiTranslate="kotekkaappApp.walletHolder.network">Network</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="tag">
+              <div class="d-flex">
+                <span jhiTranslate="kotekkaappApp.walletHolder.tag">Tag</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="firstName">
+              <div class="d-flex">
+                <span jhiTranslate="kotekkaappApp.walletHolder.firstName">First Name</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="lastName">
+              <div class="d-flex">
+                <span jhiTranslate="kotekkaappApp.walletHolder.lastName">Last Name</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="address">
+              <div class="d-flex">
+                <span jhiTranslate="kotekkaappApp.walletHolder.address">Address</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="city">
+              <div class="d-flex">
+                <span jhiTranslate="kotekkaappApp.walletHolder.city">City</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="country">
+              <div class="d-flex">
+                <span jhiTranslate="kotekkaappApp.walletHolder.country">Country</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="postalCode">
+              <div class="d-flex">
+                <span jhiTranslate="kotekkaappApp.walletHolder.postalCode">Postal Code</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="onboarding">
+              <div class="d-flex">
+                <span jhiTranslate="kotekkaappApp.walletHolder.onboarding">Onboarding</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="externalId">
+              <div class="d-flex">
+                <span jhiTranslate="kotekkaappApp.walletHolder.externalId">External Id</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="email">
+              <div class="d-flex">
+                <span jhiTranslate="kotekkaappApp.walletHolder.email">Email</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="dateOfBirth">
+              <div class="d-flex">
+                <span jhiTranslate="kotekkaappApp.walletHolder.dateOfBirth">Date Of Birth</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="sex">
+              <div class="d-flex">
+                <span jhiTranslate="kotekkaappApp.walletHolder.sex">Sex</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="createdBy">
+              <div class="d-flex">
+                <span jhiTranslate="kotekkaappApp.walletHolder.createdBy">Created By</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="createdDate">
+              <div class="d-flex">
+                <span jhiTranslate="kotekkaappApp.walletHolder.createdDate">Created Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="lastModifiedBy">
+              <div class="d-flex">
+                <span jhiTranslate="kotekkaappApp.walletHolder.lastModifiedBy">Last Modified By</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="lastModifiedDate">
+              <div class="d-flex">
+                <span jhiTranslate="kotekkaappApp.walletHolder.lastModifiedDate">Last Modified Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="loginStatus">
+              <div class="d-flex">
+                <span jhiTranslate="kotekkaappApp.walletHolder.loginStatus">Login Status</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="user.login">
+              <div class="d-flex">
+                <span jhiTranslate="kotekkaappApp.walletHolder.user">User</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (walletHolder of walletHolders; track trackId(walletHolder)) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/wallet-holder', walletHolder.id, 'view']">{{ walletHolder.id }}</a>
+              </td>
+              <td>{{ walletHolder.uuid }}</td>
+              <td [jhiTranslate]="'kotekkaappApp.AccountType.' + (walletHolder.type ?? 'null')">
+                {{
+                  { null: '', CUSTOMER: 'CUSTOMER', MERCHANT: 'MERCHANT', AGENT: 'AGENT', INTERNAL: 'INTERNAL' }[
+                    walletHolder.type ?? 'null'
+                  ]
+                }}
+              </td>
+              <td [jhiTranslate]="'kotekkaappApp.AccountStatus.' + (walletHolder.status ?? 'null')">
+                {{
+                  { null: '', PENDING: 'PENDING', ACTIVE: 'ACTIVE', REJECTED: 'REJECTED', BLOCKED: 'BLOCKED', CLOSED: 'CLOSED' }[
+                    walletHolder.status ?? 'null'
+                  ]
+                }}
+              </td>
+              <td>{{ walletHolder.phoneNumber }}</td>
+              <td [jhiTranslate]="'kotekkaappApp.Network.' + (walletHolder.network ?? 'null')">
+                {{ { null: '', IAM: 'IAM', INWI: 'INWI', ORANGE: 'ORANGE', OTHER: 'OTHER' }[walletHolder.network ?? 'null'] }}
+              </td>
+              <td>{{ walletHolder.tag }}</td>
+              <td>{{ walletHolder.firstName }}</td>
+              <td>{{ walletHolder.lastName }}</td>
+              <td>{{ walletHolder.address }}</td>
+              <td>{{ walletHolder.city }}</td>
+              <td>{{ walletHolder.country }}</td>
+              <td>{{ walletHolder.postalCode }}</td>
+              <td [jhiTranslate]="'kotekkaappApp.OnboardingStatus.' + (walletHolder.onboarding ?? 'null')">
+                {{
+                  {
+                    null: '',
+                    PENDING: 'PENDING',
+                    PERSONAL_INFO: 'PERSONAL_INFO',
+                    CREATE_INTERNAL_WALLET: 'CREATE_INTERNAL_WALLET',
+                    ACTIVATE_CUSTOMER_PARTNER_SIDE: 'ACTIVATE_CUSTOMER_PARTNER_SIDE',
+                    PRE_CREATE_CUSTOMER_PARTNER_SIDE: 'PRE_CREATE_CUSTOMER_PARTNER_SIDE',
+                    SET_PASSWORD: 'SET_PASSWORD',
+                    CREATE_EXTERNAL_WALLET: 'CREATE_EXTERNAL_WALLET',
+                    CONFIRM_OTP: 'CONFIRM_OTP',
+                  }[walletHolder.onboarding ?? 'null']
+                }}
+              </td>
+              <td>{{ walletHolder.externalId }}</td>
+              <td>{{ walletHolder.email }}</td>
+              <td>{{ walletHolder.dateOfBirth | formatMediumDate }}</td>
+              <td [jhiTranslate]="'kotekkaappApp.Sex.' + (walletHolder.sex ?? 'null')">
+                {{ { null: '', M: 'M', F: 'F' }[walletHolder.sex ?? 'null'] }}
+              </td>
+              <td>{{ walletHolder.createdBy }}</td>
+              <td>{{ walletHolder.createdDate | formatMediumDatetime }}</td>
+              <td>{{ walletHolder.lastModifiedBy }}</td>
+              <td>{{ walletHolder.lastModifiedDate | formatMediumDatetime }}</td>
+              <td [jhiTranslate]="'kotekkaappApp.LoginStatus.' + (walletHolder.loginStatus ?? 'null')">
+                {{
+                  {
+                    null: '',
+                    LOGIN_LOCKED: 'LOGIN_LOCKED',
+                    LOGIN_UNLOCKED: 'LOGIN_UNLOCKED',
+                    LOGIN_LOCKED_FULL: 'LOGIN_LOCKED_FULL',
+                    LOGIN_DEVICE_LOCKED: 'LOGIN_DEVICE_LOCKED',
+                    DEVICE_FLAGGED: 'DEVICE_FLAGGED',
+                  }[walletHolder.loginStatus ?? 'null']
+                }}
+              </td>
+              <td>
+                {{ walletHolder.user?.login }}
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/wallet-holder', walletHolder.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a [routerLink]="['/wallet-holder', walletHolder.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(walletHolder)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+  @if (walletHolders && walletHolders.length > 0) {
+    <div>
+      <div class="d-flex justify-content-center">
+        <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+      </div>
+
+      <div class="d-flex justify-content-center">
+        <ngb-pagination
+          [collectionSize]="totalItems"
+          [page]="page"
+          [pageSize]="itemsPerPage"
+          [maxSize]="5"
+          [rotate]="true"
+          [boundaryLinks]="true"
+          (pageChange)="navigateToPage($event)"
+        ></ngb-pagination>
+      </div>
+    </div>
+  }
+</div>

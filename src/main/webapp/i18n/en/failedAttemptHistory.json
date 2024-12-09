@@ -1,0 +1,31 @@
+{
+  "kotekkaappApp": {
+    "failedAttemptHistory": {
+      "home": {
+        "title": "Failed Attempt Histories",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Failed Attempt History",
+        "createOrEditLabel": "Create or edit a Failed Attempt History",
+        "notFound": "No Failed Attempt Histories found"
+      },
+      "created": "A new Failed Attempt History is created with identifier {{ param }}",
+      "updated": "A Failed Attempt History is updated with identifier {{ param }}",
+      "deleted": "A Failed Attempt History is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Failed Attempt History {{ id }}?"
+      },
+      "detail": {
+        "title": "Failed Attempt History"
+      },
+      "id": "ID",
+      "login": "Login",
+      "ipAddress": "Ip Address",
+      "isAfterLock": "Is After Lock",
+      "app": "App",
+      "action": "Action",
+      "device": "Device",
+      "createdDate": "Created Date",
+      "reason": "Reason"
+    }
+  }
+}

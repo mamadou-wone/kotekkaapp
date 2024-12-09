@@ -1,0 +1,11 @@
+{
+  "kotekkaappApp": {
+    "Partner": {
+      "null": "",
+      "CIH": "CIH",
+      "CMI": "CMI",
+      "WAFR": "WAFR",
+      "OTHER": "OTHER"
+    }
+  }
+}

@@ -1,0 +1,123 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-organisation-heading"
+        data-cy="OrganisationCreateUpdateHeading"
+        jhiTranslate="kotekkaappApp.organisation.home.createOrEditLabel"
+      >
+        Create or edit a Organisation
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="kotekkaappApp.organisation.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        @let nameRef = editForm.get('name')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_name" jhiTranslate="kotekkaappApp.organisation.name">Name</label>
+          <input type="text" class="form-control" name="name" id="field_name" data-cy="name" formControlName="name" />
+          @if (nameRef.invalid && (nameRef.dirty || nameRef.touched)) {
+            <div>
+              @if (editForm.get('name')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              @if (editForm.get('name')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '50' }"
+                  >This field cannot be longer than 50 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_type" jhiTranslate="kotekkaappApp.organisation.type">Type</label>
+          <select class="form-control" name="type" formControlName="type" id="field_type" data-cy="type">
+            <option [ngValue]="null">{{ 'kotekkaappApp.OrgType.null' | translate }}</option>
+            @for (orgType of orgTypeValues; track $index) {
+              <option [value]="orgType">{{ 'kotekkaappApp.OrgType.' + orgType | translate }}</option>
+            }
+          </select>
+        </div>
+
+        @let parentRef = editForm.get('parent')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_parent" jhiTranslate="kotekkaappApp.organisation.parent">Parent</label>
+          <input type="text" class="form-control" name="parent" id="field_parent" data-cy="parent" formControlName="parent" />
+          @if (parentRef.invalid && (parentRef.dirty || parentRef.touched)) {
+            <div>
+              @if (editForm.get('parent')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '50' }"
+                  >This field cannot be longer than 50 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let locationRef = editForm.get('location')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_location" jhiTranslate="kotekkaappApp.organisation.location">Location</label>
+          <input type="text" class="form-control" name="location" id="field_location" data-cy="location" formControlName="location" />
+          @if (locationRef.invalid && (locationRef.dirty || locationRef.touched)) {
+            <div>
+              @if (editForm.get('location')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '50' }"
+                  >This field cannot be longer than 50 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_headcount" jhiTranslate="kotekkaappApp.organisation.headcount">Headcount</label>
+          <input type="number" class="form-control" name="headcount" id="field_headcount" data-cy="headcount" formControlName="headcount" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_createdBy" jhiTranslate="kotekkaappApp.organisation.createdBy">Created By</label>
+          <input type="text" class="form-control" name="createdBy" id="field_createdBy" data-cy="createdBy" formControlName="createdBy" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_createdDate" jhiTranslate="kotekkaappApp.organisation.createdDate">Created Date</label>
+          <div class="d-flex">
+            <input
+              id="field_createdDate"
+              data-cy="createdDate"
+              type="datetime-local"
+              class="form-control"
+              name="createdDate"
+              formControlName="createdDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

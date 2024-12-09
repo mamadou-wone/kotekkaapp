@@ -1,0 +1,221 @@
+<div>
+  <h2 id="page-heading" data-cy="WalletHeading">
+    <span jhiTranslate="kotekkaappApp.wallet.home.title">Wallets</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
+        <span jhiTranslate="kotekkaappApp.wallet.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-wallet"
+        [routerLink]="['/wallet/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="kotekkaappApp.wallet.home.createLabel">Create a new Wallet</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <jhi-filter [filters]="filters"></jhi-filter>
+
+  @if (wallets?.length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="kotekkaappApp.wallet.home.notFound">No Wallets found</span>
+    </div>
+  }
+
+  @if (wallets && wallets.length > 0) {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [sortState]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="uuid">
+              <div class="d-flex">
+                <span jhiTranslate="kotekkaappApp.wallet.uuid">Uuid</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="type">
+              <div class="d-flex">
+                <span jhiTranslate="kotekkaappApp.wallet.type">Type</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="status">
+              <div class="d-flex">
+                <span jhiTranslate="kotekkaappApp.wallet.status">Status</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="level">
+              <div class="d-flex">
+                <span jhiTranslate="kotekkaappApp.wallet.level">Level</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="iban">
+              <div class="d-flex">
+                <span jhiTranslate="kotekkaappApp.wallet.iban">Iban</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="currency">
+              <div class="d-flex">
+                <span jhiTranslate="kotekkaappApp.wallet.currency">Currency</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="balance">
+              <div class="d-flex">
+                <span jhiTranslate="kotekkaappApp.wallet.balance">Balance</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="balancesAsOf">
+              <div class="d-flex">
+                <span jhiTranslate="kotekkaappApp.wallet.balancesAsOf">Balances As Of</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="externalId">
+              <div class="d-flex">
+                <span jhiTranslate="kotekkaappApp.wallet.externalId">External Id</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="walletHolder">
+              <div class="d-flex">
+                <span jhiTranslate="kotekkaappApp.wallet.walletHolder">Wallet Holder</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="createdBy">
+              <div class="d-flex">
+                <span jhiTranslate="kotekkaappApp.wallet.createdBy">Created By</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="createdDate">
+              <div class="d-flex">
+                <span jhiTranslate="kotekkaappApp.wallet.createdDate">Created Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="lastModifiedBy">
+              <div class="d-flex">
+                <span jhiTranslate="kotekkaappApp.wallet.lastModifiedBy">Last Modified By</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="lastModifiedDate">
+              <div class="d-flex">
+                <span jhiTranslate="kotekkaappApp.wallet.lastModifiedDate">Last Modified Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (wallet of wallets; track trackId(wallet)) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/wallet', wallet.id, 'view']">{{ wallet.id }}</a>
+              </td>
+              <td>{{ wallet.uuid }}</td>
+              <td [jhiTranslate]="'kotekkaappApp.WalletType.' + (wallet.type ?? 'null')">
+                {{ { null: '', PRIMARY: 'PRIMARY', SAVINGS: 'SAVINGS', SECONDARY: 'SECONDARY' }[wallet.type ?? 'null'] }}
+              </td>
+              <td [jhiTranslate]="'kotekkaappApp.WalletStatus.' + (wallet.status ?? 'null')">
+                {{
+                  { null: '', PENDING: 'PENDING', ACTIVE: 'ACTIVE', REJECTED: 'REJECTED', BLOCKED: 'BLOCKED', CLOSED: 'CLOSED' }[
+                    wallet.status ?? 'null'
+                  ]
+                }}
+              </td>
+              <td [jhiTranslate]="'kotekkaappApp.AccountLevel.' + (wallet.level ?? 'null')">
+                {{ { null: '', ONE: 'ONE', TWO: 'TWO', THREE: 'THREE' }[wallet.level ?? 'null'] }}
+              </td>
+              <td>{{ wallet.iban }}</td>
+              <td>{{ wallet.currency }}</td>
+              <td>{{ wallet.balance }}</td>
+              <td>{{ wallet.balancesAsOf | formatMediumDatetime }}</td>
+              <td>{{ wallet.externalId }}</td>
+              <td>{{ wallet.walletHolder }}</td>
+              <td>{{ wallet.createdBy }}</td>
+              <td>{{ wallet.createdDate | formatMediumDatetime }}</td>
+              <td>{{ wallet.lastModifiedBy }}</td>
+              <td>{{ wallet.lastModifiedDate | formatMediumDatetime }}</td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/wallet', wallet.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a [routerLink]="['/wallet', wallet.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(wallet)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+  @if (wallets && wallets.length > 0) {
+    <div>
+      <div class="d-flex justify-content-center">
+        <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+      </div>
+
+      <div class="d-flex justify-content-center">
+        <ngb-pagination
+          [collectionSize]="totalItems"
+          [page]="page"
+          [pageSize]="itemsPerPage"
+          [maxSize]="5"
+          [rotate]="true"
+          [boundaryLinks]="true"
+          (pageChange)="navigateToPage($event)"
+        ></ngb-pagination>
+      </div>
+    </div>
+  }
+</div>

@@ -1,0 +1,27 @@
+{
+  "kotekkaappApp": {
+    "cacheInfo": {
+      "home": {
+        "title": "CacheInfos",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Cache Info",
+        "createOrEditLabel": "Créer ou éditer un Cache Info",
+        "notFound": "Aucun Cache Info trouvé"
+      },
+      "created": "Un nouveau Cache Info a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Cache Info avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Cache Info avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Cache Info {{ id }} ?"
+      },
+      "detail": {
+        "title": "Cache Info"
+      },
+      "id": "ID",
+      "walletHolder": "Wallet Holder",
+      "key": "Key",
+      "value": "Value",
+      "createdDate": "Created Date"
+    }
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "kotekkaappApp": {
+    "cin": {
+      "home": {
+        "title": "Cins",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Cin",
+        "createOrEditLabel": "Create or edit a Cin",
+        "notFound": "No Cins found"
+      },
+      "created": "A new Cin is created with identifier {{ param }}",
+      "updated": "A Cin is updated with identifier {{ param }}",
+      "deleted": "A Cin is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Cin {{ id }}?"
+      },
+      "detail": {
+        "title": "Cin"
+      },
+      "id": "ID",
+      "cinId": "Cin Id",
+      "validityDate": "Validity Date",
+      "birthDate": "Birth Date",
+      "birthPlace": "Birth Place",
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "birthCity": "Birth City",
+      "fatherName": "Father Name",
+      "nationality": "Nationality",
+      "nationalityCode": "Nationality Code",
+      "issuingCountry": "Issuing Country",
+      "issuingCountryCode": "Issuing Country Code",
+      "motherName": "Mother Name",
+      "civilRegister": "Civil Register",
+      "sex": "Sex",
+      "address": "Address",
+      "birthCityCode": "Birth City Code",
+      "walletHolder": "Wallet Holder",
+      "createdDate": "Created Date"
+    }
+  }
+}

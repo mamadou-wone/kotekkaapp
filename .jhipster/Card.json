@@ -1,0 +1,93 @@
+{
+  "annotations": {
+    "changelogDate": "20241209130809"
+  },
+  "applications": "*",
+  "documentation": "Payment Card\\nTokenized card details provided by the payment processor\\nOptionally stored by the customer",
+  "fields": [
+    {
+      "fieldName": "uuid",
+      "fieldType": "UUID",
+      "fieldValidateRules": ["required", "unique"]
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "DefaultStatus",
+      "fieldTypeDocumentation": "Default generic status values for entities added by users\\nShould be just `Status`",
+      "fieldValues": "PENDING,ACTIVE,BLOCKED,DELETED"
+    },
+    {
+      "fieldName": "label",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "maskedPan",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "30"
+    },
+    {
+      "fieldName": "cardHolderName",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "30"
+    },
+    {
+      "fieldName": "token",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "36"
+    },
+    {
+      "fieldName": "expiryYear",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "2"
+    },
+    {
+      "fieldName": "expiryMonth",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "2"
+    },
+    {
+      "fieldName": "rnd",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "20"
+    },
+    {
+      "fieldName": "hash",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "100"
+    },
+    {
+      "fieldName": "walletHolder",
+      "fieldType": "UUID"
+    },
+    {
+      "fieldName": "createdBy",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "createdDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "lastModifiedBy",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "lastModifiedDate",
+      "fieldType": "Instant"
+    }
+  ],
+  "name": "Card",
+  "pagination": "pagination",
+  "relationships": [],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

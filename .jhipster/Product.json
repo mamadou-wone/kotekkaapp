@@ -1,0 +1,92 @@
+{
+  "annotations": {
+    "changelogDate": "20241209130831"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "uuid",
+      "fieldType": "UUID",
+      "fieldValidateRules": ["required", "unique"]
+    },
+    {
+      "fieldName": "walletHolder",
+      "fieldType": "UUID"
+    },
+    {
+      "fieldName": "title",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "5000"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "ProductStatus",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "Active,Inactive"
+    },
+    {
+      "fieldName": "media",
+      "fieldType": "ImageBlob"
+    },
+    {
+      "fieldName": "price",
+      "fieldType": "BigDecimal",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "compareAtPrice",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "costPerItem",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "profit",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "margin",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "inventoryQuantity",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "inventoryLocation",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "trackQuantity",
+      "fieldType": "Boolean"
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "name": "Product",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityField": "name",
+      "otherEntityName": "category",
+      "relationshipName": "category",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityField": "name",
+      "otherEntityName": "collection",
+      "relationshipName": "collections",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

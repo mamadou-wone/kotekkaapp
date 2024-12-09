@@ -1,0 +1,67 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (organisation(); as organisationRef) {
+      <div>
+        <h2 data-cy="organisationDetailsHeading"><span jhiTranslate="kotekkaappApp.organisation.detail.title">Organisation</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ organisationRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.organisation.name">Name</span></dt>
+          <dd>
+            <span>{{ organisationRef.name }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.organisation.type">Type</span></dt>
+          <dd>
+            <span [jhiTranslate]="'kotekkaappApp.OrgType.' + (organisationRef.type ?? 'null')">{{
+              {
+                null: '',
+                UNIVERSITY: 'UNIVERSITY',
+                CORPORATION: 'CORPORATION',
+                NONPROFIT: 'NONPROFIT',
+                GOVERNMENT: 'GOVERNMENT',
+                OTHER: 'OTHER',
+              }[organisationRef.type ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.organisation.parent">Parent</span></dt>
+          <dd>
+            <span>{{ organisationRef.parent }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.organisation.location">Location</span></dt>
+          <dd>
+            <span>{{ organisationRef.location }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.organisation.headcount">Headcount</span></dt>
+          <dd>
+            <span>{{ organisationRef.headcount }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.organisation.createdBy">Created By</span></dt>
+          <dd>
+            <span>{{ organisationRef.createdBy }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.organisation.createdDate">Created Date</span></dt>
+          <dd>
+            <span>{{ organisationRef.createdDate | formatMediumDatetime }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/organisation', organisationRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

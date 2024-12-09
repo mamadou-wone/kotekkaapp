@@ -1,0 +1,46 @@
+{
+  "annotations": {
+    "changelogDate": "20241209130837"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "uuid",
+      "fieldType": "UUID",
+      "fieldValidateRules": ["required", "unique"]
+    },
+    {
+      "fieldName": "product",
+      "fieldType": "UUID",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "walletHolder",
+      "fieldType": "UUID",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "rating",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required", "min", "max"],
+      "fieldValidateRulesMax": "5",
+      "fieldValidateRulesMin": "1"
+    },
+    {
+      "fieldName": "comment",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "1000"
+    },
+    {
+      "fieldName": "createdDate",
+      "fieldType": "Instant"
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "name": "Review",
+  "pagination": "pagination",
+  "relationships": [],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

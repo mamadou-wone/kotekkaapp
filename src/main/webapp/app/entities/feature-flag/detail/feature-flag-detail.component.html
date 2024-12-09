@@ -1,0 +1,58 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (featureFlag(); as featureFlagRef) {
+      <div>
+        <h2 data-cy="featureFlagDetailsHeading"><span jhiTranslate="kotekkaappApp.featureFlag.detail.title">Feature Flag</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ featureFlagRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.featureFlag.name">Name</span></dt>
+          <dd>
+            <span>{{ featureFlagRef.name }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.featureFlag.enabled">Enabled</span></dt>
+          <dd>
+            <span>{{ featureFlagRef.enabled }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.featureFlag.description">Description</span></dt>
+          <dd>
+            <span>{{ featureFlagRef.description }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.featureFlag.createdBy">Created By</span></dt>
+          <dd>
+            <span>{{ featureFlagRef.createdBy }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.featureFlag.createdDate">Created Date</span></dt>
+          <dd>
+            <span>{{ featureFlagRef.createdDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.featureFlag.updatedBy">Updated By</span></dt>
+          <dd>
+            <span>{{ featureFlagRef.updatedBy }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.featureFlag.updatedDate">Updated Date</span></dt>
+          <dd>
+            <span>{{ featureFlagRef.updatedDate | formatMediumDatetime }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/feature-flag', featureFlagRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

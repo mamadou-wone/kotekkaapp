@@ -1,0 +1,82 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (order(); as orderRef) {
+      <div>
+        <h2 data-cy="orderDetailsHeading"><span jhiTranslate="kotekkaappApp.order.detail.title">Order</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ orderRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.order.uuid">Uuid</span></dt>
+          <dd>
+            <span>{{ orderRef.uuid }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.order.walletHolder">Wallet Holder</span></dt>
+          <dd>
+            <span>{{ orderRef.walletHolder }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.order.status">Status</span></dt>
+          <dd>
+            <span [jhiTranslate]="'kotekkaappApp.OrderStatus.' + (orderRef.status ?? 'null')">{{
+              { null: '', PENDING: 'PENDING', CONFIRMED: 'CONFIRMED', SHIPPED: 'SHIPPED', DELIVERED: 'DELIVERED', CANCELED: 'CANCELED' }[
+                orderRef.status ?? 'null'
+              ]
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.order.totalPrice">Total Price</span></dt>
+          <dd>
+            <span>{{ orderRef.totalPrice }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.order.currency">Currency</span></dt>
+          <dd>
+            <span>{{ orderRef.currency }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.order.orderDate">Order Date</span></dt>
+          <dd>
+            <span>{{ orderRef.orderDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.order.paymentMethod">Payment Method</span></dt>
+          <dd>
+            <span>{{ orderRef.paymentMethod }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.order.shippingAddress">Shipping Address</span></dt>
+          <dd>
+            <span>{{ orderRef.shippingAddress }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.order.createdBy">Created By</span></dt>
+          <dd>
+            <span>{{ orderRef.createdBy }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.order.createdDate">Created Date</span></dt>
+          <dd>
+            <span>{{ orderRef.createdDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.order.lastModifiedBy">Last Modified By</span></dt>
+          <dd>
+            <span>{{ orderRef.lastModifiedBy }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.order.lastModifiedDate">Last Modified Date</span></dt>
+          <dd>
+            <span>{{ orderRef.lastModifiedDate | formatMediumDatetime }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/order', orderRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

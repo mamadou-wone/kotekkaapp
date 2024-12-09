@@ -1,0 +1,137 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-failed-attempt-heading"
+        data-cy="FailedAttemptCreateUpdateHeading"
+        jhiTranslate="kotekkaappApp.failedAttempt.home.createOrEditLabel"
+      >
+        Create or edit a Failed Attempt
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="kotekkaappApp.failedAttempt.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        @let loginRef = editForm.get('login')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_login" jhiTranslate="kotekkaappApp.failedAttempt.login">Login</label>
+          <input type="text" class="form-control" name="login" id="field_login" data-cy="login" formControlName="login" />
+          @if (loginRef.invalid && (loginRef.dirty || loginRef.touched)) {
+            <div>
+              @if (editForm.get('login')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '50' }"
+                  >This field cannot be longer than 50 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let ipAddressRef = editForm.get('ipAddress')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_ipAddress" jhiTranslate="kotekkaappApp.failedAttempt.ipAddress">Ip Address</label>
+          <input type="text" class="form-control" name="ipAddress" id="field_ipAddress" data-cy="ipAddress" formControlName="ipAddress" />
+          @if (ipAddressRef.invalid && (ipAddressRef.dirty || ipAddressRef.touched)) {
+            <div>
+              @if (editForm.get('ipAddress')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '50' }"
+                  >This field cannot be longer than 50 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_isAfterLock" jhiTranslate="kotekkaappApp.failedAttempt.isAfterLock">Is After Lock</label>
+          <input
+            type="checkbox"
+            class="form-check"
+            name="isAfterLock"
+            id="field_isAfterLock"
+            data-cy="isAfterLock"
+            formControlName="isAfterLock"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_app" jhiTranslate="kotekkaappApp.failedAttempt.app">App</label>
+          <select class="form-control" name="app" formControlName="app" id="field_app" data-cy="app">
+            <option [ngValue]="null">{{ 'kotekkaappApp.App.null' | translate }}</option>
+            @for (app of appValues; track $index) {
+              <option [value]="app">{{ 'kotekkaappApp.App.' + app | translate }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_action" jhiTranslate="kotekkaappApp.failedAttempt.action">Action</label>
+          <select class="form-control" name="action" formControlName="action" id="field_action" data-cy="action">
+            <option [ngValue]="null">{{ 'kotekkaappApp.Action.null' | translate }}</option>
+            @for (action of actionValues; track $index) {
+              <option [value]="action">{{ 'kotekkaappApp.Action.' + action | translate }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_device" jhiTranslate="kotekkaappApp.failedAttempt.device">Device</label>
+          <input type="text" class="form-control" name="device" id="field_device" data-cy="device" formControlName="device" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_createdDate" jhiTranslate="kotekkaappApp.failedAttempt.createdDate">Created Date</label>
+          <div class="d-flex">
+            <input
+              id="field_createdDate"
+              data-cy="createdDate"
+              type="datetime-local"
+              class="form-control"
+              name="createdDate"
+              formControlName="createdDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        @let reasonRef = editForm.get('reason')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_reason" jhiTranslate="kotekkaappApp.failedAttempt.reason">Reason</label>
+          <input type="text" class="form-control" name="reason" id="field_reason" data-cy="reason" formControlName="reason" />
+          @if (reasonRef.invalid && (reasonRef.dirty || reasonRef.touched)) {
+            <div>
+              @if (editForm.get('reason')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '100' }"
+                  >This field cannot be longer than 100 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

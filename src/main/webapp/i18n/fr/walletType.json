@@ -1,0 +1,10 @@
+{
+  "kotekkaappApp": {
+    "WalletType": {
+      "null": "",
+      "PRIMARY": "PRIMARY",
+      "SAVINGS": "SAVINGS",
+      "SECONDARY": "SECONDARY"
+    }
+  }
+}

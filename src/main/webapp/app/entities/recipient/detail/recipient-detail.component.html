@@ -1,0 +1,72 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (recipient(); as recipientRef) {
+      <div>
+        <h2 data-cy="recipientDetailsHeading"><span jhiTranslate="kotekkaappApp.recipient.detail.title">Recipient</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ recipientRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.recipient.uuid">Uuid</span></dt>
+          <dd>
+            <span>{{ recipientRef.uuid }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.recipient.status">Status</span></dt>
+          <dd>
+            <span [jhiTranslate]="'kotekkaappApp.DefaultStatus.' + (recipientRef.status ?? 'null')">{{
+              { null: '', PENDING: 'PENDING', ACTIVE: 'ACTIVE', BLOCKED: 'BLOCKED', DELETED: 'DELETED' }[recipientRef.status ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.recipient.firstName">First Name</span></dt>
+          <dd>
+            <span>{{ recipientRef.firstName }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.recipient.lastName">Last Name</span></dt>
+          <dd>
+            <span>{{ recipientRef.lastName }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.recipient.phoneNumber">Phone Number</span></dt>
+          <dd>
+            <span>{{ recipientRef.phoneNumber }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.recipient.walletHolder">Wallet Holder</span></dt>
+          <dd>
+            <span>{{ recipientRef.walletHolder }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.recipient.createdBy">Created By</span></dt>
+          <dd>
+            <span>{{ recipientRef.createdBy }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.recipient.createdDate">Created Date</span></dt>
+          <dd>
+            <span>{{ recipientRef.createdDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.recipient.lastModifiedBy">Last Modified By</span></dt>
+          <dd>
+            <span>{{ recipientRef.lastModifiedBy }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.recipient.lastModifiedDate">Last Modified Date</span></dt>
+          <dd>
+            <span>{{ recipientRef.lastModifiedDate | formatMediumDatetime }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/recipient', recipientRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

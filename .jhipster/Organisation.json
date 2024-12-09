@@ -1,0 +1,48 @@
+{
+  "annotations": {
+    "changelogDate": "20241209130820"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "type",
+      "fieldType": "OrgType",
+      "fieldValues": "UNIVERSITY,CORPORATION,NONPROFIT,GOVERNMENT,OTHER"
+    },
+    {
+      "fieldName": "parent",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "location",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "headcount",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "createdBy",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "createdDate",
+      "fieldType": "Instant"
+    }
+  ],
+  "name": "Organisation",
+  "pagination": "pagination",
+  "relationships": [],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

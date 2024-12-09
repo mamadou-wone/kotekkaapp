@@ -1,0 +1,48 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (userAffiliation(); as userAffiliationRef) {
+      <div>
+        <h2 data-cy="userAffiliationDetailsHeading">
+          <span jhiTranslate="kotekkaappApp.userAffiliation.detail.title">User Affiliation</span>
+        </h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ userAffiliationRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.userAffiliation.walletHolder">Wallet Holder</span></dt>
+          <dd>
+            <span>{{ userAffiliationRef.walletHolder }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.userAffiliation.affiliation">Affiliation</span></dt>
+          <dd>
+            <span>{{ userAffiliationRef.affiliation }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.userAffiliation.createdBy">Created By</span></dt>
+          <dd>
+            <span>{{ userAffiliationRef.createdBy }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.userAffiliation.createdDate">Created Date</span></dt>
+          <dd>
+            <span>{{ userAffiliationRef.createdDate | formatMediumDatetime }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/user-affiliation', userAffiliationRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

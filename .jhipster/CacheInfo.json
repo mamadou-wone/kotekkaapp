@@ -1,0 +1,33 @@
+{
+  "annotations": {
+    "changelogDate": "20241209130808"
+  },
+  "applications": "*",
+  "documentation": "temporary Cache entity\\n(key, value) pairs for given wallet holders\\nincludes createdDate for cleanup",
+  "fields": [
+    {
+      "fieldName": "walletHolder",
+      "fieldType": "UUID"
+    },
+    {
+      "fieldName": "key",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "150"
+    },
+    {
+      "fieldName": "value",
+      "fieldType": "TextBlob"
+    },
+    {
+      "fieldName": "createdDate",
+      "fieldType": "Instant"
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "name": "CacheInfo",
+  "pagination": "pagination",
+  "relationships": [],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

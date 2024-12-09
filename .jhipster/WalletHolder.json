@@ -1,0 +1,140 @@
+{
+  "annotations": {
+    "changelogDate": "20241209130830"
+  },
+  "applications": "*",
+  "documentation": "A Wallet account Holder\\nUsually a Customer, but could be a Merchant or an Internal user, etc.",
+  "fields": [
+    {
+      "fieldName": "uuid",
+      "fieldType": "UUID",
+      "fieldValidateRules": ["required", "unique"]
+    },
+    {
+      "fieldName": "type",
+      "fieldType": "AccountType",
+      "fieldValues": "CUSTOMER,MERCHANT,AGENT,INTERNAL"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "AccountStatus",
+      "fieldValues": "PENDING,ACTIVE,REJECTED,BLOCKED,CLOSED"
+    },
+    {
+      "fieldName": "phoneNumber",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "network",
+      "fieldType": "Network",
+      "fieldValues": "IAM,INWI,ORANGE,OTHER"
+    },
+    {
+      "fieldName": "tag",
+      "fieldType": "String",
+      "fieldValidateRules": ["unique", "maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "firstName",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "lastName",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "address",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "city",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "country",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "postalCode",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "onboarding",
+      "fieldType": "OnboardingStatus",
+      "fieldValues": "PENDING,PERSONAL_INFO,CREATE_INTERNAL_WALLET,ACTIVATE_CUSTOMER_PARTNER_SIDE,PRE_CREATE_CUSTOMER_PARTNER_SIDE,SET_PASSWORD,CREATE_EXTERNAL_WALLET,CONFIRM_OTP"
+    },
+    {
+      "fieldName": "externalId",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "36"
+    },
+    {
+      "fieldName": "email",
+      "fieldType": "String",
+      "fieldValidateRules": ["minlength", "maxlength"],
+      "fieldValidateRulesMaxlength": "254",
+      "fieldValidateRulesMinlength": "5"
+    },
+    {
+      "fieldName": "dateOfBirth",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "sex",
+      "fieldType": "Sex",
+      "fieldValues": "M,F"
+    },
+    {
+      "fieldName": "createdBy",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "createdDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "lastModifiedBy",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "lastModifiedDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "loginStatus",
+      "fieldType": "LoginStatus",
+      "fieldValues": "LOGIN_LOCKED,LOGIN_UNLOCKED,LOGIN_LOCKED_FULL,LOGIN_DEVICE_LOCKED,DEVICE_FLAGGED"
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "name": "WalletHolder",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityField": "login",
+      "otherEntityName": "user",
+      "relationshipName": "user",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one",
+      "relationshipWithBuiltInEntity": true
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

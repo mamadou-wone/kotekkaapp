@@ -1,0 +1,191 @@
+<div>
+  <h2 id="page-heading" data-cy="MoneyRequestHeading">
+    <span jhiTranslate="kotekkaappApp.moneyRequest.home.title">Money Requests</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
+        <span jhiTranslate="kotekkaappApp.moneyRequest.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-money-request"
+        [routerLink]="['/money-request/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="kotekkaappApp.moneyRequest.home.createLabel">Create a new Money Request</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <jhi-filter [filters]="filters"></jhi-filter>
+
+  @if (moneyRequests?.length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="kotekkaappApp.moneyRequest.home.notFound">No Money Requests found</span>
+    </div>
+  }
+
+  @if (moneyRequests && moneyRequests.length > 0) {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [sortState]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="uuid">
+              <div class="d-flex">
+                <span jhiTranslate="kotekkaappApp.moneyRequest.uuid">Uuid</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="status">
+              <div class="d-flex">
+                <span jhiTranslate="kotekkaappApp.moneyRequest.status">Status</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="otherHolder">
+              <div class="d-flex">
+                <span jhiTranslate="kotekkaappApp.moneyRequest.otherHolder">Other Holder</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="amount">
+              <div class="d-flex">
+                <span jhiTranslate="kotekkaappApp.moneyRequest.amount">Amount</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="description">
+              <div class="d-flex">
+                <span jhiTranslate="kotekkaappApp.moneyRequest.description">Description</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="currency">
+              <div class="d-flex">
+                <span jhiTranslate="kotekkaappApp.moneyRequest.currency">Currency</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="walletHolder">
+              <div class="d-flex">
+                <span jhiTranslate="kotekkaappApp.moneyRequest.walletHolder">Wallet Holder</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="createdBy">
+              <div class="d-flex">
+                <span jhiTranslate="kotekkaappApp.moneyRequest.createdBy">Created By</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="createdDate">
+              <div class="d-flex">
+                <span jhiTranslate="kotekkaappApp.moneyRequest.createdDate">Created Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="lastModifiedBy">
+              <div class="d-flex">
+                <span jhiTranslate="kotekkaappApp.moneyRequest.lastModifiedBy">Last Modified By</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="lastModifiedDate">
+              <div class="d-flex">
+                <span jhiTranslate="kotekkaappApp.moneyRequest.lastModifiedDate">Last Modified Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (moneyRequest of moneyRequests; track trackId(moneyRequest)) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/money-request', moneyRequest.id, 'view']">{{ moneyRequest.id }}</a>
+              </td>
+              <td>{{ moneyRequest.uuid }}</td>
+              <td [jhiTranslate]="'kotekkaappApp.RequestStatus.' + (moneyRequest.status ?? 'null')">
+                {{
+                  { null: '', PENDING: 'PENDING', SENT: 'SENT', PROCESSED: 'PROCESSED', FAILED: 'FAILED' }[moneyRequest.status ?? 'null']
+                }}
+              </td>
+              <td>{{ moneyRequest.otherHolder }}</td>
+              <td>{{ moneyRequest.amount }}</td>
+              <td>{{ moneyRequest.description }}</td>
+              <td>{{ moneyRequest.currency }}</td>
+              <td>{{ moneyRequest.walletHolder }}</td>
+              <td>{{ moneyRequest.createdBy }}</td>
+              <td>{{ moneyRequest.createdDate | formatMediumDatetime }}</td>
+              <td>{{ moneyRequest.lastModifiedBy }}</td>
+              <td>{{ moneyRequest.lastModifiedDate | formatMediumDatetime }}</td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/money-request', moneyRequest.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a [routerLink]="['/money-request', moneyRequest.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(moneyRequest)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+  @if (moneyRequests && moneyRequests.length > 0) {
+    <div>
+      <div class="d-flex justify-content-center">
+        <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+      </div>
+
+      <div class="d-flex justify-content-center">
+        <ngb-pagination
+          [collectionSize]="totalItems"
+          [page]="page"
+          [pageSize]="itemsPerPage"
+          [maxSize]="5"
+          [rotate]="true"
+          [boundaryLinks]="true"
+          (pageChange)="navigateToPage($event)"
+        ></ngb-pagination>
+      </div>
+    </div>
+  }
+</div>

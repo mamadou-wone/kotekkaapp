@@ -1,0 +1,94 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (wallet(); as walletRef) {
+      <div>
+        <h2 data-cy="walletDetailsHeading"><span jhiTranslate="kotekkaappApp.wallet.detail.title">Wallet</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ walletRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.wallet.uuid">Uuid</span></dt>
+          <dd>
+            <span>{{ walletRef.uuid }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.wallet.type">Type</span></dt>
+          <dd>
+            <span [jhiTranslate]="'kotekkaappApp.WalletType.' + (walletRef.type ?? 'null')">{{
+              { null: '', PRIMARY: 'PRIMARY', SAVINGS: 'SAVINGS', SECONDARY: 'SECONDARY' }[walletRef.type ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.wallet.status">Status</span></dt>
+          <dd>
+            <span [jhiTranslate]="'kotekkaappApp.WalletStatus.' + (walletRef.status ?? 'null')">{{
+              { null: '', PENDING: 'PENDING', ACTIVE: 'ACTIVE', REJECTED: 'REJECTED', BLOCKED: 'BLOCKED', CLOSED: 'CLOSED' }[
+                walletRef.status ?? 'null'
+              ]
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.wallet.level">Level</span></dt>
+          <dd>
+            <span [jhiTranslate]="'kotekkaappApp.AccountLevel.' + (walletRef.level ?? 'null')">{{
+              { null: '', ONE: 'ONE', TWO: 'TWO', THREE: 'THREE' }[walletRef.level ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.wallet.iban">Iban</span></dt>
+          <dd>
+            <span>{{ walletRef.iban }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.wallet.currency">Currency</span></dt>
+          <dd>
+            <span>{{ walletRef.currency }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.wallet.balance">Balance</span></dt>
+          <dd>
+            <span>{{ walletRef.balance }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.wallet.balancesAsOf">Balances As Of</span></dt>
+          <dd>
+            <span>{{ walletRef.balancesAsOf | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.wallet.externalId">External Id</span></dt>
+          <dd>
+            <span>{{ walletRef.externalId }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.wallet.walletHolder">Wallet Holder</span></dt>
+          <dd>
+            <span>{{ walletRef.walletHolder }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.wallet.createdBy">Created By</span></dt>
+          <dd>
+            <span>{{ walletRef.createdBy }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.wallet.createdDate">Created Date</span></dt>
+          <dd>
+            <span>{{ walletRef.createdDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.wallet.lastModifiedBy">Last Modified By</span></dt>
+          <dd>
+            <span>{{ walletRef.lastModifiedBy }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.wallet.lastModifiedDate">Last Modified Date</span></dt>
+          <dd>
+            <span>{{ walletRef.lastModifiedDate | formatMediumDatetime }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/wallet', walletRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

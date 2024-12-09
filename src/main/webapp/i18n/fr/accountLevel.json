@@ -1,0 +1,10 @@
+{
+  "kotekkaappApp": {
+    "AccountLevel": {
+      "null": "",
+      "ONE": "ONE",
+      "TWO": "TWO",
+      "THREE": "THREE"
+    }
+  }
+}

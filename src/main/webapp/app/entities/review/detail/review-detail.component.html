@@ -1,0 +1,54 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (review(); as reviewRef) {
+      <div>
+        <h2 data-cy="reviewDetailsHeading"><span jhiTranslate="kotekkaappApp.review.detail.title">Review</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ reviewRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.review.uuid">Uuid</span></dt>
+          <dd>
+            <span>{{ reviewRef.uuid }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.review.product">Product</span></dt>
+          <dd>
+            <span>{{ reviewRef.product }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.review.walletHolder">Wallet Holder</span></dt>
+          <dd>
+            <span>{{ reviewRef.walletHolder }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.review.rating">Rating</span></dt>
+          <dd>
+            <span>{{ reviewRef.rating }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.review.comment">Comment</span></dt>
+          <dd>
+            <span>{{ reviewRef.comment }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.review.createdDate">Created Date</span></dt>
+          <dd>
+            <span>{{ reviewRef.createdDate | formatMediumDatetime }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/review', reviewRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

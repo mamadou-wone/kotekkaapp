@@ -1,0 +1,12 @@
+{
+  "kotekkaappApp": {
+    "OrderStatus": {
+      "null": "",
+      "PENDING": "PENDING",
+      "CONFIRMED": "CONFIRMED",
+      "SHIPPED": "SHIPPED",
+      "DELIVERED": "DELIVERED",
+      "CANCELED": "CANCELED"
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "kotekkaappApp": {
+    "TransactionStatus": {
+      "null": "",
+      "PENDING": "PENDING",
+      "TO_CONFIRM": "TO_CONFIRM",
+      "CONFIRMED": "CONFIRMED",
+      "REJECTED": "REJECTED",
+      "PARTNER_CONFIRMED": "PARTNER_CONFIRMED",
+      "PARTNER_REJECTED": "PARTNER_REJECTED",
+      "IN_PROGRESS": "IN_PROGRESS",
+      "PROCESSED": "PROCESSED",
+      "FAILED": "FAILED"
+    }
+  }
+}

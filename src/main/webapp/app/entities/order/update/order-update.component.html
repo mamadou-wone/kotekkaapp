@@ -1,0 +1,231 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-order-heading" data-cy="OrderCreateUpdateHeading" jhiTranslate="kotekkaappApp.order.home.createOrEditLabel">
+        Create or edit a Order
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="kotekkaappApp.order.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        @let uuidRef = editForm.get('uuid')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_uuid" jhiTranslate="kotekkaappApp.order.uuid">Uuid</label>
+          <input type="text" class="form-control" name="uuid" id="field_uuid" data-cy="uuid" formControlName="uuid" />
+          @if (uuidRef.invalid && (uuidRef.dirty || uuidRef.touched)) {
+            <div>
+              @if (editForm.get('uuid')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_walletHolder" jhiTranslate="kotekkaappApp.order.walletHolder">Wallet Holder</label>
+          <input
+            type="text"
+            class="form-control"
+            name="walletHolder"
+            id="field_walletHolder"
+            data-cy="walletHolder"
+            formControlName="walletHolder"
+          />
+        </div>
+
+        @let statusRef = editForm.get('status')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_status" jhiTranslate="kotekkaappApp.order.status">Status</label>
+          <select class="form-control" name="status" formControlName="status" id="field_status" data-cy="status">
+            <option [ngValue]="null">{{ 'kotekkaappApp.OrderStatus.null' | translate }}</option>
+            @for (orderStatus of orderStatusValues; track $index) {
+              <option [value]="orderStatus">{{ 'kotekkaappApp.OrderStatus.' + orderStatus | translate }}</option>
+            }
+          </select>
+          @if (statusRef.invalid && (statusRef.dirty || statusRef.touched)) {
+            <div>
+              @if (editForm.get('status')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        @let totalPriceRef = editForm.get('totalPrice')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_totalPrice" jhiTranslate="kotekkaappApp.order.totalPrice">Total Price</label>
+          <input
+            type="number"
+            class="form-control"
+            name="totalPrice"
+            id="field_totalPrice"
+            data-cy="totalPrice"
+            formControlName="totalPrice"
+          />
+          @if (totalPriceRef.invalid && (totalPriceRef.dirty || totalPriceRef.touched)) {
+            <div>
+              @if (editForm.get('totalPrice')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('totalPrice')?.errors?.number"
+                jhiTranslate="entity.validation.number"
+                >This field should be a number.</small
+              >
+            </div>
+          }
+        </div>
+
+        @let currencyRef = editForm.get('currency')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_currency" jhiTranslate="kotekkaappApp.order.currency">Currency</label>
+          <input type="text" class="form-control" name="currency" id="field_currency" data-cy="currency" formControlName="currency" />
+          @if (currencyRef.invalid && (currencyRef.dirty || currencyRef.touched)) {
+            <div>
+              @if (editForm.get('currency')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '3' }"
+                  >This field cannot be longer than 3 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let orderDateRef = editForm.get('orderDate')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_orderDate" jhiTranslate="kotekkaappApp.order.orderDate">Order Date</label>
+          <div class="d-flex">
+            <input
+              id="field_orderDate"
+              data-cy="orderDate"
+              type="datetime-local"
+              class="form-control"
+              name="orderDate"
+              formControlName="orderDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+          @if (orderDateRef.invalid && (orderDateRef.dirty || orderDateRef.touched)) {
+            <div>
+              @if (editForm.get('orderDate')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('orderDate')?.errors?.datetimelocal"
+                jhiTranslate="entity.validation.datetimelocal"
+                >This field should be a date and time.</small
+              >
+            </div>
+          }
+        </div>
+
+        @let paymentMethodRef = editForm.get('paymentMethod')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_paymentMethod" jhiTranslate="kotekkaappApp.order.paymentMethod">Payment Method</label>
+          <input
+            type="text"
+            class="form-control"
+            name="paymentMethod"
+            id="field_paymentMethod"
+            data-cy="paymentMethod"
+            formControlName="paymentMethod"
+          />
+          @if (paymentMethodRef.invalid && (paymentMethodRef.dirty || paymentMethodRef.touched)) {
+            <div>
+              @if (editForm.get('paymentMethod')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '50' }"
+                  >This field cannot be longer than 50 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_shippingAddress" jhiTranslate="kotekkaappApp.order.shippingAddress">Shipping Address</label>
+          <textarea
+            class="form-control"
+            name="shippingAddress"
+            id="field_shippingAddress"
+            data-cy="shippingAddress"
+            formControlName="shippingAddress"
+          ></textarea>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_createdBy" jhiTranslate="kotekkaappApp.order.createdBy">Created By</label>
+          <input type="text" class="form-control" name="createdBy" id="field_createdBy" data-cy="createdBy" formControlName="createdBy" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_createdDate" jhiTranslate="kotekkaappApp.order.createdDate">Created Date</label>
+          <div class="d-flex">
+            <input
+              id="field_createdDate"
+              data-cy="createdDate"
+              type="datetime-local"
+              class="form-control"
+              name="createdDate"
+              formControlName="createdDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_lastModifiedBy" jhiTranslate="kotekkaappApp.order.lastModifiedBy">Last Modified By</label>
+          <input
+            type="text"
+            class="form-control"
+            name="lastModifiedBy"
+            id="field_lastModifiedBy"
+            data-cy="lastModifiedBy"
+            formControlName="lastModifiedBy"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_lastModifiedDate" jhiTranslate="kotekkaappApp.order.lastModifiedDate"
+            >Last Modified Date</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_lastModifiedDate"
+              data-cy="lastModifiedDate"
+              type="datetime-local"
+              class="form-control"
+              name="lastModifiedDate"
+              formControlName="lastModifiedDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

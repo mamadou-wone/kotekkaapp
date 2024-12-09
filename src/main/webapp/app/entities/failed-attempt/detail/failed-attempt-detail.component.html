@@ -1,0 +1,76 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (failedAttempt(); as failedAttemptRef) {
+      <div>
+        <h2 data-cy="failedAttemptDetailsHeading"><span jhiTranslate="kotekkaappApp.failedAttempt.detail.title">Failed Attempt</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ failedAttemptRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.failedAttempt.login">Login</span></dt>
+          <dd>
+            <span>{{ failedAttemptRef.login }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.failedAttempt.ipAddress">Ip Address</span></dt>
+          <dd>
+            <span>{{ failedAttemptRef.ipAddress }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.failedAttempt.isAfterLock">Is After Lock</span></dt>
+          <dd>
+            <span>{{ failedAttemptRef.isAfterLock }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.failedAttempt.app">App</span></dt>
+          <dd>
+            <span [jhiTranslate]="'kotekkaappApp.App.' + (failedAttemptRef.app ?? 'null')">{{
+              { null: '', MOBILE: 'MOBILE', WEB: 'WEB', MERCHANT: 'MERCHANT', AGENT: 'AGENT', PORTAL: 'PORTAL' }[
+                failedAttemptRef.app ?? 'null'
+              ]
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.failedAttempt.action">Action</span></dt>
+          <dd>
+            <span [jhiTranslate]="'kotekkaappApp.Action.' + (failedAttemptRef.action ?? 'null')">{{
+              {
+                null: '',
+                LOGIN: 'LOGIN',
+                PHONENUMBER_CHECK: 'PHONENUMBER_CHECK',
+                EMAIL_CHECK: 'EMAIL_CHECK',
+                PASSWORD_RESET: 'PASSWORD_RESET',
+                DEVICE_CHECK: 'DEVICE_CHECK',
+                TRANSACTION: 'TRANSACTION',
+              }[failedAttemptRef.action ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.failedAttempt.device">Device</span></dt>
+          <dd>
+            <span>{{ failedAttemptRef.device }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.failedAttempt.createdDate">Created Date</span></dt>
+          <dd>
+            <span>{{ failedAttemptRef.createdDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.failedAttempt.reason">Reason</span></dt>
+          <dd>
+            <span>{{ failedAttemptRef.reason }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/failed-attempt', failedAttemptRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

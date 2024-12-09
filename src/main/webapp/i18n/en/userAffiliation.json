@@ -1,0 +1,27 @@
+{
+  "kotekkaappApp": {
+    "userAffiliation": {
+      "home": {
+        "title": "User Affiliations",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new User Affiliation",
+        "createOrEditLabel": "Create or edit a User Affiliation",
+        "notFound": "No User Affiliations found"
+      },
+      "created": "A new User Affiliation is created with identifier {{ param }}",
+      "updated": "A User Affiliation is updated with identifier {{ param }}",
+      "deleted": "A User Affiliation is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete User Affiliation {{ id }}?"
+      },
+      "detail": {
+        "title": "User Affiliation"
+      },
+      "id": "ID",
+      "walletHolder": "Wallet Holder",
+      "affiliation": "Affiliation",
+      "createdBy": "Created By",
+      "createdDate": "Created Date"
+    }
+  }
+}

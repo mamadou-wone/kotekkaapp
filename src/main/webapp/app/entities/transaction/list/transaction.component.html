@@ -1,0 +1,331 @@
+<div>
+  <h2 id="page-heading" data-cy="TransactionHeading">
+    <span jhiTranslate="kotekkaappApp.transaction.home.title">Transactions</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
+        <span jhiTranslate="kotekkaappApp.transaction.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-transaction"
+        [routerLink]="['/transaction/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="kotekkaappApp.transaction.home.createLabel">Create a new Transaction</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <jhi-filter [filters]="filters"></jhi-filter>
+
+  @if (transactions?.length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="kotekkaappApp.transaction.home.notFound">No Transactions found</span>
+    </div>
+  }
+
+  @if (transactions && transactions.length > 0) {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [sortState]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="uuid">
+              <div class="d-flex">
+                <span jhiTranslate="kotekkaappApp.transaction.uuid">Uuid</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="type">
+              <div class="d-flex">
+                <span jhiTranslate="kotekkaappApp.transaction.type">Type</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="status">
+              <div class="d-flex">
+                <span jhiTranslate="kotekkaappApp.transaction.status">Status</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="direction">
+              <div class="d-flex">
+                <span jhiTranslate="kotekkaappApp.transaction.direction">Direction</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="amount">
+              <div class="d-flex">
+                <span jhiTranslate="kotekkaappApp.transaction.amount">Amount</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="description">
+              <div class="d-flex">
+                <span jhiTranslate="kotekkaappApp.transaction.description">Description</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="fee">
+              <div class="d-flex">
+                <span jhiTranslate="kotekkaappApp.transaction.fee">Fee</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="commission">
+              <div class="d-flex">
+                <span jhiTranslate="kotekkaappApp.transaction.commission">Commission</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="currency">
+              <div class="d-flex">
+                <span jhiTranslate="kotekkaappApp.transaction.currency">Currency</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="counterpartyType">
+              <div class="d-flex">
+                <span jhiTranslate="kotekkaappApp.transaction.counterpartyType">Counterparty Type</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="counterpartyId">
+              <div class="d-flex">
+                <span jhiTranslate="kotekkaappApp.transaction.counterpartyId">Counterparty Id</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="entryDate">
+              <div class="d-flex">
+                <span jhiTranslate="kotekkaappApp.transaction.entryDate">Entry Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="effectiveDate">
+              <div class="d-flex">
+                <span jhiTranslate="kotekkaappApp.transaction.effectiveDate">Effective Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="startTime">
+              <div class="d-flex">
+                <span jhiTranslate="kotekkaappApp.transaction.startTime">Start Time</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="endTime">
+              <div class="d-flex">
+                <span jhiTranslate="kotekkaappApp.transaction.endTime">End Time</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="parent">
+              <div class="d-flex">
+                <span jhiTranslate="kotekkaappApp.transaction.parent">Parent</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="reference">
+              <div class="d-flex">
+                <span jhiTranslate="kotekkaappApp.transaction.reference">Reference</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="externalId">
+              <div class="d-flex">
+                <span jhiTranslate="kotekkaappApp.transaction.externalId">External Id</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="partnerToken">
+              <div class="d-flex">
+                <span jhiTranslate="kotekkaappApp.transaction.partnerToken">Partner Token</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="wallet">
+              <div class="d-flex">
+                <span jhiTranslate="kotekkaappApp.transaction.wallet">Wallet</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="createdBy">
+              <div class="d-flex">
+                <span jhiTranslate="kotekkaappApp.transaction.createdBy">Created By</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="createdDate">
+              <div class="d-flex">
+                <span jhiTranslate="kotekkaappApp.transaction.createdDate">Created Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="lastModifiedBy">
+              <div class="d-flex">
+                <span jhiTranslate="kotekkaappApp.transaction.lastModifiedBy">Last Modified By</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="lastModifiedDate">
+              <div class="d-flex">
+                <span jhiTranslate="kotekkaappApp.transaction.lastModifiedDate">Last Modified Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (transaction of transactions; track trackId(transaction)) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/transaction', transaction.id, 'view']">{{ transaction.id }}</a>
+              </td>
+              <td>{{ transaction.uuid }}</td>
+              <td [jhiTranslate]="'kotekkaappApp.TransactionType.' + (transaction.type ?? 'null')">
+                {{
+                  {
+                    null: '',
+                    PAY: 'PAY',
+                    RECEIVE: 'RECEIVE',
+                    WIRE_IN: 'WIRE_IN',
+                    WIRE_OUT: 'WIRE_OUT',
+                    TRANSFER_IN: 'TRANSFER_IN',
+                    TRANSFER_OUT: 'TRANSFER_OUT',
+                    CASH_IN: 'CASH_IN',
+                    CASH_OUT: 'CASH_OUT',
+                    FEE: 'FEE',
+                    REBATE: 'REBATE',
+                    COMMISSION: 'COMMISSION',
+                  }[transaction.type ?? 'null']
+                }}
+              </td>
+              <td [jhiTranslate]="'kotekkaappApp.TransactionStatus.' + (transaction.status ?? 'null')">
+                {{
+                  {
+                    null: '',
+                    PENDING: 'PENDING',
+                    TO_CONFIRM: 'TO_CONFIRM',
+                    CONFIRMED: 'CONFIRMED',
+                    REJECTED: 'REJECTED',
+                    PARTNER_CONFIRMED: 'PARTNER_CONFIRMED',
+                    PARTNER_REJECTED: 'PARTNER_REJECTED',
+                    IN_PROGRESS: 'IN_PROGRESS',
+                    PROCESSED: 'PROCESSED',
+                    FAILED: 'FAILED',
+                  }[transaction.status ?? 'null']
+                }}
+              </td>
+              <td [jhiTranslate]="'kotekkaappApp.Direction.' + (transaction.direction ?? 'null')">
+                {{ { null: '', DEBIT: 'DEBIT', CREDIT: 'CREDIT' }[transaction.direction ?? 'null'] }}
+              </td>
+              <td>{{ transaction.amount }}</td>
+              <td>{{ transaction.description }}</td>
+              <td>{{ transaction.fee }}</td>
+              <td>{{ transaction.commission }}</td>
+              <td>{{ transaction.currency }}</td>
+              <td [jhiTranslate]="'kotekkaappApp.CounterpartyType.' + (transaction.counterpartyType ?? 'null')">
+                {{
+                  { null: '', WALLET: 'WALLET', CARD: 'CARD', BENEFICIARY: 'BENEFICIARY', RECIPIENT: 'RECIPIENT' }[
+                    transaction.counterpartyType ?? 'null'
+                  ]
+                }}
+              </td>
+              <td>{{ transaction.counterpartyId }}</td>
+              <td>{{ transaction.entryDate | formatMediumDate }}</td>
+              <td>{{ transaction.effectiveDate | formatMediumDate }}</td>
+              <td>{{ transaction.startTime | formatMediumDatetime }}</td>
+              <td>{{ transaction.endTime | formatMediumDatetime }}</td>
+              <td>{{ transaction.parent }}</td>
+              <td>{{ transaction.reference }}</td>
+              <td>{{ transaction.externalId }}</td>
+              <td>{{ transaction.partnerToken }}</td>
+              <td>{{ transaction.wallet }}</td>
+              <td>{{ transaction.createdBy }}</td>
+              <td>{{ transaction.createdDate | formatMediumDatetime }}</td>
+              <td>{{ transaction.lastModifiedBy }}</td>
+              <td>{{ transaction.lastModifiedDate | formatMediumDatetime }}</td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/transaction', transaction.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a [routerLink]="['/transaction', transaction.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(transaction)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+  @if (transactions && transactions.length > 0) {
+    <div>
+      <div class="d-flex justify-content-center">
+        <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+      </div>
+
+      <div class="d-flex justify-content-center">
+        <ngb-pagination
+          [collectionSize]="totalItems"
+          [page]="page"
+          [pageSize]="itemsPerPage"
+          [maxSize]="5"
+          [rotate]="true"
+          [boundaryLinks]="true"
+          (pageChange)="navigateToPage($event)"
+        ></ngb-pagination>
+      </div>
+    </div>
+  }
+</div>

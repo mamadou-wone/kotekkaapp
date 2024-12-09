@@ -1,0 +1,153 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (walletHolder(); as walletHolderRef) {
+      <div>
+        <h2 data-cy="walletHolderDetailsHeading"><span jhiTranslate="kotekkaappApp.walletHolder.detail.title">Wallet Holder</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ walletHolderRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.walletHolder.uuid">Uuid</span></dt>
+          <dd>
+            <span>{{ walletHolderRef.uuid }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.walletHolder.type">Type</span></dt>
+          <dd>
+            <span [jhiTranslate]="'kotekkaappApp.AccountType.' + (walletHolderRef.type ?? 'null')">{{
+              { null: '', CUSTOMER: 'CUSTOMER', MERCHANT: 'MERCHANT', AGENT: 'AGENT', INTERNAL: 'INTERNAL' }[walletHolderRef.type ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.walletHolder.status">Status</span></dt>
+          <dd>
+            <span [jhiTranslate]="'kotekkaappApp.AccountStatus.' + (walletHolderRef.status ?? 'null')">{{
+              { null: '', PENDING: 'PENDING', ACTIVE: 'ACTIVE', REJECTED: 'REJECTED', BLOCKED: 'BLOCKED', CLOSED: 'CLOSED' }[
+                walletHolderRef.status ?? 'null'
+              ]
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.walletHolder.phoneNumber">Phone Number</span></dt>
+          <dd>
+            <span>{{ walletHolderRef.phoneNumber }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.walletHolder.network">Network</span></dt>
+          <dd>
+            <span [jhiTranslate]="'kotekkaappApp.Network.' + (walletHolderRef.network ?? 'null')">{{
+              { null: '', IAM: 'IAM', INWI: 'INWI', ORANGE: 'ORANGE', OTHER: 'OTHER' }[walletHolderRef.network ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.walletHolder.tag">Tag</span></dt>
+          <dd>
+            <span>{{ walletHolderRef.tag }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.walletHolder.firstName">First Name</span></dt>
+          <dd>
+            <span>{{ walletHolderRef.firstName }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.walletHolder.lastName">Last Name</span></dt>
+          <dd>
+            <span>{{ walletHolderRef.lastName }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.walletHolder.address">Address</span></dt>
+          <dd>
+            <span>{{ walletHolderRef.address }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.walletHolder.city">City</span></dt>
+          <dd>
+            <span>{{ walletHolderRef.city }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.walletHolder.country">Country</span></dt>
+          <dd>
+            <span>{{ walletHolderRef.country }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.walletHolder.postalCode">Postal Code</span></dt>
+          <dd>
+            <span>{{ walletHolderRef.postalCode }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.walletHolder.onboarding">Onboarding</span></dt>
+          <dd>
+            <span [jhiTranslate]="'kotekkaappApp.OnboardingStatus.' + (walletHolderRef.onboarding ?? 'null')">{{
+              {
+                null: '',
+                PENDING: 'PENDING',
+                PERSONAL_INFO: 'PERSONAL_INFO',
+                CREATE_INTERNAL_WALLET: 'CREATE_INTERNAL_WALLET',
+                ACTIVATE_CUSTOMER_PARTNER_SIDE: 'ACTIVATE_CUSTOMER_PARTNER_SIDE',
+                PRE_CREATE_CUSTOMER_PARTNER_SIDE: 'PRE_CREATE_CUSTOMER_PARTNER_SIDE',
+                SET_PASSWORD: 'SET_PASSWORD',
+                CREATE_EXTERNAL_WALLET: 'CREATE_EXTERNAL_WALLET',
+                CONFIRM_OTP: 'CONFIRM_OTP',
+              }[walletHolderRef.onboarding ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.walletHolder.externalId">External Id</span></dt>
+          <dd>
+            <span>{{ walletHolderRef.externalId }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.walletHolder.email">Email</span></dt>
+          <dd>
+            <span>{{ walletHolderRef.email }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.walletHolder.dateOfBirth">Date Of Birth</span></dt>
+          <dd>
+            <span>{{ walletHolderRef.dateOfBirth | formatMediumDate }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.walletHolder.sex">Sex</span></dt>
+          <dd>
+            <span [jhiTranslate]="'kotekkaappApp.Sex.' + (walletHolderRef.sex ?? 'null')">{{
+              { null: '', M: 'M', F: 'F' }[walletHolderRef.sex ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.walletHolder.createdBy">Created By</span></dt>
+          <dd>
+            <span>{{ walletHolderRef.createdBy }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.walletHolder.createdDate">Created Date</span></dt>
+          <dd>
+            <span>{{ walletHolderRef.createdDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.walletHolder.lastModifiedBy">Last Modified By</span></dt>
+          <dd>
+            <span>{{ walletHolderRef.lastModifiedBy }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.walletHolder.lastModifiedDate">Last Modified Date</span></dt>
+          <dd>
+            <span>{{ walletHolderRef.lastModifiedDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.walletHolder.loginStatus">Login Status</span></dt>
+          <dd>
+            <span [jhiTranslate]="'kotekkaappApp.LoginStatus.' + (walletHolderRef.loginStatus ?? 'null')">{{
+              {
+                null: '',
+                LOGIN_LOCKED: 'LOGIN_LOCKED',
+                LOGIN_UNLOCKED: 'LOGIN_UNLOCKED',
+                LOGIN_LOCKED_FULL: 'LOGIN_LOCKED_FULL',
+                LOGIN_DEVICE_LOCKED: 'LOGIN_DEVICE_LOCKED',
+                DEVICE_FLAGGED: 'DEVICE_FLAGGED',
+              }[walletHolderRef.loginStatus ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="kotekkaappApp.walletHolder.user">User</span></dt>
+          <dd>
+            <span>{{ walletHolderRef.user?.login }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/wallet-holder', walletHolderRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

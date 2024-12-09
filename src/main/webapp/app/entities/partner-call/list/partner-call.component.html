@@ -1,0 +1,199 @@
+<div>
+  <h2 id="page-heading" data-cy="PartnerCallHeading">
+    <span jhiTranslate="kotekkaappApp.partnerCall.home.title">Partner Calls</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
+        <span jhiTranslate="kotekkaappApp.partnerCall.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-partner-call"
+        [routerLink]="['/partner-call/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="kotekkaappApp.partnerCall.home.createLabel">Create a new Partner Call</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <jhi-filter [filters]="filters"></jhi-filter>
+
+  @if (partnerCalls?.length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="kotekkaappApp.partnerCall.home.notFound">No Partner Calls found</span>
+    </div>
+  }
+
+  @if (partnerCalls && partnerCalls.length > 0) {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [sortState]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="partner">
+              <div class="d-flex">
+                <span jhiTranslate="kotekkaappApp.partnerCall.partner">Partner</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="api">
+              <div class="d-flex">
+                <span jhiTranslate="kotekkaappApp.partnerCall.api">Api</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="method">
+              <div class="d-flex">
+                <span jhiTranslate="kotekkaappApp.partnerCall.method">Method</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="requestHeaders">
+              <div class="d-flex">
+                <span jhiTranslate="kotekkaappApp.partnerCall.requestHeaders">Request Headers</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="requestBody">
+              <div class="d-flex">
+                <span jhiTranslate="kotekkaappApp.partnerCall.requestBody">Request Body</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="requestTime">
+              <div class="d-flex">
+                <span jhiTranslate="kotekkaappApp.partnerCall.requestTime">Request Time</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="responseStatusCode">
+              <div class="d-flex">
+                <span jhiTranslate="kotekkaappApp.partnerCall.responseStatusCode">Response Status Code</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="responseHeaders">
+              <div class="d-flex">
+                <span jhiTranslate="kotekkaappApp.partnerCall.responseHeaders">Response Headers</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="responseBody">
+              <div class="d-flex">
+                <span jhiTranslate="kotekkaappApp.partnerCall.responseBody">Response Body</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="responseTime">
+              <div class="d-flex">
+                <span jhiTranslate="kotekkaappApp.partnerCall.responseTime">Response Time</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="correlationId">
+              <div class="d-flex">
+                <span jhiTranslate="kotekkaappApp.partnerCall.correlationId">Correlation Id</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="queryParam">
+              <div class="d-flex">
+                <span jhiTranslate="kotekkaappApp.partnerCall.queryParam">Query Param</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (partnerCall of partnerCalls; track trackId(partnerCall)) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/partner-call', partnerCall.id, 'view']">{{ partnerCall.id }}</a>
+              </td>
+              <td [jhiTranslate]="'kotekkaappApp.Partner.' + (partnerCall.partner ?? 'null')">
+                {{ { null: '', CIH: 'CIH', CMI: 'CMI', WAFR: 'WAFR', OTHER: 'OTHER' }[partnerCall.partner ?? 'null'] }}
+              </td>
+              <td>{{ partnerCall.api }}</td>
+              <td [jhiTranslate]="'kotekkaappApp.HttpMethod.' + (partnerCall.method ?? 'null')">
+                {{ { null: '', GET: 'GET', POST: 'POST', PUT: 'PUT', DELETE: 'DELETE', PATCH: 'PATCH' }[partnerCall.method ?? 'null'] }}
+              </td>
+              <td>{{ partnerCall.requestHeaders }}</td>
+              <td>{{ partnerCall.requestBody }}</td>
+              <td>{{ partnerCall.requestTime | formatMediumDatetime }}</td>
+              <td>{{ partnerCall.responseStatusCode }}</td>
+              <td>{{ partnerCall.responseHeaders }}</td>
+              <td>{{ partnerCall.responseBody }}</td>
+              <td>{{ partnerCall.responseTime | formatMediumDatetime }}</td>
+              <td>{{ partnerCall.correlationId }}</td>
+              <td>{{ partnerCall.queryParam }}</td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/partner-call', partnerCall.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a [routerLink]="['/partner-call', partnerCall.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(partnerCall)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+  @if (partnerCalls && partnerCalls.length > 0) {
+    <div>
+      <div class="d-flex justify-content-center">
+        <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+      </div>
+
+      <div class="d-flex justify-content-center">
+        <ngb-pagination
+          [collectionSize]="totalItems"
+          [page]="page"
+          [pageSize]="itemsPerPage"
+          [maxSize]="5"
+          [rotate]="true"
+          [boundaryLinks]="true"
+          (pageChange)="navigateToPage($event)"
+        ></ngb-pagination>
+      </div>
+    </div>
+  }
+</div>
