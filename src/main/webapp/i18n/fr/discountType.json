@@ -1,9 +1,0 @@
-{
-  "kotekkaappApp": {
-    "DiscountType": {
-      "null": "",
-      "FIXED": "FIXED",
-      "PERCENTAGE": "PERCENTAGE"
-    }
-  }
-}
